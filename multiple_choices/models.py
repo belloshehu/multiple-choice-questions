@@ -29,7 +29,7 @@ class Question(models.Model):
 
 class MultipleChoiceQuestion(models.Model):
     ''' Model for multiple choice questions. '''
-
+    passage = models.TextField(max_length=500)
     title = models.CharField(max_length=20)
     questions = models.ForeignKey(Question, on_delete=models.CASCADE)
     duration = models.TimeField()
@@ -48,9 +48,9 @@ class AssessmentTaker(models.Model):
         ('f', 'FAILED'),
         ('p', 'PASSED')
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    username = models.CharField(unique=True, max_length=20)
     score = models.IntegerField(default=0)
     status = models.CharField(choices=GRADES, max_length=20)
 
     def __str__(self):
-        return f'{self.user.first_name}, {self.user.last_name}'
+        return f'{self.username}'

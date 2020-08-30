@@ -1,0 +1,13 @@
+{% extends 'base.html'%}
+
+{% block main %}
+    <section id="auth">
+        <h1>Welcome to online Assessment center.</h1>
+    </section>
+    <section id="assessment">
+        <p>Take your assessment within {{assessment.duration}} when you are ready.
+             Note that once an assessment is started, it can not be stopped.
+        </p>
+      <a href="{% url 'multiple_choices:assessment' %}"><button>Get started</button></a>
+    </section>
+{% endblock %}

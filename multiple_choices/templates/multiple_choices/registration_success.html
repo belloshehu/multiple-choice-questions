@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% block header %} <h1 id="score-head">Assessment center</h1> {% endblock %}
+{% block main %}
+    <section id="result">
+        <p>
+            <h4 id="score-head">Successfully registered.</h4>
+            <p>You can now log in and take your assessment.</p>
+            <button><a href="{% url 'multiple_choices:login' %}" >login</a></button>
+        </p>
+        <p>
+            <a href="{% url 'multiple_choices:home' %}"><button>Take assessment again</button></a>
+        </p>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

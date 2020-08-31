@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AssessmentForm, UserRegistration, UserLogin
 from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice
@@ -18,31 +19,48 @@ def register(request):
     return render(request, 'multiple_choices/register.html', {'form':form})
 
 
-def login(request):
-    pass
+def user_login(request):
+    ''' View to handle user login.'''
+    form = UserLogin()
+    if request.method == 'POST':
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        user = authenticate(username=username, password=password)
+        if user:
+            login(request, user)
+            return redirect('multiple_choices:home')
+        else:
+            messages.info(request, 'username or password or both are incorrect.')
+            return redirect(reverse('multiple_choices:login'))
+    return render(request, 'multiple_choices/login.html', {'form':form})
 
+
+def user_logout(request):
+    pass
 
 
 def assessment(request):
     ''' View for taking assessment page. '''
     questions, choices = None, None
     multiple_choice_questions = None
-    try:
-        multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
-        questions = Question.objects.all()
-        choices = Choice.objects.all()
-    except MultipleChoiceQuestion.DoesNotExist:
-        pass
-    except Question.DoesNotExist:
-        pass
-    except Choice.DoesNotExist:
-        pass
-    context = {
-        'multiple_choice_questions':multiple_choice_questions,
-        'questions':questions,
-        'choices':choices,
-        }
-    return render(request, 'multiple_choices/assessment.html', context)
+    if request.user.is_authenticated: 
+        try:
+            multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
+            questions = Question.objects.all()
+            choices = Choice.objects.all()
+        except MultipleChoiceQuestion.DoesNotExist:
+            pass
+        except Question.DoesNotExist:
+            pass
+        except Choice.DoesNotExist:
+            pass
+        context = {
+            'multiple_choice_questions':multiple_choice_questions,
+            'questions':questions,
+            'choices':choices,
+            }
+        return render(request, 'multiple_choices/assessment.html', context)
+    return redirect('multiple_choices:login')
 
 
 def process_result(request):

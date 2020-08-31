@@ -1,11 +1,9 @@
-main {
-    margin:5%;
-    padding: 5%;
+main{
+    margin:0%;
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     font-size: larger;
-    padding: 5%;
-
+    padding: 2%;
 }
 h1, h2, h4 {
     font-family: forte;
@@ -18,20 +16,84 @@ input {
     text-align: center;
 }
 
-#auth {
-    background-color: rgb(123, 78,45);
+header {
+    margin: 0%;
+    background-color: rgb(11, 23, 67);
     color: white;
     font-family: 'Courier New', Courier, monospace;
-    font-size: larger;
+    font-size: x-large;
+    padding: 1% 2%;
+    box-shadow: 0px 0px 5px 5px gray;
+}
+#result, .ass{
+    background-color: rgb(11, 23, 67);
+    font-family: 'Courier New', Courier, monospace;
     padding: 5%;
+    width: 20%;
+    border-radius: 2em 2em;
+    margin: 10%;
+    text-align: center;
+    color: white;
+}
+
+header > section > h4 {
+    padding: 0%;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
 }
 button {
-    background-color: rgb(123, 78,45);
-    color: white;
+    background-color:  rgb(11, 23, 67);
+    color:  rgb(255, 255, 255);
+    font-weight: bold;
     padding: 1%;
     border-radius: 2em 2em;
+}
+form > button {
+    float: left;
+    margin: 2%;
+}
+
+hr {
+    border: 5px solid  rgb(11, 23, 67);
+    border-radius: 10px 10px;
 }
 
 a {
     text-decoration: none;
+}
+
+#assessment p {
+    text-align: justify;
+    font-size: medium;
+    background-color: palegoldenrod;
+    padding: 1%;
+    line-height: 1.7em;
+    color: black;
+}
+p > strong  {
+    background-color: white;
+}
+
+input {
+    text-align: left;
+}
+
+ol li {
+    text-align: left;
+}
+
+ol > section {
+    text-align: left;
+    margin: 2%;
+}
+
+ul {
+    margin-bottom: 2%;
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
+    background-color: white;
+    color: black;
 }

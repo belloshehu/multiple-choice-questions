@@ -11,26 +11,24 @@ def home(request):
 
 
 def register(request):
+    ''' View to handle user registration.'''
     pass
 
 
 def assessment(request):
-    score = 0
+    ''' View for taking assessment page. '''
     questions, choices = None, None
     multiple_choice_questions = None
-    if request.method == 'GET':
-        try:
-            multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
-            questions = Question.objects.all()
-            choices = Choice.objects.all()
-        except MultipleChoiceQuestion.DoesNotExist:
-            pass
-        except Question.DoesNotExist:
-            pass
-        except Choice.DoesNotExist:
-            pass
-    else:
-        return redirect('multiple_choices:result')
+    try:
+        multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
+        questions = Question.objects.all()
+        choices = Choice.objects.all()
+    except MultipleChoiceQuestion.DoesNotExist:
+        pass
+    except Question.DoesNotExist:
+        pass
+    except Choice.DoesNotExist:
+        pass
     context = {
         'multiple_choice_questions':multiple_choice_questions,
         'questions':questions,
@@ -40,4 +38,16 @@ def assessment(request):
 
 
 def process_result(request):
-    pass
+    '''View to compute assessment result. '''
+    score = 0
+    if request.method == 'POST':
+        for key in list(request.POST.keys())[1:]:
+            choice_id = request.POST.get(key, None)
+            print(choice_id)
+            choice = Choice.objects.get(id=int(choice_id))
+            if choice.is_correct:
+                # get the score assigned to the question 
+                score+=Question.objects.get(id=choice.questions.id).grade
+        return render(request, 'multiple_choices/result.html', {'score':score})
+    return redirect('multiple_choices:home')
+    

@@ -6,7 +6,7 @@ main{
     padding: 2%;
 }
 h1, h2, h4 {
-    font-family: forte;
+    font-family: 'arial black', forte;
     color: white
 }
 
@@ -25,16 +25,38 @@ header {
     padding: 1% 2%;
     box-shadow: 0px 0px 5px 5px gray;
 }
-#result, .ass{
-    background-color: rgb(11, 23, 67);
-    font-family: 'Courier New', Courier, monospace;
-    padding: 5%;
-    width: 20%;
-    border-radius: 2em 2em;
-    margin: 10%;
-    text-align: center;
-    color: white;
+@media(min-width: 499px){
+    #result, .ass{
+        background-color: rgb(11, 23, 67);
+        font-family: 'Courier New', Courier, monospace;
+        padding: 5%;
+        width: 20%;
+        border-radius: 2em 2em;
+        margin: 3%;
+        text-align: center;
+        color: white;
+        box-shadow: 0px 0px 5px 5px gray;
+    }
 }
+@media(max-width: 499px){
+    #result, .ass{
+        background-color: rgb(11, 23, 67);
+        font-family: 'Courier New', Courier, monospace;
+        padding: 1%;
+        width: 100%;
+        border-radius: 2em 2em;
+        margin: 10% 2%;
+        text-align: center;
+        color: white;
+        box-shadow: 0px 0px 5px 5px gray;
+    }
+    h1 {
+        font-family: 'arial black';
+        color: white;
+        font-size: medium;
+    }
+}
+
 
 header > section > h4 {
     padding: 0%;
@@ -47,6 +69,7 @@ button {
     font-weight: bold;
     padding: 1%;
     border-radius: 2em 2em;
+    box-shadow: 0px 2px 2px 0px gray;
 }
 form > button {
     float: left;
@@ -58,8 +81,12 @@ hr {
     border-radius: 10px 10px;
 }
 
-a {
+button > a {
     text-decoration: none;
+    color: white;
+}
+a {
+    color: white;
 }
 
 #assessment p {
@@ -76,6 +103,8 @@ p > strong  {
 
 input {
     text-align: left;
+    padding: 2px;
+    font-weight: bold;
 }
 
 ol li {
@@ -96,4 +125,7 @@ body {
     padding: 0%;
     background-color: white;
     color: black;
+}
+span {
+    color: white;
 }

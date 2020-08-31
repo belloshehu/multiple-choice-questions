@@ -68,6 +68,7 @@ def assessment(request):
             'multiple_choice_questions':multiple_choice_questions,
             'questions':questions,
             'choices':choices,
+            'duration': 10,
             }
         return render(request, 'multiple_choices/assessment.html', context)
     return redirect('multiple_choices:login')

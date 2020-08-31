@@ -5,9 +5,15 @@
         <p>
             <h1 id="score-head">Total score</h1>
             <h1 id="score">{{score}}</h1>
+            {% if grade %}
+                <h1>PASSED</h1>   
+            {% else %}
+                <h1>FAILED</h1>
+            {% endif %}
         </p>
         <p>
             <a href="{% url 'multiple_choices:home' %}"><button>Take assessment again</button></a>
         </p>
     </section>
 {% endblock %}
+{% block script %}{% endblock %}

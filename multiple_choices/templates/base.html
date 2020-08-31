@@ -8,8 +8,18 @@
         <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}"> 
     </head>
     <body>
-        <header></header>
+        <header>
+            {% block header %}{% endblock %}
+            {% block user_info %}
+                {% if user.username %}
+                    <span>{{user.username}}</span>
+                    <button><a href="{% url 'multiple_choices:logout' %}">logout</a></button>
+                {% endif %} 
+            {% endblock %}
+        </header>
         <main>{% block main %} {% endblock %}</main>
         <footer></footer>
+       {% block script %}  <script src="{% static 'script/jquery-3.5.0.js'%}" ></script> {% endblock %}
+        <script src="{% static 'script/script.js'%}" ></script>
     </body>
 </html>

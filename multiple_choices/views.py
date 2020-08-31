@@ -36,7 +36,9 @@ def user_login(request):
 
 
 def user_logout(request):
-    pass
+    ''' view function to logout user. '''
+    logout(request)
+    return redirect('multiple_choices:home')
 
 
 def assessment(request):

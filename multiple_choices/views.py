@@ -15,7 +15,15 @@ def register(request):
     ''' View to handle user registration.'''
     form = UserRegistration()
     if request.method == 'POST':
-        pass
+        form = UserRegistration(request.POST)
+        if form.is_valid:
+            try:
+                form.save(commit=True)
+                return render(request, 'multiple_choices/registration_success.html', {'form':form})
+            except ValueError:
+                pass
+        messages.warning(request, 'Wrong information entered!')
+        return redirect(reverse('multiple_choices:register'))
     return render(request, 'multiple_choices/register.html', {'form':form})
 
 

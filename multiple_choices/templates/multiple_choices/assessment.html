@@ -1,0 +1,43 @@
+{% extends 'base.html'%}
+{% block header %} 
+    <h2>Online assessment center</h2>
+    <section><h4>You can't submit assessment once time is out.</h4>
+        <p>Remaining time:  <span id="timer"></span></p>
+    </section>
+{% endblock %}
+{% block user_info %}  {% endblock %}
+{% block main %}
+    <section id="auth">
+        <!--h4>Assessment will automatically close after {{duration}} minutes</h4-->
+    </section>
+    <section id="assessment">
+        <form method="POST" action="{% url 'multiple_choices:result' %}">
+        {% csrf_token %}
+        {% if multiple_choice_questions %}
+            {% for multiple_choice_question in multiple_choice_questions %}
+                <p><strong>Read the passage below and use it to answer the questions that follow.</strong></p>
+                <p>{{multiple_choice_question.passage}}</p>
+                <br>
+                <ol>
+                    {% for question in questions %}
+                        {% ifequal question.multiple_choice_question.id multiple_choice_questions.id  %}
+                            <li>{{question.question_asked}}</li>
+                            <section>
+                                {% for choice in choices %}
+                                    {% ifequal choice.questions.id question.id %}
+                                        <input type="radio" name="{{question.id}}" value="{{choice.id}}" required> {{choice.choice_statement}} <br>
+                                    {% endifequal %}
+
+                                {% endfor %}
+                            </section>
+                        {% endifequal %}
+                    {% endfor %}
+                </ol>
+            {% endfor %}
+        {% endif %}
+                <hr>
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

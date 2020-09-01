@@ -19,10 +19,10 @@ def register(request):
         if form.is_valid:
             try:
                 form.save(commit=True)
-                return render(request, 'multiple_choices/registration_success.html', {'form':form})
+                return render(request, 'multiple_choices/registration_success.html')
             except ValueError:
                 pass
-        messages.warning(request, 'Wrong information entered!')
+        messages.info(request, 'Wrong information entered!')
         return redirect(reverse('multiple_choices:register'))
     return render(request, 'multiple_choices/register.html', {'form':form})
 

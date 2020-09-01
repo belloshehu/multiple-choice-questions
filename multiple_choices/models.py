@@ -14,8 +14,6 @@ class MultipleChoiceQuestion(models.Model):
     duration = models.TimeField()
     no_of_questions = models.IntegerField(default=10)
 
-    class Meta:
-        ordering = ['title']
     
     def __str__(self):
         return self.title
@@ -28,6 +26,7 @@ class Question(models.Model):
     no_of_choices = models.IntegerField(default=4)
     multiple_choice_questions = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.question_asked
 
@@ -38,8 +37,10 @@ class Choice(models.Model):
     is_correct = models.BooleanField(default=False)
     questions = models.ForeignKey(Question, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.choice_statement
+
 
 
 

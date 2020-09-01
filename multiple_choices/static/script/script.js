@@ -17,7 +17,8 @@ $(document).ready(function(){
         if (time_diff < 0){
             clearInterval(ret);
             $('#timer').html('Time out!').attr({'color':'red'});
-            $('#submit-btn').css('background-color', 'red').attr('disabled', true);
+            $('#submit-btn').css('color', 'rgb(11, 23, 67)').attr('disabled', true);
+            $('button:radio').css('color', 'red').attr('disabled', true);
             $('body').css({'background': 'rgba(11, 23, 67, 0.6)'});
         }
     }, secs);

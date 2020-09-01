@@ -3,13 +3,17 @@ from django.utils import timezone
 from django.contrib.auth .models import User
 
 
-# Create your models here.
+    GRADES = [
+        ('f', 'FAILED'),
+        ('p', 'PASSED')
+    ]
 
+# Create your models here.
 
 
 class MultipleChoiceQuestion(models.Model):
     ''' Model for multiple choice questions. '''
-    passage = models.TextField(max_length=3000)
+    passage = models.TextField(max_length=3000,)
     title = models.CharField(max_length=50)
     duration = models.TimeField()
     no_of_questions = models.IntegerField(default=10)
@@ -44,10 +48,6 @@ class Choice(models.Model):
 
 class AssessmentTaker(models.Model):
     ''' Model for individuals taking the assessment. '''
-    GRADES = [
-        ('f', 'FAILED'),
-        ('p', 'PASSED')
-    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
     status = models.CharField(choices=GRADES, max_length=20, default=GRADES[0])

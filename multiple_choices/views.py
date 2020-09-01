@@ -60,7 +60,7 @@ def assessment(request):
             questions = Question.objects.all()
             choices = Choice.objects.all()
         except MultipleChoiceQuestion.DoesNotExist:
-            pass
+            passpip
         except Question.DoesNotExist:
             pass
         except Choice.DoesNotExist:
@@ -69,7 +69,7 @@ def assessment(request):
             'multiple_choice_questions':multiple_choice_questions,
             'questions':questions,
             'choices':choices,
-            'duration': 10,
+            'duration': multiple_choice_questions[0].duration,
             }
         return render(request, 'multiple_choices/assessment.html', context)
     return redirect('multiple_choices:login')

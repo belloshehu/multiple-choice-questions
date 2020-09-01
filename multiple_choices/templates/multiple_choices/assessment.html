@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 {% block header %} 
-    <h2>Online assessment center</h2>
+    <h2>MCQs platform</h2>
     <section><h4>You can't submit assessment once time is out.</h4>
         <p>Duration: <span id="duration">{{duration}} mins.</span> 
             | Remaining time: <span id="timer"></span> 
@@ -13,7 +13,7 @@
     <section id="auth">
         <!--h4>Assessment will automatically close after {{duration}} minutes</h4-->
     </section>
-    <!--section id="assessment">
+    <section id="assessment">
         <form method="POST" action="{% url 'multiple_choices:result' %}">
         {% csrf_token %}
         {% if multiple_choice_questions %}
@@ -42,6 +42,6 @@
                 <hr>
             <button id="submit-btn" type="submit">Submit</button>
         </form>
-    </section-->
+    </section>
 {% endblock %}
 {% block script %} {{block.super}}{% endblock %}

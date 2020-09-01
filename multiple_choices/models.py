@@ -42,8 +42,6 @@ class Choice(models.Model):
         return self.choice_statement
 
 
-
-
 class AssessmentTaker(models.Model):
     ''' Model for individuals taking the assessment. '''
     GRADES = [

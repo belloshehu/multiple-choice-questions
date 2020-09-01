@@ -3,10 +3,10 @@ from django.utils import timezone
 from django.contrib.auth .models import User
 
 
-    GRADES = [
+GRADES = [
         ('f', 'FAILED'),
         ('p', 'PASSED')
-    ]
+]
 
 # Create your models here.
 

@@ -9,8 +9,8 @@ from django.contrib.auth .models import User
 
 class MultipleChoiceQuestion(models.Model):
     ''' Model for multiple choice questions. '''
-    passage = models.TextField(max_length=500)
-    title = models.CharField(max_length=20)
+    passage = models.TextField(max_length=3000)
+    title = models.CharField(max_length=50)
     duration = models.TimeField()
     no_of_questions = models.IntegerField(default=10)
 
@@ -23,7 +23,7 @@ class MultipleChoiceQuestion(models.Model):
 
 class Question(models.Model):
     ''' Model for questions to be asked with multiple choices.'''
-    question_asked = models.CharField(max_length=100)
+    question_asked = models.CharField(max_length=200)
     grade = models.IntegerField(default=5)
     no_of_choices = models.IntegerField(default=4)
     multiple_choice_questions = models.ForeignKey(MultipleChoiceQuestion, on_delete=models.CASCADE)
@@ -34,7 +34,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     ''' Choice for each question asked. '''
-    choice_statement = models.CharField(max_length=100, unique=True)
+    choice_statement = models.CharField(max_length=200, unique=True)
     is_correct = models.BooleanField(default=False)
     questions = models.ForeignKey(Question, on_delete=models.CASCADE)
 
@@ -49,9 +49,9 @@ class AssessmentTaker(models.Model):
         ('f', 'FAILED'),
         ('p', 'PASSED')
     ]
-    username = models.CharField(unique=True, max_length=20)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
-    status = models.CharField(choices=GRADES, max_length=20)
+    status = models.CharField(choices=GRADES, max_length=20, default=GRADES[0])
 
     def __str__(self):
-        return f'{self.username}'
+        return f'{self.user.username}'

@@ -51,7 +51,8 @@ def user_logout(request):
 
 def assessment(request):
     ''' View for taking assessment page. '''
-    questions, choices = None, None
+    questions = None
+    choices = None
     multiple_choice_questions = None
     if request.user.is_authenticated: 
         try:

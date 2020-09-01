@@ -10,11 +10,6 @@ h1, h2, h4 {
     color: white
 }
 
-input:password, input:text, input:email {
-    border-radius: 2em 2em;
-    height: 1.5em;
-    text-align: center;
-}
 i {
     color: white;
     font-size: large;
@@ -77,6 +72,7 @@ button {
 form > button {
     float: left;
     margin: 2%;
+    padding: 2px;
 }
 
 hr {
@@ -87,6 +83,7 @@ hr {
 button > a {
     text-decoration: none;
     color: white;
+    padding: 1%;
 }
 a {
     color: white;
@@ -104,10 +101,17 @@ p > strong  {
     background-color: white;
 }
 
-input {
-    text-align: text;
-    padding: 2px;
+input:radio {
+    text-align: left;
     font-weight: bold;
+}
+
+input {
+    border-radius: 2em 2em;
+    height: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    padding: 2px;
 }
 
 ol li {

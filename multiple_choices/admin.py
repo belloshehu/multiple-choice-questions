@@ -8,17 +8,17 @@ from .models import Question, Choice, MultipleChoiceQuestion, AssessmentTaker
 class QuestionAdmin(ModelAdmin):
     '''Question admin model'''
     list_filter = ['id']
-    fields = ['id', 'question_asked']
+    list_display = ['id', 'question_asked']
     ordering = ['id']
 
 class MultipleChoiceQuestionAdmin(ModelAdmin):
     list_filter = ['id']
-    fields = ['id', 'title']
+    list_display = ['id', 'title']
     ordering = ['id']
 
 class ChoiceAdmin(ModelAdmin):
     list_filter = ['questions']
-    fields = ['questions', 'choice_statement']
+    list_display = ['questions', 'choice_statement']
     ordering = ['questions']
 
 admin.site.register(Question, QuestionAdmin)

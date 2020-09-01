@@ -3,6 +3,15 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AssessmentForm, UserRegistration, UserLogin
 from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice
+
+
+def duration_in_minute(duration):
+    ''' Convert duration of assessment into minutes. '''
+    hours = duration.hour
+    minutes = duration.minute
+    seconds = duration.seconds
+    duration_min = hours * 60 + minutes + seconds % 60
+    return duration_min
 # Create your views here.
 
 
@@ -65,12 +74,14 @@ def assessment(request):
             pass
         except Choice.DoesNotExist:
             pass
+        duration = multiple_choice_questions[0].duration
         context = {
             'multiple_choice_questions':multiple_choice_questions,
             'questions':questions,
             'choices':choices,
-            'duration': multiple_choice_questions[0].duration,
+            'duration': duration_in_minute(duration),
             }
+    
         return render(request, 'multiple_choices/assessment.html', context)
     return redirect('multiple_choices:login')
 

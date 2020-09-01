@@ -9,7 +9,7 @@ def duration_in_minute(duration):
     ''' Convert duration of assessment into minutes. '''
     hours = duration.hour
     minutes = duration.minute
-    seconds = duration.seconds
+    seconds = duration.second
     duration_min = hours * 60 + minutes + seconds % 60
     return duration_min
 # Create your views here.

@@ -18,7 +18,7 @@ class MultipleChoiceQuestionAdmin(ModelAdmin):
 
 class ChoiceAdmin(ModelAdmin):
     list_filter = ['questions']
-    list_display = ['questions', 'choice_statement']
+    list_display = ['questions_id', 'choice_statement']
     ordering = ['questions']
 
 admin.site.register(Question, QuestionAdmin)

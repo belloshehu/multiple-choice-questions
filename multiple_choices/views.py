@@ -26,7 +26,9 @@ def get_score(passed):
 
 def home(request):
     ''' View for assessment taking. '''
-    return render(request, 'multiple_choices/home.html')
+    multiple_choice_questions = MultipleChoiceQuestion.objects.all()
+    duration = duration_in_minute(multiple_choice_questions[0].duration) 
+    return render(request, 'multiple_choices/home.html', {'duration':duration})
 
 
 def register(request):
@@ -52,7 +54,7 @@ def user_login(request):
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
         user = authenticate(username=username, password=password)
-        if user:
+        if user is not None:
             login(request, user)
             return redirect('multiple_choices:home')
         else:

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AssessmentForm, UserRegistration, UserLogin
-from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice
+from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice, GRADES
 
 
 def duration_in_minute(duration):
@@ -12,6 +12,15 @@ def duration_in_minute(duration):
     seconds = duration.second
     duration_min = hours * 60 + minutes + seconds % 60
     return duration_min
+
+
+def get_score(passed):
+    '''Returns grade value of either PASSED or FAILED. '''
+    if passed:
+        return GRADES[1]
+    else:
+        return GRADES[0]
+
 # Create your views here.
 
 
@@ -110,6 +119,7 @@ def process_result(request):
             percentage = 0
         if percentage >= 75:
             passed = True
+        AssessmentTaker(user=request.user.id, score=percentage, status=get_score(passed)).save()
         return render(request, 'multiple_choices/result.html', {'score': score, 'grade': passed})
     return redirect('multiple_choices:home')
     

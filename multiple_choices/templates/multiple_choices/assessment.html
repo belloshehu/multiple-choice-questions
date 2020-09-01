@@ -24,7 +24,7 @@
                 <ol>
                     {% for question in questions %}
                         {% ifequal question.multiple_choice_question.id multiple_choice_questions.id  %}
-                            <li>{{question.question_asked}}</li>
+                            <li><strong>{{question.question_asked}}</strong></li>
                             <section>
                                 {% for choice in choices %}
                                     {% ifequal choice.questions.id question.id %}

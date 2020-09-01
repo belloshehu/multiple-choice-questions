@@ -1,7 +1,7 @@
 {% extends 'base.html'%}
 {% block header %}
     <section >
-        <h1>Welcome to MCQs platform</h1>
+        <h1>MCQs platform</h1>
     </section>
 {% endblock %}
 {% block user_info %} {{block.super}} {% endblock %}
@@ -9,15 +9,23 @@
  
     <section class="ass">
         <h3>Instructions</h3>
-        <h2><i class="fa fa-clock-o" aria-hidden="true"></i></h2>
-        <p>
+        <h2><i style="color: orange;" class="fa fa-clock-o" aria-hidden="true"></i></h2>
+        <p class="txt" style="color: orange;">
+               Duration for the assessment
+                is <span id="time">{{duration}}</span> minutes
+        </p> 
+        <br>
+        <p class="txt">
             Make sure you are ready before you commence.
-             Note that once an assessment is started, it can not be stopped.
+             Note that once an assessment is started, it can not be stopped
+        </p> 
+        <br>
+        <p class="txt"> 
+            You are expected to remain within the window while taking the assessment as 
+            going out of it will be considered an effort to cheat
         </p>
-        <p>You are expected to remain within the window while taking the assessment as 
-            going out of it will be considered an effort to cheat.
-        </p>
-      <a href="{% url 'multiple_choices:assessment' %}"><button>Get started</button></a>
+        <br>
+        <button style="margin: 2%;"><a href="{% url 'multiple_choices:assessment' %}">Get started</a></button>
     </section>
 {% endblock %}
 {% block script %} {{block.super}}{% endblock %}

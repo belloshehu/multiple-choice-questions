@@ -23,7 +23,7 @@ header {
     padding: 1% 2%;
     box-shadow: 0px 0px 5px 5px gray;
 }
-@media(min-width: 499px){
+@media(min-width: 500px){
     #result, .ass{
         background-color: rgb(11, 23, 67);
         font-family: 'Courier New', Courier, monospace;
@@ -35,46 +35,91 @@ header {
         color: white;
         box-shadow: 0px 0px 5px 5px gray;
     }
+    input {
+        border-radius: 2em 2em;
+        height: 1.5em;
+        text-align: center;
+        font-weight: bold;
+        padding: 2px;
+    }
+    input:radio {
+        text-align: left;
+    }
+    button {
+        background-color:  rgb(11, 23, 67);
+        color:  rgb(255, 255, 255);
+        font-weight: bold;
+        padding: 1% 2%;
+        border-radius: 2em 2em;
+        box-shadow: 0px 2px 2px 0px gray;
+    }
+    form > button {
+        float: left;
+        margin-top: 2%;
+        margin-bottom: 5%;
+        padding: 1% 2%;
+    }
 }
 @media(max-width: 499px){
     #result, .ass{
         background-color: rgb(11, 23, 67);
         font-family: 'Courier New', Courier, monospace;
-        padding: 1%;
-        width: 100%;
+        padding: 2% 1%;
         border-radius: 2em 2em;
-        margin: 10% 2%;
+        margin: 2%;
         text-align: center;
         color: white;
         box-shadow: 0px 0px 5px 5px gray;
+
     }
     h1 {
         font-family: 'arial black';
         color: white;
-        font-size: medium;
+        font-size: larger;
+        margin: 1%;
+    }
+        
+    input {
+        border-radius: 2em 2em;
+        height: 2em;
+        text-align: center;
+        font-weight: bold;
+        padding: 2px;
+        width: 80%;
+
+    }
+    input:radio {
+        text-align: left;
+        font-weight: normal;
+    }
+    button {
+        background-color:  rgb(11, 23, 67);
+        color:  rgb(255, 255, 255);
+        font-weight: bold;
+        padding: 1% 2%;
+        border-radius: 2em 2em;
+        box-shadow: 0px 2px 2px 0px gray;
+        width: 80%;
+    }
+    form > button {
+        float: none;
+        margin-top: 2%;
+        margin-bottom: 5%;
+        padding: 1% 2%;
+        width: 60%;
+    }
+    p.txt {
+        font-size:medium;
+        margin: 1% 2%;
     }
 }
-
 
 header > section > h4 {
     padding: 0%;
     font-size: large;
     font-family: 'Courier New', Courier, monospace;
 }
-button {
-    background-color:  rgb(11, 23, 67);
-    color:  rgb(255, 255, 255);
-    font-weight: bold;
-    padding: 1%;
-    border-radius: 2em 2em;
-    box-shadow: 0px 2px 2px 0px gray;
-}
-form > button {
-    float: left;
-    margin-top: 2%;
-    margin-bottom: 5%;
-    padding: 1%;
-}
+
 
 label {
     font-size: medium;
@@ -85,12 +130,12 @@ hr {
     border-radius: 10px 10px;
 }
 
+a {
+    color: orangered;
+}
+
 button > a {
     text-decoration: none;
-    color: white;
-    padding: 1%;
-}
-a {
     color: white;
 }
 
@@ -106,18 +151,6 @@ p > strong  {
     background-color: white;
 }
 
-
-input {
-    border-radius: 2em 2em;
-    height: 1.5em;
-    text-align: center;
-    font-weight: bold;
-    padding: 2px;
-}
-input:radio {
-    text-align: left;
-    font-weight: bold;
-}
 
 ol li {
     text-align: left;

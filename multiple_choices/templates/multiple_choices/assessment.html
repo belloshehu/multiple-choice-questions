@@ -2,7 +2,10 @@
 {% block header %} 
     <h2>Online assessment center</h2>
     <section><h4>You can't submit assessment once time is out.</h4>
-        <p>Remaining time:  <span id="timer"></span></p>
+        <p>Duration: <span id="duration">{{duration}} mins.</span> 
+            | Remaining time: <span id="timer"></span> 
+            <i class="fa fa-clock-o" aria-hidden="true"></i>
+        </p>
     </section>
 {% endblock %}
 {% block user_info %}  {% endblock %}
@@ -25,7 +28,8 @@
                             <section>
                                 {% for choice in choices %}
                                     {% ifequal choice.questions.id question.id %}
-                                        <input type="radio" name="{{question.id}}" value="{{choice.id}}" required> {{choice.choice_statement}} <br>
+                                        <input id="{{question.id}}{{choice.id}}" type="radio" name="{{question.id}}" value="{{choice.id}}" required>
+                                        <label for="{{question.id}}{{choice.id}}">{{choice.choice_statement}}</label><br>
                                     {% endifequal %}
 
                                 {% endfor %}
@@ -36,7 +40,7 @@
             {% endfor %}
         {% endif %}
                 <hr>
-            <button type="submit">Submit</button>
+            <button id="submit-btn" type="submit">Submit</button>
         </form>
     </section>
 {% endblock %}

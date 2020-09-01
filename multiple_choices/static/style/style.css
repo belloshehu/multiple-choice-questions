@@ -10,12 +10,15 @@ h1, h2, h4 {
     color: white
 }
 
-input {
+input:password, input:text, input:email {
     border-radius: 2em 2em;
     height: 1.5em;
     text-align: center;
 }
-
+i {
+    color: white;
+    font-size: large;
+}
 header {
     margin: 0%;
     background-color: rgb(11, 23, 67);
@@ -29,8 +32,8 @@ header {
     #result, .ass{
         background-color: rgb(11, 23, 67);
         font-family: 'Courier New', Courier, monospace;
-        padding: 5%;
-        width: 20%;
+        padding: 3%;
+        width: 30%;
         border-radius: 2em 2em;
         margin: 3%;
         text-align: center;
@@ -102,7 +105,7 @@ p > strong  {
 }
 
 input {
-    text-align: left;
+    text-align: text;
     padding: 2px;
     font-weight: bold;
 }

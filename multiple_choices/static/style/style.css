@@ -100,10 +100,11 @@ header {
         border-radius: 2em 2em;
         box-shadow: 0px 2px 2px 0px gray;
         width: 80%;
+        margin-bottom: 5%;
     }
-    form > button {
+    form > button, p > button {
         float: none;
-        margin-top: 2%;
+        margin-top: 5%;
         margin-bottom: 5%;
         padding: 1% 2%;
         width: 60%;
@@ -111,6 +112,9 @@ header {
     p.txt {
         font-size:medium;
         margin: 1% 2%;
+    }
+    #login {
+        padding-bottom: 20%;
     }
 }
 

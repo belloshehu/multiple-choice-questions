@@ -6,7 +6,7 @@
 {% endblock %}
 {% block main %}
 
-    <section class="ass">
+    <section class="ass" id="login">
        <h2>Login</h2>
        {% for message in messages %}
             {% if forloop.counter == 1 %}
@@ -18,7 +18,7 @@
             <p>{{form.as_p}}</p>
             <p><button><a href="{% url 'multiple_choices:assessment' %}">Send</a></button></p>
        </form><br>
-       <p class="txt">If you not registered, go <a href="{% url 'multiple_choices:register' %}">here</a></p>
+       <p class="txt">If you are not registered, go <a href="{% url 'multiple_choices:register' %}">here</a></p>
     </section>
 {% endblock %}
 {% block script %}{% endblock %}

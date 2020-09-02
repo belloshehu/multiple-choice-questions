@@ -3,8 +3,7 @@
     <h2>MCQs platform</h2>
     <section><h4>You can't submit assessment once time is out.</h4>
         <p id="time">Duration: <span id="duration">{{duration}} mins.</span> 
-            <p>Remaining time: <span id="timer"></span> </p>
-            <i class="fa fa-clock-o" aria-hidden="true"></i>
+            <p>Remaining time: <span id="timer"></span> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
         </p>
     </section>
 {% endblock %}
@@ -19,7 +18,7 @@
         {% if multiple_choice_questions %}
             {% for multiple_choice_question in multiple_choice_questions %}
                 <p><strong>Read the passage below and use it to answer the questions that follow.</strong></p>
-                <p>{{multiple_choice_question.passage}}</p>
+                <p id="passage">{{multiple_choice_question.passage}}</p>
                 <br>
                 <ol>
                     {% for question in questions %}

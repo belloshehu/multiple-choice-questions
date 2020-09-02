@@ -142,6 +142,7 @@ strong{
 label {
     font-size: medium;
     text-align: justify;
+    white-space: nowrap;
 }
 
 hr {
@@ -162,7 +163,7 @@ a {
 .anc-btn > button {
     margin: 0;
     width: 60%;
-    color: orangered;
+    color: white;
     text-decoration: none;
 }
 #assessment p {
@@ -199,4 +200,7 @@ body {
 }
 span {
     color: white;
+}
+#passage {
+    white-space: pre-line;
 }

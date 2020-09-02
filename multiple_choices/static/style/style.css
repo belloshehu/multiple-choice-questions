@@ -30,17 +30,19 @@ header {
         padding: 3%;
         width: 30%;
         border-radius: 2em 2em;
-        margin: 3%;
+        margin: 0% 3%;
         text-align: center;
         color: white;
         box-shadow: 0px 0px 5px 5px gray;
     }
     input {
         border-radius: 2em 2em;
-        height: 1.5em;
+        height: 2em;
+        font-size: large;
         text-align: center;
         font-weight: bold;
         padding: 2px;
+        width: 80%;
     }
     input:radio {
         text-align: left;
@@ -49,15 +51,21 @@ header {
         background-color:  rgb(11, 23, 67);
         color:  rgb(255, 255, 255);
         font-weight: bold;
+        font-size: large;
         padding: 1% 2%;
         border-radius: 2em 2em;
         box-shadow: 0px 2px 2px 0px gray;
+        width: 60%;
+        margin-top: 5%;
     }
     form > button {
         float: left;
         margin-top: 2%;
+        font-size: large;
         margin-bottom: 5%;
         padding: 1% 2%;
+        width: 60%;
+        margin-top: 5%;
     }
 }
 @media(max-width: 499px){

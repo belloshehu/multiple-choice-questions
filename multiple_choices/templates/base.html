@@ -14,7 +14,7 @@
             {% block user_info %}
                 {% if user.username %}
                     <span>{{user.username}}</span>
-                    <button><a href="{% url 'multiple_choices:logout' %}">logout</a></button>
+                    <a class="anc-btn" href="{% url 'multiple_choices:logout' %}"><button>logout</button></a>
                 {% endif %} 
             {% endblock %}
         </header>

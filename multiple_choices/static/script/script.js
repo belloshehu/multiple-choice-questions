@@ -16,10 +16,13 @@ $(document).ready(function(){
         $('#timer').html(hours_diff + ' h : ' + minutes_diff + ' m : ' + seconds_diff +' s' );
         if (time_diff < 0){
             clearInterval(ret);
-            $('#timer').html('Time out!').attr({'color':'red'});
-            $('#submit-btn').css('color', 'rgb(11, 23, 67)').attr('disabled', true);
-            $('button:radio').css('color', 'red').attr('disabled', true);
+            $('#timer').html('Time out!').css({'color':'red'});
+            $('#submit-btn').html('You can not submit').attr('disabled', true);
+            $('input:radio').css('color', 'red').attr('disabled', true);
             $('body').css({'background': 'rgba(11, 23, 67, 0.6)'});
+        }
+        else if(time_diff > 0 && time_diff < 300000){
+            $('#timer').css({'color':'red'});
         }
     }, secs);
 });

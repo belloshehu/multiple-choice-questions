@@ -28,24 +28,25 @@ header {
         background-color: rgb(11, 23, 67);
         font-family: 'Courier New', Courier, monospace;
         padding: 3%;
-        width: 30%;
+        width: 50%;
         border-radius: 2em 2em;
         margin: 0% 3%;
         text-align: center;
         color: white;
         box-shadow: 0px 0px 5px 5px gray;
     }
-    input {
+    input[type=text], input[type=password], input[type=email]{
         border-radius: 2em 2em;
         height: 2em;
         font-size: large;
         text-align: center;
         font-weight: bold;
         padding: 2px;
-        width: 80%;
+        width: 60%;
     }
-    input:radio {
+    input[type=radio] {
         text-align: left;
+        font-size: large;
     }
     button {
         background-color:  rgb(11, 23, 67);
@@ -86,8 +87,10 @@ header {
         font-size: larger;
         margin: 1%;
     }
-        
-    input {
+      #time {
+          font-size: small;
+      }  
+    input[type=text], input[type=password], input[type=email] {
         border-radius: 2em 2em;
         height: 2em;
         text-align: center;
@@ -96,7 +99,7 @@ header {
         width: 80%;
 
     }
-    input:radio {
+    input[type=radio] {
         text-align: left;
         font-weight: normal;
     }
@@ -146,11 +149,18 @@ a {
     color: orangered;
 }
 
-button > a {
+.anc-btn {
     text-decoration: none;
     color: white;
+    border-radius: 2em 2em;
+    margin: 0 2%;
+    padding: 0;
 }
-
+.anc-btn > button {
+    margin: 0;
+    width: 10%;
+    color: orangered;
+}
 #assessment p {
     text-align: justify;
     font-size: medium;

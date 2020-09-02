@@ -113,7 +113,7 @@ header {
         width: 80%;
         margin-bottom: 5%;
     }
-    form > button, p > button {
+    form > button{
         float: none;
         margin-top: 5%;
         margin-bottom: 5%;
@@ -135,9 +135,13 @@ header > section > h4 {
     font-family: 'Courier New', Courier, monospace;
 }
 
-
+strong{
+    text-align: justify;
+    font-size: large;
+}
 label {
     font-size: medium;
+    text-align: justify;
 }
 
 hr {
@@ -149,17 +153,17 @@ a {
     color: orangered;
 }
 
-.anc-btn {
+.anc-btn  {
     text-decoration: none;
     color: white;
     border-radius: 2em 2em;
     margin: 0 2%;
-    padding: 0;
 }
 .anc-btn > button {
     margin: 0;
-    width: 10%;
+    width: 60%;
     color: orangered;
+    text-decoration: none;
 }
 #assessment p {
     text-align: justify;

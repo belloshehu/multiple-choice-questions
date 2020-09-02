@@ -17,7 +17,7 @@
        <form action="{% url 'multiple_choices:login' %}" method="POST">
             {% csrf_token %}
             <p>{{form.as_p}}</p>
-            <p><button><a href="{% url 'multiple_choices:assessment' %}">Send</a></button></p>
+            <p><a class="acn-btn" href="{% url 'multiple_choices:assessment' %}"><button>Send</button></a></p>
        </form><br>
        <p class="txt">If you are not registered, go <a href="{% url 'multiple_choices:register' %}">here</a></p>
     </section>

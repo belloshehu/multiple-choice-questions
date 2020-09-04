@@ -47,7 +47,7 @@ header {
     input[type=radio] {
         text-align: left;
         font-size: large;
-        display: block;
+        display: inline;
     }
     button {
         background-color:  rgb(11, 23, 67);
@@ -103,7 +103,7 @@ header {
     input[type=radio] {
         text-align: left;
         font-weight: normal;
-        display: block;
+        display: inline;
     }
     button {
         background-color:  rgb(11, 23, 67);

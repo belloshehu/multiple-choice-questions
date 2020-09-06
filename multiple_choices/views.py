@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import AssessmentForm, UserRegistration, UserLogin
+from .forms import AssessmentForm, UserRegistration, UserLogin, MultipleChoiceQuestionForm
 from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice, GRADES
 
 
@@ -125,3 +125,12 @@ def process_result(request):
         return render(request, 'multiple_choices/result.html', {'score': score, 'grade': passed})
     return redirect('multiple_choices:home')
     
+
+def create_cbt(request):
+    '''
+    Create new cbt.
+    '''
+    if request.method == 'GET':
+        form = MultipleChoiceQuestionForm()
+        return render(request, 'multiple_choices/create_cbt.html', {'form': form})
+    return redirect('multiple_choices:login')

@@ -10,4 +10,5 @@ urlpatterns = [
     path('assessment/', views.assessment, name='assessment'),
     path('result/', views.process_result, name='result'),
     path('logout/', views.user_logout, name='logout'),
+    path('create-test/', views.create_cbt, name='create_test')
 ]

@@ -54,3 +54,12 @@ class AssessmentTaker(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
+
+class ComputerBasedTest(models.Model):
+    '''
+    Computer based test for assessing students, employees etc.
+    '''
+    title = models.CharField(max_length=50)
+    description = models.TextField(max_length=1000,)
+    duration = models.TimeField()
+    no_of_questions = models.IntegerField(default=10)

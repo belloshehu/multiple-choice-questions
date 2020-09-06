@@ -164,7 +164,7 @@ a {
 }
 .anc-btn > button {
     margin: 0;
-    width: 60%;
+    width: 30%;
     color: white;
     text-decoration: none;
 }
@@ -205,4 +205,8 @@ span {
 }
 #passage {
     white-space: pre-line;
+}
+
+hr.thick-line {
+    border: 5px solid rgb(223, 10, 30);
 }

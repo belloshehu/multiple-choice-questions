@@ -58,3 +58,12 @@ class UserLogin(forms.Form):
         widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
     )
    
+
+class MultipleChoiceQuestionForm(forms.ModelForm):
+    '''Create form for creating Multiple choice questions.
+    '''
+    
+    class Meta:
+        model = MultipleChoiceQuestion
+        fields = ('passage', 'title', 'duration', 'no_of_questions')
+    

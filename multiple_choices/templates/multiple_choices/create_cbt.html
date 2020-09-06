@@ -7,19 +7,14 @@
 {% endblock %}
 {% block main %}
 
-    <section class="ass" id="login">
-       <h2>Login</h2>
-       {% for message in messages %}
-            {% if forloop.counter == 1 %}
-                <span style="color: orange;">{{message}}</span>
-            {% endif %}
-        {% endfor %}
+    <section class="ass">
+       <h2>Create CBT Question</h2><hr class="thick-line">
+       
        <form action="{% url 'multiple_choices:login' %}" method="POST">
             {% csrf_token %}
             <p>{{form.as_p}}</p>
             <p><a class="acn-btn" href="{% url 'multiple_choices:assessment' %}"><button>Send</button></a></p>
        </form><br>
-       <p class="txt">If you are not registered, go <a href="{% url 'multiple_choices:register' %}">here</a></p>
     </section>
 {% endblock %}
 {% block script %}{% endblock %}

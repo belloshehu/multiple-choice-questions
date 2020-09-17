@@ -1,6 +1,9 @@
 {% extends 'cbt_base.html'%}
 {% load static %}
-{% block user_info %} {{block.super}} {% endblock %}
+{% block user_info %} 
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    {{block.super}} 
+{% endblock %}
 {% block main %}
  
     <section class="" style="background-color:white">
@@ -17,22 +20,20 @@
         </p>
         <article class="">
             <div class="cbt-type">
-                <p>Use this option to create quize, test and exams for students, children etc.
+                <p> 
+                    <h4>Organisation computer-based test</h4>
+                    Use this option to create quize, test and exams for students, children etc.
                     <br>
                     It is designed for teachers, parents, emplyers etc. who want to use this platform for their personal use.
                 </p>
                 <p>
-                    <a href="{% url 'cbt:create_cbt' %}">Create CBT for personal use only <button>start</button></a>
-                </p>
-            </div>
-            <div class="cbt-type"> 
-                <p>
-                    Use this option if you are creating test on behalf of an organisation, school or company.
+                    <h4>Personal computer-based test</h4>
+                     Use this option if you are creating test on behalf of an organisation, school or company.
                     <br>
                     This will require you to initially add the organisation you are creating the test during the creation process.
                 </p>
                 <p>
-                    <a href="{% url 'cbt:create_institution' %}">Create CBT for organisation use only <button>start</button></a>
+                    <a href="{% url 'cbt:create_cbt' %}">Create CBT for personal use only <button>start</button></a>
                 </p>
             </div>
         </article>

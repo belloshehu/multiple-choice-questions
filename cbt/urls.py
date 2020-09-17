@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-
+from multiple_choices.views import sample
 app_name = 'cbt'
 
 urlpatterns = [
@@ -13,6 +13,7 @@ urlpatterns = [
     path('create-institution-cbt/', views.create_institution_cbt, name='create_institution'),
     path('create-institution/', views.create_institution, name='create_institution'),
     path('logout', views.user_logout, name='logout'),
+    path('sample/', sample, name='sample'),
     
 ]
 

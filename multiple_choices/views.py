@@ -115,7 +115,7 @@ def sample(request):
         choices = Choice.objects.all()
         duration = multiple_choice_questions[0].duration
     except MultipleChoiceQuestion.DoesNotExist:
-        passpip
+        pass
     except Question.DoesNotExist:
         pass
     except Choice.DoesNotExist:

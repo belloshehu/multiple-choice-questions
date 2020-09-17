@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import AssessmentForm, UserRegistration, UserLogin, MultipleChoiceQuestionForm
 from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice, GRADES
+from django.utils import timezone
 
 
 def duration_in_minute(duration):
@@ -26,8 +27,12 @@ def get_score(passed):
 
 def home(request):
     ''' View for assessment taking. '''
+    duration = 0
     multiple_choice_questions = MultipleChoiceQuestion.objects.all()
-    duration = duration_in_minute(multiple_choice_questions[0].duration) 
+    try:
+        duration = duration_in_minute(multiple_choice_questions[0].duration) 
+    except IndexError:
+        pass
     return render(request, 'multiple_choices/home.html', {'duration':duration})
 
 
@@ -95,6 +100,37 @@ def assessment(request):
     
         return render(request, 'multiple_choices/assessment.html', context)
     return redirect('multiple_choices:login')
+
+
+def sample(request):
+    ''' View for taking sample assessment. '''
+    questions = None
+    choices = None
+    multiple_choice_questions = None
+    now = timezone.datetime.now()
+    duration = now - timezone.timedelta(minutes=20)
+    try:
+        multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
+        questions = Question.objects.all()
+        choices = Choice.objects.all()
+        duration = multiple_choice_questions[0].duration
+    except MultipleChoiceQuestion.DoesNotExist:
+        passpip
+    except Question.DoesNotExist:
+        pass
+    except Choice.DoesNotExist:
+        pass
+    except IndexError:
+        pass
+    context = {
+        'multiple_choice_questions':multiple_choice_questions,
+        'questions':questions,
+        'choices':choices,
+        'duration': duration_in_minute(duration),
+        }
+    return render(request, 'multiple_choices/assessment.html', context)
+
+
 
 
 def process_result(request):

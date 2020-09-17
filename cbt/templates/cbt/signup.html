@@ -1,0 +1,30 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block user_info %}
+    {% if user.username %}
+        <span>{{user.username}}</span>
+        <a class="" href="{% url 'cbt:logout' %}">logout</a>
+    {% else %}
+        <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
+        <a class="" href="{% url 'cbt:login' %}"><button>login</button></a>
+{% endif %} 
+{% endblock %}
+{% block main %}
+    <section class="signup">
+        <p>
+            <img src="{% static 'image/cbtmaker-signup-gold-dark.png' %}" height="20%" width="50%">
+        </p>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <form action="{% url 'cbt:signup' %}" method="POST">
+            {% csrf_token %}
+            <p>{{form.as_p}}</p>
+            <p><button type="submit">Send</button></p>
+        </form>
+       <p class="">If you are registered, login <a href="{% url 'cbt:login' %}">here</a></p>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

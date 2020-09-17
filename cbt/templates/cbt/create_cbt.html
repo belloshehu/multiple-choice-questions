@@ -1,0 +1,88 @@
+{% extends 'cbt_base.html'%}
+{% block user_info %} 
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    {{block.super}}
+{% endblock %}
+{% block main %}
+    <section class="cbt-form">
+        <section>
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}
+                    <p class="info">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        </section>
+        <section>
+            <h1>
+                CBT creation form 
+                <span><a href="{% url 'cbt:cbt_list' %}"><button class="small">my CBTs</button></a></span>
+                <span class="badge">{{cbts|length}}</span>
+            </h1>
+        </section>
+        <section>
+            <form action="{% url 'cbt:create_cbt' %}" method="POST">
+                {% csrf_token %}
+                <section id="cbt-info">
+                    
+                    <h4>Enter information related to your CBT</h4>
+                        <p> 
+                            <p class="label"> Select CBT type:</p>
+                            <p class="label">
+                                <input id="personal" type="radio" name="type" value="personal" required>
+                                <label for="personal">Personal(For parents, teachers or any individual)</label>
+                            </p>
+                            <p class="label">
+                                <input id="organisation" type="radio" name="type" value="organisation" required>
+                                <label for="organisation">Organisation(for schools, companies or any organisation)</label>
+                            </p>
+                        </p>
+                    <section>
+                        <p> <label for="selection">Select organisation<span class="badge">{{organisations|length}}</span>:</label>
+                            {% if organisations %}
+                                <select id="selection">
+                                {% for organisation in organisations %}
+                                    <option value="{{organisation.id}}">{{organisation.name}}</option>
+                                {% endfor %}
+                                </select>
+                            {% else %}
+                                <span> No organisations <a href="institution"><button class="small">create organisation</button></a></span>
+                            {% endif %}
+                        </p>
+                    </section>
+                    <section>
+                        {% for field in cbt_form %}
+                            {% if 3 > forloop.counter %}
+                            <p>{{field.error}}</p>
+                            <p>{{field}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    
+                        {% for field in cbt_form %}
+                            {% if forloop.counter > 2%}
+                            {{field.error}}
+                            {{field}}
+                            {% endif %}
+                        {% endfor %}
+                    </section>
+                    <a class="acn-btn" href="{% url 'cbt:create_cbt' %}"><button>Create CBT</button></a>
+                </section>
+            </form>
+        </section>
+        <section>
+            <h1>
+                Create institution 
+                <span><a href="{% url 'cbt:cbt_list' %}"><button class="small">my organisations</button></a></span>
+                <span class="badge">{{organisations|length}}</span>
+            </h1>
+            <form  id="institution" method="POST" action="{% url 'cbt:create_institution' %}">
+                {% csrf_token %}
+                {% for field in institution_form %}
+                    {{field.error}}
+                    {{field}}
+                {% endfor %}
+                <p><button type="submit">create</button></p>
+            </form>
+        </section>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

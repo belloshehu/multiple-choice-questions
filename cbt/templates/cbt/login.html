@@ -1,0 +1,35 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block header %}
+ 
+{% endblock %}
+{% block user_info %} 
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    <a class="" href="{% url 'cbt:signup' %}"><button>signup</button></a>
+{% endblock %}
+{% block main %}
+
+    <section  id="login">
+        <section>
+            <p>
+                <img src="{% static 'image/cbtmaker-login-gold-dark.png' %}" height="20%" width="50%">
+            </p>
+        </section>       
+        <article id="login-form">
+            
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}
+                    <span style="color: red;">{{message}}</span>
+                {% endif %}
+            {% endfor %}
+                <form action="{% url 'cbt:login' %}" method="POST">
+                    {% csrf_token %}
+                    <p>{{form.as_p}}</p>
+                    <p><a class="acn-btn" href="{% url 'cbt:login' %}"><button>login</button></a></p>
+                </form><br>
+                <p class="">If you are not registered, signup <a href="{% url 'cbt:signup' %}">here</a></p>
+        </article>
+
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport", content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{% static 'style/cbt/style.css' %}"> 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+            <img src="{% static 'image/cbtmaker-logo-gold-dark.png' %}" height="10%" width="20%">
+            {% block header %}
+                
+            {% endblock %}
+            {% block user_info %}
+                {% if user.username %}
+                    <span><a href="{% url 'cbt:cbt_list' %}">{{user.username}}</a></span>
+                    <a class="" href="{% url 'cbt:logout' %}">logout</a>
+                {% else %}
+                    <a class="" href="{% url 'cbt:signup' %}"><button>signup</button></a>
+                    <a class="" href="{% url 'cbt:login' %}"><button>login</button></a>
+                {% endif %} 
+            {% endblock %}
+        </header>
+        <main>{% block main %} {% endblock %}</main>
+        <footer>
+            <em>@cbtmaker 2020</em>
+        </footer>
+       {% block script %}  <script src="{% static 'script/jquery-3.5.0.js'%}"></script> {% endblock %}
+        <script src="{% static 'script/script.js'%}" ></script>
+    </body>
+</html>

@@ -85,7 +85,7 @@ def assessment(request):
             questions = Question.objects.all()
             choices = Choice.objects.all()
         except MultipleChoiceQuestion.DoesNotExist:
-            passpip
+            pass
         except Question.DoesNotExist:
             pass
         except Choice.DoesNotExist:

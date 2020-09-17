@@ -1,0 +1,361 @@
+main{
+    margin:0%;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: larger;
+    padding: 2%;
+}
+
+
+i {
+    color: white;
+    font-size: large;
+}
+header, footer {
+    margin: 0%;
+    background-color: rgb(11, 23, 67);
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: x-large;
+    padding: 1% 2%;
+    box-shadow: 0px 0px 5px 5px gray;
+}
+footer {
+    font-size: small;
+    box-shadow: none;
+    padding: 3% 5%;
+    text-align: center;
+}
+
+footer em {
+    text-align: center;
+}
+
+
+@media(min-width: 500px){
+    .cbt-form {
+        text-align: left;
+    }
+    textarea {
+        border-radius: 1em 1em;
+        text-align: left;
+        padding: 0px 4px;
+    }
+
+    #result, .ass{
+        background-color: rgb(11, 23, 67);
+        font-family: 'Courier New', Courier, monospace;
+        padding: 3%;
+        border-radius: 0;
+        margin: 0% 3%;
+        text-align: center;
+        color: white;
+        box-shadow: 0px 0px 5px 5px gray;
+    }
+    h1 {
+        color: rgb(223, 10, 30);
+        font-size: 42px;
+    }
+    input[type=text], input[type=password], input[type=email], input[type=number]{
+        border-radius: 2em 2em;
+        border-color: rgb(132, 105, 12);
+        height: 2em;
+        text-align: left;
+        font-weight: bold;
+        padding: 0px 4px;
+    }
+   
+    input[type=radio] {
+        text-align: left;
+        font-size: large;
+        display: inline-flex;
+    }
+    button {
+        background-color:  rgb(11, 23, 67);
+        color:  rgb(255, 255, 255);
+        font-weight: bold;
+        font-size: large;
+        padding: 1% 2%;
+        border-radius: 2em 2em;
+        box-shadow: 0px 2px 2px 0px gray;
+        margin-top: 1%;
+    }
+    form > button {
+        float: left;
+        margin-top: 2%;
+        font-size: large;
+        margin-bottom: 5%;
+        padding: 1% 2%;
+        margin-top: 5%;
+    }
+    p.txt {
+        font-size: larger;
+        font-weight:bold;
+        color: rgb(11, 23, 67);
+    }
+}
+@media(max-width: 499px){
+    #result, .ass{
+        background-color: rgb(11, 23, 67);
+        font-family: 'Courier New', Courier, monospace;
+        padding: 2% 1%;
+        border-radius: 2em 2em;
+        margin: 2%;
+        text-align: center;
+        color: white;
+        box-shadow: 0px 0px 5px 5px gray;
+
+    }
+    h1 {
+        font-family: 'arial black';
+        color: white;
+        font-size: 30px;
+        margin: 1%;
+        display: block;
+    }
+      #time {
+          font-size: small;
+      } 
+      textarea{
+        border-radius: 1em 1em;
+        text-align: left;
+        padding: 0px 4px;
+        width: 100%;
+    }
+      
+    input[type=text], input[type=password], input[type=email] {
+        border-radius: 2em 2em;
+        height: 2em;
+        text-align: center;
+        font-weight: bold;
+        padding: 2px;
+        width: 80%;
+    }
+    input[type=radio] {
+        text-align: left;
+        font-weight: normal;
+        display: inline-flex;
+    }
+    button {
+        background-color:  rgb(11, 23, 67);
+        color:  rgb(255, 255, 255);
+        font-weight: bold;
+        padding: 1% 1%;
+        border-radius: 2em 2em;
+        box-shadow: 0px 2px 2px 0px gray;
+        margin-bottom: 1%;
+    }
+
+    form a button{
+        margin-top: 5%;
+        margin-bottom: 5%;
+        padding: 0% 1%;
+        width: fit-content;
+    }
+    p.txt {
+        font-size: large;
+        margin: 1% 2%;
+    }
+    #login {
+        padding-bottom: 20%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+    }
+    header img {
+        width: 20%;
+        height: 20%;
+    }
+
+    .cbt-form {
+        width: 100%;
+    }
+    .cbt-info {
+        width: 100%;
+    }
+    p.label {
+        text-align: left;
+    }
+    p.label label {
+        margin-block-start: 2px;
+    }
+}
+
+header > section > h4 {
+    padding: 0%;
+    font-size: large;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+strong{
+    text-align: justify;
+    font-size: large;
+}
+
+hr {
+    border: 1px solid  rgb(11, 23, 67);
+    border-radius: 10px 10px;
+}
+
+a {
+    color: orangered;
+}
+
+.anc-btn  {
+    text-decoration: none;
+    color: white;
+    border-radius: 2em 2em;
+    margin: 0 2%;
+}
+.anc-btn > button {
+    margin: 0;
+    width: fit-content;
+    color: white;
+    text-decoration: none;
+}
+#assessment p {
+    text-align: justify;
+    font-size: medium;
+    background-color: palegoldenrod;
+    padding: 1%;
+    line-height: 1.7em;
+    color: black;
+}
+p > strong  {
+    background-color: white;
+}
+
+
+ol li {
+    text-align: left;
+}
+
+ol > section {
+    text-align: left;
+    margin: 2%;
+}
+
+ul {
+    margin-bottom: 2%;
+}
+
+body {
+    margin: 0%;
+    padding: 0%;
+    background-color: white;
+    color: black;
+}
+span {
+    color: rgb(107, 93, 93);
+}
+#passage {
+    white-space: pre-line;
+}
+
+hr.thick-line {
+    border: 1px solid rgb(223, 10, 30);
+}
+ img {
+    border-radius: 50%;
+    margin: 0;
+    padding: 0%;
+}
+h1, h2, h4 {
+    font-family: 'arial black', forte;
+    color: rgb(132, 105, 12);
+}
+
+header > section > h1 {
+    color: white;
+}
+
+ol > p , ol > li{
+    font-size: medium;
+}
+
+span.cbt-type{
+    color: rgb(11, 23, 67);
+    margin: 5%;
+    
+}
+section.page-head {
+    border: 2px dashed rgb(11, 23, 67);
+    background-color: rgb(11, 23, 67);
+    color: white;
+}
+button.small {
+    font-size: small;
+    padding: 2px 10px;
+    background-color: rgb(132, 105, 12);
+    border-radius: 10px;
+    vertical-align: 5px;
+}
+p.info{
+    color: green;
+    font-style: italic;
+}
+span.label {
+    font-weight: bold;
+    font-size: medium;
+}
+span.badge {
+    border-radius: 50%;
+    padding: 2px 4px;
+    margin: 2px;
+    background-color: rgb(11, 23, 67);
+    color: white;
+    font-size: medium;
+    font-weight: bold;
+}
+#login section h1 {
+    margin: 5% 0% 0% 0%;
+    padding: 0%;
+    font-size: 40px;
+    text-align: center;
+}
+#login section p {
+    margin: 0%;
+    padding: 0%;
+    text-align: center;
+}
+
+.signup form input{
+    text-align: center;   
+}
+#login form input {
+    text-align: center;
+}
+.cbt-type {
+    border-radius: 2em 2em;
+    box-shadow: 5px 5px 5px;
+    border: 2px dashed rgb(132, 105, 12);
+}
+.cbt-type a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(132, 105, 12);
+    border-radius: 2em 2em;
+}
+.cbt-form article ol {
+    color: black;
+}
+.cbt-form article ol li {
+    background-color: rgb(132, 105, 12);
+    color: white;
+    font-weight: bold;
+    border-radius: 2em 2em;
+    padding: 2px 20px;
+    width: fit-content;
+}
+
+.cbt-form article ol p {
+    display: block;
+    font-size: 1em;
+    text-align: left;
+}
+
+.cbt-form article p, .cbt-form article h2, .cbt-form h1{
+    text-align: left;
+}

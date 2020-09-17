@@ -62,7 +62,6 @@ class UserLogin(forms.Form):
 class MultipleChoiceQuestionForm(forms.ModelForm):
     '''Create form for creating Multiple choice questions.
     '''
-    
     class Meta:
         model = MultipleChoiceQuestion
         fields = ('passage', 'title', 'duration', 'no_of_questions')

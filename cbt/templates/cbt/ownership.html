@@ -1,0 +1,41 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block user_info %} {{block.super}} {% endblock %}
+{% block main %}
+ 
+    <section class="" style="background-color:white">
+        <section class="page-head">
+            
+            <p style="color: #efbb0f;">
+                CBT can be created for institutions or personal use as a teacher or parents 
+                who want to test their students and children respectively.
+            </p> 
+        </section>
+       
+        <p class="txt"> 
+                <img src="{% static 'image/cbtmaker-create-gold-dark.png' %}">
+        </p>
+        <article class="">
+            <div class="cbt-type">
+                <p>Use this option to create quize, test and exams for students, children etc.
+                    <br>
+                    It is designed for teachers, parents, emplyers etc. who want to use this platform for their personal use.
+                </p>
+                <p>
+                    <a href="{% url 'cbt:create_cbt' %}">Create CBT for personal use only <button>start</button></a>
+                </p>
+            </div>
+            <div class="cbt-type"> 
+                <p>
+                    Use this option if you are creating test on behalf of an organisation, school or company.
+                    <br>
+                    This will require you to initially add the organisation you are creating the test during the creation process.
+                </p>
+                <p>
+                    <a href="{% url 'cbt:create_institution' %}">Create CBT for organisation use only <button>start</button></a>
+                </p>
+            </div>
+        </article>
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

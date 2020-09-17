@@ -1,0 +1,26 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block header %}
+{% endblock %}
+{% block user_info %} {{block.super}} {% endblock %}
+{% block main %}
+    <section class="">
+        {% if cbts %}
+        <ol>
+        {% for cbt in cbts %}
+            <li>{{cbt.title}}</li>
+        {% endfor %}
+        </ol>
+        {% else %}
+
+         <p class="txt">You have not created any CBT.</p>
+         <article id="logo">
+                <p><img src="{% static 'image/cbtmaker-logo-gold-dark.png' %}" height="50%" width="20%"></p>
+                <p class="cbt-type">
+                    create CBT <a href="{% url 'cbt:create_cbt' %}">here</a>
+                </p>
+        </article>
+        {% endif %}
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

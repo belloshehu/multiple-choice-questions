@@ -1,0 +1,32 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block user_info %} {{block.super}} {% endblock %}
+{% block main %}
+ 
+    <section class="cbt-form">
+        <h1>Use CBTMaker to create computer based tests.</h1>
+        <p class="txt" style="text-align: center;"> 
+            <img src="{% static 'image/cbtmaker20.png' %}">
+        </p>
+        <h1 class="">
+           CBTMaker makes creation and online computer test easire, smarter and more user-friendly. 
+        </h1> 
+        <article>
+            <h4>Steps to create a CBT</h4>
+            <p>Make sure you have an account and have logged in before you start</p>
+            <ol>
+                <li>Create a CBT </li>
+                    <p>You start by creating a CBT which is the may contain questions. Give your CBT a title, description, number of candidates and duration of test.</p>
+                <li>Add questions </li>
+                    <p>After creating your CBT  in step 1, go ahead to add questions to the it depending on the number of chose.</p>
+            </ol>
+            <p><a class="anc-btn" href="{% url 'cbt:cbt_type' %}"><button>Create CBT Test</button></a></p><br>
+        </article>
+        <article>
+            <h1> Learn with Samples CBT</h1>
+            <p class="">To better familiarize yourself with the platform as a student, we encourage you to take Samples tests.</p>
+            <p><a class="anc-btn" href="{% url 'cbt:create_cbt' %}"><button>Learn with Samples</button></a></p><br>
+        </article>
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

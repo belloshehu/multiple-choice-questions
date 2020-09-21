@@ -394,7 +394,6 @@ article#cbt-steps section p {
     text-align: center;
 }
 article#cbt-steps section{
-    background-image:url("{% static 'images/cbt.png' %}") ;
     box-shadow: 3px 5px 5px 5px rgb(240, 230, 200);
     padding: 5px;
     text-align: center;

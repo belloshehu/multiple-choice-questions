@@ -7,7 +7,7 @@ from django.utils import timezone
 
 
 def duration_in_minute(duration):
-    ''' Convert duration of assessment into minutes. '''
+    ''' Converts duration of assessment into minutes. '''
     hours = duration.hour
     minutes = duration.minute
     seconds = duration.second
@@ -75,7 +75,7 @@ def user_logout(request):
 
 
 def assessment(request):
-    ''' View for taking assessment page. '''
+    ''' View for taking assessment after login. '''
     questions = None
     choices = None
     multiple_choice_questions = None
@@ -84,18 +84,21 @@ def assessment(request):
             multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
             questions = Question.objects.all()
             choices = Choice.objects.all()
+            duration = multiple_choice_questions[0].duration
         except MultipleChoiceQuestion.DoesNotExist:
             pass
         except Question.DoesNotExist:
             pass
         except Choice.DoesNotExist:
             pass
-        duration = multiple_choice_questions[0].duration
+        except IndexError:
+            pass
         context = {
             'multiple_choice_questions':multiple_choice_questions,
             'questions':questions,
             'choices':choices,
             'duration': duration_in_minute(duration),
+            'test_time':duration
             }
     
         return render(request, 'multiple_choices/assessment.html', context)
@@ -131,8 +134,6 @@ def sample(request):
     return render(request, 'multiple_choices/assessment.html', context)
 
 
-
-
 def process_result(request):
     '''View to compute assessment result. '''
     score = 0
@@ -163,9 +164,7 @@ def process_result(request):
     
 
 def create_cbt(request):
-    '''
-    Create new cbt.
-    '''
+    '''View for creating new cbt. '''
     if request.method == 'GET':
         form = MultipleChoiceQuestionForm()
         return render(request, 'multiple_choices/create_cbt.html', {'form': form})

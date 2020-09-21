@@ -18,7 +18,7 @@ Running above command in the terminal will create and activate virtual environme
 
 * Clone the repository and cd into the project root directory:
 ```
-    $ git clone repository url name
+    $ git clone repository url
     $ cd multiple-choice-questions
 ```
 
@@ -39,4 +39,4 @@ Running above command in the terminal will create and activate virtual environme
     while for cbt application visit [here](https://multi-choices.herokuapp.com/cbt/)
 
 # License
-This projects is licenced under **MIT licence**.
+This project is licenced under **MIT licence**.

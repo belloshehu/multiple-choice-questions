@@ -27,7 +27,9 @@
                     <p>{{form.as_p}}</p>
                     <p><a class="acn-btn" href="{% url 'cbt:login' %}"><button>login</button></a></p>
                 </form><br>
-                <p class="">If you are not registered, signup <a href="{% url 'cbt:signup' %}">here</a></p>
+                <p class="">If you are not registered, signup <a href="{% url 'cbt:signup' %}">here</a> |
+                    Forgot password, retrieve <a href="{% url 'cbt:password_reset' %}">here</a>
+                </p>
         </article>
 
     </section>

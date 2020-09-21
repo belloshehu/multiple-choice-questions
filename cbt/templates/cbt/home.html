@@ -4,28 +4,43 @@
 {% block main %}
  
     <section class="cbt-form">
-        <h1>Create computer based tests for yourself and your organnisation CBTMaker.</h1>
-        <p class="txt" style="text-align: center;"> 
-            <img src="{% static 'image/cbtmaker20.png' %}">
-        </p>
-        <h1 class="">
-           CBTMaker makes it easier for individuals and organnisations to create online computer tests(CBT), quizes and exams. 
-           Its practice session allows individuals to practice in order to improve their confidence before taking their actual tests.
-        </h1> 
-        <article>
-            <h4>Steps to create a computer-base test(CBT)</h4>
+        <article class="statement">
+            <h1>Create computer based tests for yourself and your organnisation using CBTMaker.</h1>
+            <p class="txt" style="text-align: center;"> 
+                <img src="{% static 'image/cbtmaker20.png' %}">
+            </p>
+            <h1>
+            CBTMaker makes it easier for individuals and organnisations to create online computer tests(CBT), quizes and exams. 
+            Its practice session allows individuals to practice in order to improve their confidence before taking their actual tests.
+            </h1> 
+        </article>
+        <article id="cbt-steps">
+            <h2>Steps to create a computer-base test(CBT)</h2>
             <p>Creating a CBT requires sign up and log in. Ensure you do so.</p>
-            <ol>
-                <li>Create a CBT </li>
-                    <p>
-                        You start by creating a CBT which serves as the main container for your questions. Give your CBT a title,
-                        description, number of candidates and duration of test.
-                    </p>
-                <li>Add questions </li>
-                    <p>After creating your CBT  in step 1, go ahead to add questions to it depending on the number of choice.</p>
-                <li>Add choice</li>
-                    <p>Add choices to your questions.</p>
-            </ol>
+            
+            <section>
+                <div>Step <span>1</span>
+                    <h3>Create a CBT </h3>
+                </div>
+                <p>
+                    You start by creating a CBT which serves as the main container for your questions. Give your CBT a title,
+                    description, number of candidates and duration of test.
+                </p>
+            </section>
+            <section>
+                <div>Step <span>2</span>
+                    <h3>Add questions </h3>
+                </div>
+            
+                <p>After creating your CBT  in step 1, go ahead to add questions to it depending on the number of choice.</p>
+            </section>
+            <section>
+                <div>Step <span>3</span>
+                    <h3>Add choice</h3>
+                </div>
+                
+                <p>Add choices to your questions.</p>
+            </section>
             <p><a class="anc-btn" href="{% url 'cbt:cbt_type' %}"><button>Create CBT Test</button></a></p><br>
         </article>
         <article>

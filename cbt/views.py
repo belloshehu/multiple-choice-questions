@@ -9,7 +9,15 @@ from cbt.forms import (PersonalCBTForm, PersonalQuestionForm,
 from multiple_choices.forms import UserRegistration, UserLogin
 from .models import (CBTAssessment, InstitutionCBTAssessment,
                      OrganisationalCBT, PersonalCBT, Institution)
-
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import PasswordResetForm
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
 # Create your views here.
 
 
@@ -87,8 +95,22 @@ def user_signup(request):
     if request.method == 'POST':
         form = UserRegistration(request.POST)
         if form.is_valid:
+            if User.objects.filter(email=request.POST['email']).exists():
+                messages.error(request, 'Username is already taken')
+                return render(request, 'cbt/signup.html', {'form':form})
             form.save()
+            user_detail = request.POST
+            email_subject = 'Welcome to CBTMaker'
+            message = f'''Hi {user_detail.get('username')}, 
+                \n Thank you for registering with CBTMaker.
+                \n\n Enjoy CBTMaker. \n\n CBTMaker team.'''
+            email_sender = settings.EMAIL_HOST_USER
+            recipient_list = [user_detail.get('email')]
+            send_mail(email_subject, message, email_sender, recipient_list)
+            print('Email sent')
             return redirect('cbt:home')
+        else:
+            return redirect(reverse('cbt:signup'))
     return render(request, 'cbt/signup.html', {'form':form})
 
 
@@ -98,5 +120,38 @@ def user_logout(request):
 
 
 def cbt_list(request):
+    ''' View for displaying list of CBTs. '''
     cbts = CBTAssessment.objects.filter(user=request.user.id)
     return render(request, 'cbt/cbt_list.html', {'cbts':cbts})
+
+
+def password_reset(request):
+    ''' View for resetting user's password. '''
+    if request.method == 'POST':
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid:
+            email = request.POST['email']
+            associated_users = User.objects.filter(email=email)
+            if associated_users.exists():
+                for user in associated_users:
+                    subject = "Password Reset Requested"
+                    email_template_name = "cbt/password/password_email.txt"
+                    c = {
+                        "email":user.email,
+                        'domain':'127.0.0.1:8000',
+                        'site_name': 'Website',
+                        "uid": urlsafe_base64_encode(force_bytes(user.pk)),
+                        "user": user,
+                        'token': default_token_generator.make_token(user),
+                        'protocol': 'http',
+				    }
+                    email = render_to_string(email_template_name, c)
+                    try:
+                        send_mail(subject, email, 'admin@example.com' , [user.email], fail_silently=False)
+                    except BadHeaderError:
+                    	return HttpResponse('Invalid header found.')
+                    return redirect('password_reset_done')
+    password_reset_form = PasswordResetForm()
+    context = {'password_reset_form':password_reset_form}
+    return render(request, 'cbt/password/password_reset.html', context)
+    

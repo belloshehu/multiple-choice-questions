@@ -6,7 +6,7 @@ from cbt.models import (PersonalCBT, OrganisationalCBT, CBTAssessment,
                         OrganisationalQuestion)
 
 class PersonalCBTForm(forms.ModelForm):
-    ''' Form for creating Personal CBT info .'''
+    ''' Form for creating Personal CBT info. .'''
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter CBT title', 'size':50}))
     description = forms.CharField(widget=forms.Textarea(attrs={'cols':100, 'rows':10, 'placeholder': 'Write what your cbt is all about?'}),)
     duration = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter duration in minutes', 'size':50}))

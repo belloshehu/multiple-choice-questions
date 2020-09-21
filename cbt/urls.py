@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from multiple_choices.views import sample
+from django.contrib.auth import urls
+
 app_name = 'cbt'
 
 urlpatterns = [
@@ -14,6 +16,6 @@ urlpatterns = [
     path('create-institution/', views.create_institution, name='create_institution'),
     path('logout', views.user_logout, name='logout'),
     path('sample/', sample, name='sample'),
-    
+    path('password_reset/', views.password_reset, name='password_reset'),
 ]
 

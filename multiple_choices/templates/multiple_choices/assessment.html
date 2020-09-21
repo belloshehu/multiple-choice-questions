@@ -2,7 +2,7 @@
 {% block header %} 
     <h2>MCQs platform</h2>
     <section><h4>You can't submit assessment once time is out.</h4>
-        <p id="time">Duration: <span id="duration">{{test_time|time:"H\h:i\m"|default:"00h:00m:00s"}}</span> 
+        <p id="time">Duration: <span id="duration">{{duration}}</span> 
             <p>Remaining time: <span id="timer"></span> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
         </p>
     </section>

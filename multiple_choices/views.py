@@ -158,7 +158,8 @@ def process_result(request):
             percentage = 0
         if percentage >= 75:
             passed = True
-        AssessmentTaker(user=request.user, score=percentage, status=get_score(passed)).save()
+        if request.user.is_authenticated:
+            AssessmentTaker(user=request.user, score=percentage, status=get_score(passed)).save()
         return render(request, 'multiple_choices/result.html', {'score': score, 'grade': passed})
     return redirect('multiple_choices:home')
     

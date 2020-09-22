@@ -292,9 +292,12 @@ span.cbt-type{
     
 }
 section.page-head {
-    border: 2px dashed rgb(11, 23, 67);
     background-color: rgb(11, 23, 67);
     color: white;
+    margin: 5% 5% 0% 5%;
+    padding: 5%;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: x-large;
 }
 button.small {
     font-size: small;

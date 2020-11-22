@@ -4,7 +4,6 @@ from multiple_choices.views import sample
 from django.contrib.auth import urls
 
 app_name = 'cbt'
-
 urlpatterns = [
     path('create_cbt/', views.create_cbt, name='create_cbt' ),
     path('', views.home, name='home'),

@@ -74,7 +74,7 @@ footer em {
         font-size: large;
         font-family: cursive;
     }
-   
+
     input[type=radio] {
         text-align: left;
         font-size: large;
@@ -129,14 +129,14 @@ footer em {
     }
       #time {
           font-size: small;
-      } 
+      }
       textarea{
         border-radius: 1em 1em;
         text-align: left;
         padding: 0px 4px;
         width: 100%;
     }
-      
+
     input[type=text], input[type=password], input[type=email] {
         border-radius: 2em 2em;
         height: 2em;
@@ -292,7 +292,7 @@ ol > p , ol > li{
 span.cbt-type{
     color: rgb(11, 23, 67);
     margin: 5%;
-    
+
 }
 section.page-head {
     background-color: rgb(11, 23, 67);
@@ -339,7 +339,7 @@ span.badge {
 }
 
 .signup form input{
-    text-align: center;   
+    text-align: center;
 }
 #login form input {
     text-align: center;
@@ -374,7 +374,7 @@ span.badge {
 .cbt-form article ol p {
     display: block;
     font-size: 1em;
-  
+
 }
 
 

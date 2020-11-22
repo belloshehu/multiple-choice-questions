@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from cbt.forms import (PersonalCBTForm, PersonalQuestionForm, 
+from cbt.forms import (PersonalCBTForm, PersonalQuestionForm,
                         OrganisationalChoiceForm,
                         PersonalChoiceForm, OrganisationalChoiceForm,
                         InstitutionForm)
@@ -66,7 +65,7 @@ def create_institution(request):
             name = request.POST.get('name')
             form.save()
             messages.info(request, f'{name} added.')
-    return redirect('cbt:create_cbt') 
+    return redirect('cbt:create_cbt')
 
 
 def create_institution_cbt(request):
@@ -101,7 +100,7 @@ def user_signup(request):
             form.save()
             user_detail = request.POST
             email_subject = 'Welcome to CBTMaker'
-            message = f'''Hi {user_detail.get('username')}, 
+            message = f'''Hi {user_detail.get('username')},
                 \n Thank you for registering with CBTMaker.
                 \n\n Enjoy CBTMaker. \n\n CBTMaker team.'''
             email_sender = settings.EMAIL_HOST_USER
@@ -154,4 +153,3 @@ def password_reset(request):
     password_reset_form = PasswordResetForm()
     context = {'password_reset_form':password_reset_form}
     return render(request, 'cbt/password/password_reset.html', context)
-    

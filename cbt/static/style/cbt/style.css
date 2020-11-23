@@ -457,18 +457,23 @@ article#sample {
 }
 
 table, tr, td {
-    border: 2px solid black;
+    border: 1px solid black;
     border-collapse: collapse;
     padding: 10px;
     margin: 0% auto 10%;
     background-color: #dddddd;
-    border-radius: 5px;
 }
-table > thead {
-    font-family: courier, forte;
+table caption {
+    padding-bottom: 10px;
     font-weight: bold;
-    color: rgb(11, 23, 67)
 }
+
+table > thead > tr > td {
+    font-family: forte,forte;
+    color: white;
+    background-color: rgb(132, 105, 12);
+}
+
 i.fa-trash {
     color: red;
 }

@@ -1,8 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from account.models import User
-# Create your models here.
+from django.shortcuts import reverse
 
 
 GRADES = [
@@ -20,6 +19,9 @@ class Institution(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('cbt:institution-details', kwargs={'pk':self.id})
 
 
 class PersonalCBT(models.Model):

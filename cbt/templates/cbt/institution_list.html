@@ -5,5 +5,25 @@
     {{block.super}}
 {% endblock %}
 {% block main %}
-    <1>Institutions</1>
+    <h2>Institutions</h2>
+        <table>
+            <caption>Institutions created</caption>
+            <thead>
+                <tr>
+                    <td>Name</td>
+                    <td>Address</td>
+                    <td colspan="2">Action</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for institution in institutions %}
+                    <tr>
+                        <td>{{institution.name|truncatewords:4}}</td>
+                        <td>{{institution.address|truncatewords:4}}</td>
+                        <td><a href="{% url 'cbt:institution-delete' institution.id %}"> <i class="fa fa-trash"></i></a></td>
+                        <td><a href="{% url 'cbt:institution-update' institution.id %}"> <i class="fa fa-pencil"></i></a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 {% endblock main %}

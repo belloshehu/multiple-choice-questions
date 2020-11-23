@@ -2,11 +2,11 @@
 {% block user_info %}
     {% if user.username %}
         <span>{{user.username}}</span>
-        <a class="" href="{% url 'cbt:logut' %}">logout</a>
+        <a class="" href="{% url 'account:logout' %}">logout</a>
     {% else %}
         <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
-        <a class="" href="{% url 'cbt:login' %}"><button>login</button></a>
-{% endif %} 
+        <a class="" href="{% url 'account:login' %}"><button>login</button></a>
+{% endif %}
 {% endblock %}
 {% block main %}
 
@@ -18,7 +18,7 @@
             {% endif %}
         {% endfor %}
         <p>
-            Provide the name and address of your Institution 
+            Provide the name and address of your Institution
         </p><br>
        <form action="{% url 'cbt:create_institution' %}" method="POST">
             {% csrf_token %}

@@ -1,5 +1,5 @@
 {% extends 'cbt_base.html'%}
-{% block user_info %} 
+{% block user_info %}
     <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
     {{block.super}}
 {% endblock %}
@@ -14,7 +14,7 @@
         </section>
         <section>
             <h1>
-                CBT creation form 
+                CBT creation form
                 <span><a href="{% url 'cbt:cbt_list' %}"><button class="small">my CBTs</button></a></span>
                 <span class="badge">{{cbts|length}}</span>
             </h1>
@@ -23,9 +23,9 @@
             <form action="{% url 'cbt:create_cbt' %}" method="POST">
                 {% csrf_token %}
                 <section id="cbt-info">
-                    
+
                     <h4>Enter information related to your CBT</h4>
-                        <p> 
+                        <p>
                             <p class="label"> Select CBT type:</p>
                             <p class="label">
                                 <input id="personal" type="radio" name="type" value="personal" required>
@@ -56,7 +56,7 @@
                             <p>{{field}}</p>
                             {% endif %}
                         {% endfor %}
-                    
+
                         {% for field in cbt_form %}
                             {% if forloop.counter > 2%}
                             {{field.error}}
@@ -70,7 +70,7 @@
         </section>
         <section>
             <h1>
-                Create institution 
+                Create institution
                 <span><a href="{% url 'cbt:cbt_list' %}"><button class="small">my organisations</button></a></span>
                 <span class="badge">{{organisations|length}}</span>
             </h1>

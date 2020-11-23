@@ -22,9 +22,11 @@ from django.views.generic import(
     CreateView,
     DeleteView,
     DetailView,
+    ListView,
     UpdateView,
     TemplateView
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -62,17 +64,38 @@ def create_cbt(request):
                 'organisations':organisations, 'cbts':cbts}
     return render(request, 'cbt/create_cbt.html', context)
 
+class InstitutionListView(LoginRequiredMixin, ListView):
+    model = Institution
+    template_name = 'cbt/institution_list.html'
+    context_object_name = 'institutions'
 
-class InstitutionCreateView(CreateView):
+
+class InstitutionDetailView(LoginRequiredMixin, DetailView):
+    pass
+
+class InstitutionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Institution
+    template_name = 'cbt/institution_confirm_delete.html'
+    success_url = reverse_lazy('cbt:institution-list')
+
+
+class InstitutionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Institution
+    form_class = InstitutionForm
+    template_name = 'cbt/institution_update_form.html'
+    success_url = reverse_lazy('cbt:institution-list')
+
+
+class InstitutionCreateView(LoginRequiredMixin, CreateView):
     ''' View to create instance of Institution.'''
     model = Institution
     form_class = InstitutionForm
-    success_url = reverse_lazy('cbt:create_cbt')
+    template_name = 'cbt/institution_form.html'
+    success_url = reverse_lazy('cbt:institution-list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
 
 """
 def create_institution(request):

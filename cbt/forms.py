@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserModel
 from django import forms
 from cbt.models import (PersonalCBT, OrganisationalCBT, CBTAssessment,
-                        PersonalChoice, OrganisationalChoice, 
+                        PersonalChoice, OrganisationalChoice,
                         PersonalQuestion, Question, Institution,
                         OrganisationalQuestion)
 
@@ -12,7 +12,7 @@ class PersonalCBTForm(forms.ModelForm):
     duration = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter duration in minutes', 'size':50}))
     candidates_no = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter number of candidates', 'size':50}))
     no_of_questions = forms.ChoiceField(widget=forms.NumberInput(attrs={'placeholder':'Number of questions', 'width':50}))
-    
+
 
     class Meta:
         model = PersonalCBT
@@ -48,9 +48,17 @@ class OrganisationalChoiceForm(forms.ModelForm):
 
 
 class InstitutionForm(forms.ModelForm):
-    name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Institution name', 'size':50 }))
-    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Institution address', 'size':70}))
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Institution name', 'size':50 }
+        )
+    )
+    address = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'placeholder': 'Institution address', 'size':70}
+        )
+    )
 
     class Meta:
         model = Institution
-        fields = '__all__'
+        fields = ('name', 'address')

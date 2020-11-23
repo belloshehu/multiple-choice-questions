@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from cbt.forms import (PersonalCBTForm, PersonalQuestionForm,
@@ -17,6 +18,13 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from django.views.generic import(
+    CreateView,
+    DeleteView,
+    DetailView,
+    UpdateView,
+    TemplateView
+)
 # Create your views here.
 
 
@@ -55,6 +63,18 @@ def create_cbt(request):
     return render(request, 'cbt/create_cbt.html', context)
 
 
+class InstitutionCreateView(CreateView):
+    ''' View to create instance of Institution.'''
+    model = Institution
+    form_class = InstitutionForm
+    success_url = reverse_lazy('cbt:create_cbt')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+"""
 def create_institution(request):
     '''
         Returns empty form for creating institution.
@@ -66,7 +86,7 @@ def create_institution(request):
             form.save()
             messages.info(request, f'{name} added.')
     return redirect('cbt:create_cbt')
-
+"""
 
 def create_institution_cbt(request):
     form = PersonalCBTForm()

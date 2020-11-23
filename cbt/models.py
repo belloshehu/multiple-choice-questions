@@ -1,7 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
-
+from account.models import User
 # Create your models here.
 
 
@@ -10,11 +10,11 @@ GRADES = [
         ('p', 'PASSED')
 ]
 
-
 class Institution(models.Model):
-    ''' 
+    '''
     Institution that a CBT might belong to.
-    ''' 
+    '''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name='Name of your Institution')
     address = models.CharField(max_length=150, verbose_name='Address of your Institution')
 
@@ -42,7 +42,7 @@ class PersonalCBT(models.Model):
 class OrganisationalCBT(PersonalCBT):
     '''
         Represent CBT for organisation such as school,
-        company etc. 
+        company etc.
     '''
     organisation = models.ForeignKey(Institution, on_delete=models.CASCADE)
 
@@ -105,4 +105,3 @@ class CBTAssessment(models.Model):
 class InstitutionCBTAssessment(CBTAssessment):
     ''' Assessment for Instituions .'''
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
-

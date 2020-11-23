@@ -14,7 +14,11 @@ urlpatterns = [
         views.create_institution_cbt,
         name='create_institution'
     ),
-    path('create-institution/', views.create_institution, name='create_institution'),
+    path(
+        'create-institution/',
+        views.InstitutionCreateView.as_view(),
+        name='create_institution'
+    ),
     path('sample/', sample, name='sample'),
 
 ]

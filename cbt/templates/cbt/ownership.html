@@ -1,16 +1,16 @@
 {% extends 'cbt_base.html'%}
 {% load static %}
-{% block user_info %} 
+{% block user_info %}
     <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
-    {{block.super}} 
+    {{block.super}}
 {% endblock %}
 {% block main %}
     <section class="">
         <section class="page-head">
             <p>
-                CBT can be created for institutions or personal use as a teacher or parents 
+                CBT can be created for institutions or personal use as a teacher or parents
                 who want to test their students and children respectively.
-            </p> 
+            </p>
             <img src="{% static 'image/cbtmaker-create-gold-dark.png' %}">
         </section>
        <section>
@@ -18,7 +18,7 @@
        </section>
        <article class="" style="margin: 5%;">
             <div class="cbt-type">
-                <p> 
+                <p>
                     <h4>Organisation computer-based test</h4>
                     Use this option to create quize, test and exams for students, children etc.
                     <br>
@@ -31,7 +31,7 @@
                     This will require you to initially add the organisation you are creating the test during the creation process.
                 </p>
                 <p>
-                    <a href="{% url 'cbt:create_cbt' %}"><button>start</button></a>
+                    <a href="{% url 'cbt:create_cbt' %}"><button>create assessment</button></a>
                 </p>
             </div>
         </article>

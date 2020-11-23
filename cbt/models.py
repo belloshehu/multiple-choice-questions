@@ -1,8 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
-
-# Create your models here.
+from account.models import User
+from django.shortcuts import reverse
 
 
 GRADES = [
@@ -10,16 +9,19 @@ GRADES = [
         ('p', 'PASSED')
 ]
 
-
 class Institution(models.Model):
-    ''' 
+    '''
     Institution that a CBT might belong to.
-    ''' 
+    '''
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100, verbose_name='Name of your Institution')
     address = models.CharField(max_length=150, verbose_name='Address of your Institution')
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('cbt:institution-details', kwargs={'pk':self.id})
 
 
 class PersonalCBT(models.Model):
@@ -42,7 +44,7 @@ class PersonalCBT(models.Model):
 class OrganisationalCBT(PersonalCBT):
     '''
         Represent CBT for organisation such as school,
-        company etc. 
+        company etc.
     '''
     organisation = models.ForeignKey(Institution, on_delete=models.CASCADE)
 
@@ -105,4 +107,3 @@ class CBTAssessment(models.Model):
 class InstitutionCBTAssessment(CBTAssessment):
     ''' Assessment for Instituions .'''
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
-

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth .models import User
+from account.models import User
 
 
 GRADES = [
@@ -18,7 +18,7 @@ class MultipleChoiceQuestion(models.Model):
     duration = models.TimeField()
     no_of_questions = models.IntegerField(default=10)
 
-    
+
     def __str__(self):
         return self.title
 
@@ -54,4 +54,3 @@ class AssessmentTaker(models.Model):
 
     def __str__(self):
         return f'{self.user.username}'
-

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'multiple_choices',
     'cbt',
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -121,7 +122,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 # Email configuration
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_USE_TLS = True
 # EMAIL_PORT = 587
@@ -131,7 +132,7 @@ EMAIL_HOST = 'smtp.mailtrap.io'
 EMAIL_HOST_USER = '7d3198dbeca782'
 EMAIL_HOST_PASSWORD = 'b0bf5a6a3a02a7'
 EMAIL_PORT = '2525'
-
+DEFAULT_FROM_EMAIL = 'belloshehu1@gmail.com'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -152,3 +153,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #django_heroku.settings(locals())
+AUTH_USER_MODEL = 'account.User'

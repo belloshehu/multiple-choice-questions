@@ -1,0 +1,32 @@
+{% extends 'cbt_base.html'%}
+{% block user_info %}
+    {% if user.username %}
+        <span>{{user.username}}</span>
+        <a class="" href="{% url 'account:logout' %}">logout</a>
+    {% else %}
+        <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
+        <a class="" href="{% url 'account:login' %}"><button>login</button></a>
+{% endif %}
+{% endblock %}
+{% block main %}
+
+    <section class="">
+       <h2 class="page-head">Delete Institution</h2>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <p>
+            Want to delete <span style="color:red; font-weight:bold"><q>{{institution.name}}</q></span> institution
+        </p><br>
+       <form action="{% url 'cbt:institution-delete' institution.id %}" method="POST">
+            {% csrf_token %}
+            <p>
+                <button type="submit">Yes delete</button>
+                <a href="{% url 'cbt:institution-list' %}"> Cancel</a>
+            </p>
+       </form>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

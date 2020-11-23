@@ -1,0 +1,35 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block user_info %}
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    {{block.super}}
+{% endblock %}
+{% block main %}
+    <h2><u>Institutions</u></h2>
+    <table>
+        <caption>Institutions list
+            <span style="margin: auto auto 2%;">
+                <a href="{% url 'cbt:create_institution' %}">
+                    <button><i class="fa fa-plus"></i> Add institution</button>
+                </a>
+            </span>
+        </caption>
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Address</td>
+                <td colspan="2">Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for institution in institutions %}
+            <tr>
+                <td>{{institution.name|truncatewords:4}}</td>
+                <td>{{institution.address|truncatewords:4}}</td>
+                <td><a href="{% url 'cbt:institution-delete' institution.id %}"> <i class="fa fa-trash"></i></a></td>
+                <td><a href="{% url 'cbt:institution-update' institution.id %}"> <i class="fa fa-pencil"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock main %}

@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% block header %}
+    <section >
+        <h1 style="margin: 0%;">MCQs platform </h1>
+    </section>
+    <a class="anc-btn" href="{% url 'multiple_choices:home' %}"><button>Home</button></a>
+{% endblock %}
+{% block main %}
+
+    <section class="ass" id="login">
+       <h2>Login</h2>
+       {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+       <form action="{% url 'account:login' %}" method="POST">
+            {% csrf_token %}
+            <p>{{form.as_p}}</p>
+            <p><a class="acn-btn"><button>Send</button></a></p>
+       </form><br>
+       <p class="txt">Have no account? <a href="{% url 'account:register' %}">sign up</a></p>
+       <p class="txt">Forgotten password? <a href="{% url 'account:reset_password' %}">reset password</a></p>
+
+
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

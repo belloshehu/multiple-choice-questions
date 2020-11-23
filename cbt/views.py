@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse
+from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from cbt.forms import (PersonalCBTForm, PersonalQuestionForm, 
+from cbt.forms import (PersonalCBTForm, PersonalQuestionForm,
                         OrganisationalChoiceForm,
                         PersonalChoiceForm, OrganisationalChoiceForm,
                         InstitutionForm)
@@ -18,6 +18,15 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from django.views.generic import(
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+    TemplateView
+)
+from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
@@ -55,7 +64,40 @@ def create_cbt(request):
                 'organisations':organisations, 'cbts':cbts}
     return render(request, 'cbt/create_cbt.html', context)
 
+class InstitutionListView(LoginRequiredMixin, ListView):
+    model = Institution
+    template_name = 'cbt/institution_list.html'
+    context_object_name = 'institutions'
 
+
+class InstitutionDetailView(LoginRequiredMixin, DetailView):
+    pass
+
+class InstitutionDeleteView(LoginRequiredMixin, DeleteView):
+    model = Institution
+    template_name = 'cbt/institution_confirm_delete.html'
+    success_url = reverse_lazy('cbt:institution-list')
+
+
+class InstitutionUpdateView(LoginRequiredMixin, UpdateView):
+    model = Institution
+    form_class = InstitutionForm
+    template_name = 'cbt/institution_update_form.html'
+    success_url = reverse_lazy('cbt:institution-list')
+
+
+class InstitutionCreateView(LoginRequiredMixin, CreateView):
+    ''' View to create instance of Institution.'''
+    model = Institution
+    form_class = InstitutionForm
+    template_name = 'cbt/institution_form.html'
+    success_url = reverse_lazy('cbt:institution-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+"""
 def create_institution(request):
     '''
         Returns empty form for creating institution.
@@ -66,8 +108,8 @@ def create_institution(request):
             name = request.POST.get('name')
             form.save()
             messages.info(request, f'{name} added.')
-    return redirect('cbt:create_cbt') 
-
+    return redirect('cbt:create_cbt')
+"""
 
 def create_institution_cbt(request):
     form = PersonalCBTForm()
@@ -101,7 +143,7 @@ def user_signup(request):
             form.save()
             user_detail = request.POST
             email_subject = 'Welcome to CBTMaker'
-            message = f'''Hi {user_detail.get('username')}, 
+            message = f'''Hi {user_detail.get('username')},
                 \n Thank you for registering with CBTMaker.
                 \n\n Enjoy CBTMaker. \n\n CBTMaker team.'''
             email_sender = settings.EMAIL_HOST_USER
@@ -154,4 +196,3 @@ def password_reset(request):
     password_reset_form = PasswordResetForm()
     context = {'password_reset_form':password_reset_form}
     return render(request, 'cbt/password/password_reset.html', context)
-    

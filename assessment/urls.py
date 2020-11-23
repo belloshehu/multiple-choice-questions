@@ -19,19 +19,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('multiple_choices.urls')),
-    path('cbt/', include('cbt.urls')),
-    path(
-        'password_reset_done/',
-        auth_views.PasswordResetDoneView.as_view(template_name='cbt/password/password_reset_done.html'),
-        name='password_reset_done'),
-    path(
-        'reset/<uidb64>/<token>/',
-        auth_views.PasswordResetConfirmView.as_view(template_name='cbt/password/password_reset_confirm.html'),
-        name='password_reset_confirm'),
-    path(
-        'reset/done/',
-        auth_views.PasswordResetCompleteView.as_view(template_name='cbt/password/password_reset_complete.html'),
-        name='password_reset_complete',),
-        
+    path('cbt', include('multiple_choices.urls')),
+    path('accounts/', include('account.urls')),
+    path('', include('cbt.urls')),
 ]

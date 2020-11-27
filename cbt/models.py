@@ -29,17 +29,24 @@ class PersonalCBT(models.Model):
         Represent CBT for individuals such as parents,
         teachers etc.
     '''
-
-    title = models.CharField(max_length=50)
-    description = models.TextField(max_length=1000,)
-    duration = models.TimeField()
-    candidates_no = models.IntegerField(default=10)
-    no_of_questions = models.IntegerField(default=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50, null=True)
+    description = models.TextField(max_length=1000, null=True)
+    start_date = models.DateField(null=True)
+    start_time = models.TimeField(null=True)
+    end_date = models.DateField(null=True)
+    end_time = models.TimeField(null=True)
+    duration = models.IntegerField(null=True)
+    candidates_no = models.IntegerField(default=10, null=True)
+    no_of_questions = models.IntegerField(default=10, null=True)
     time_created = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('cbt:individual-assessment-detail', kwargs={'pk':self.id})
+
 
 class OrganisationalCBT(PersonalCBT):
     '''

@@ -1,23 +1,96 @@
 from django.contrib.auth.forms import UserModel
 from django import forms
+from django.utils import timezone
 from cbt.models import (PersonalCBT, OrganisationalCBT, CBTAssessment,
                         PersonalChoice, OrganisationalChoice,
                         PersonalQuestion, Question, Institution,
-                        OrganisationalQuestion)
+                        OrganisationalQuestion
+                        )
 
 class PersonalCBTForm(forms.ModelForm):
     ''' Form for creating Personal CBT info. .'''
-    title = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter CBT title', 'size':50}))
-    description = forms.CharField(widget=forms.Textarea(attrs={'cols':100, 'rows':10, 'placeholder': 'Write what your cbt is all about?'}),)
-    duration = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter duration in minutes', 'size':50}))
-    candidates_no = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter number of candidates', 'size':50}))
-    no_of_questions = forms.ChoiceField(widget=forms.NumberInput(attrs={'placeholder':'Number of questions', 'width':50}))
+    title = forms.CharField(
+        widget=forms.TextInput(
+            attrs={'placeholder':'Enter CBT title', 'size':50}
+            )
+        )
+    description = forms.CharField(
+        widget=forms.Textarea(
+            attrs={'cols':100, 'rows':10, 'placeholder': 'Write what your cbt is all about?'}
+            ),
+
+        )
+    start_date = forms.DateField(
+         label='Starting date(Date assessment will be available.)',
+        widget=forms.DateInput(
+            attrs={'placeholder':'Date to start', 'type':'date'}
+            ),
+        initial=timezone.datetime.today(),
+        error_messages={'invalid':'invalid'}
+         )
+    start_time = forms.TimeField(
+        label='Starting time(Time assessment will be available.)',
+        widget=forms.TimeInput(
+            attrs={'placeholder':'Time to start', 'type':'time'}
+            ),
+        initial=timezone.datetime.now(),
+        error_messages={'invalid':'invalid'}
+        )
+    end_date = forms.DateField(
+        label='Closing date(Date assessment will be unavailable.)',
+        widget=forms.DateInput(
+            attrs={'placeholder':'Date to end', 'type':'date'}
+            ),
+        error_messages={'invalid':'invalid'}
+        )
+    end_time = forms.TimeField(
+        label='Closing date(Date assessment will be unavailable.)',
+        widget=forms.TimeInput(
+            attrs={'placeholder':'Time to expire', 'type':'time'}
+            ),
+        help_text='Time to end Assessment',
+        error_messages={'invalid':'invalid'}
+        )
+    duration = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={'placeholder':'Enter duration in minutes',}
+            ),
+        error_messages={'invalid':'invalid'}
+        )
+    candidates_no = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={'placeholder':'Enter number of candidates',}
+            ),
+        error_messages={'invalid':'invalid'}
+        )
+    no_of_questions = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={'placeholder':'Number of questions'}
+            ),
+        error_messages={'invalid':'invalid'}
+
+        )
 
 
     class Meta:
         model = PersonalCBT
-        fields = ('title', 'description', 'duration', 'candidates_no', 'no_of_questions')
+        fields = (
+            'title',
+            'description',
+            'duration',
+            'candidates_no',
+            'no_of_questions',
+            'start_date',
+            'start_time',
+            'end_date',
+            'end_time'
+        )
 
+class OrganisationalCBTForm(PersonalCBTForm):
+
+    class Meta:
+        model = OrganisationalCBT
+        exclude = ('user',)
 
 class PersonalQuestionForm(forms.ModelForm):
 

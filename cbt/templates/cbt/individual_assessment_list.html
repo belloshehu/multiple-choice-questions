@@ -1,0 +1,6 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block header %}
+{% endblock %}
+{% block user_info %} {{block.super}} {% endblock %}
+    {% include 'cbt/individual_assessment_list_items.html' %}

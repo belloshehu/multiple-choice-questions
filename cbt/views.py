@@ -2,13 +2,17 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from cbt.forms import (PersonalCBTForm, PersonalQuestionForm,
-                        OrganisationalChoiceForm,
-                        PersonalChoiceForm, OrganisationalChoiceForm,
-                        InstitutionForm)
+from cbt.forms import (
+                    PersonalCBTForm, PersonalQuestionForm,
+                    OrganisationalChoiceForm,
+                    PersonalChoiceForm, OrganisationalChoiceForm,
+                    InstitutionForm, OrganisationalCBTForm
+                    )
 from multiple_choices.forms import UserRegistration, UserLogin
-from .models import (CBTAssessment, InstitutionCBTAssessment,
-                     OrganisationalCBT, PersonalCBT, Institution)
+from .models import (
+                    CBTAssessment, InstitutionCBTAssessment,
+                    OrganisationalCBT, PersonalCBT, Institution
+                    )
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -38,31 +42,48 @@ def cbt_type(request):
     Handle CBT type selection.
     '''
     return render (request, 'cbt/ownership.html')
+class AssessmentHelpView(TemplateView):
+    template_name = 'cbt/partials/assessment_help.html'
+
+###############
+# Organisation Assessment CRUD
+##############
+class OrganisationAssessmentCreateView(LoginRequiredMixin ,CreateView):
+    ''' View to create Assessment by organisation. '''
+    model = OrganisationalCBT
+    form_class = OrganisationalCBTForm
+    template_name = 'cbt/organisation_assessment_form.html'
+    success_url = reverse_lazy('cbt:cbt_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class IndividualAssessmentListView(LoginRequiredMixin, ListView):
+    model = PersonalCBT
+    template_name = 'cbt/cbt_list.html'
+    context_object_name = 'assessments'
+
+# ####################
+# Individual assessment CRUD:
+######################
+
+class IndividualAssessmentCreateView(LoginRequiredMixin ,CreateView):
+    ''' View to create Assessment by individuals. '''
+    model = PersonalCBT
+    form_class = PersonalCBTForm
+    template_name = 'cbt/individual_assessment.html'
+    success_url = reverse_lazy('cbt:cbt_list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
-def create_cbt(request):
-    '''
-        Returns empty ComputerBasedTestForm form on GET request.
-        Otherwise populated form is received.
-    '''
-    institution_form = InstitutionForm()
-    cbt_form = PersonalCBTForm()
-    if request.method == 'POST':
-        if request.POST.get('type'):
-            form = PersonalCBTForm()
-            if form.is_valid:
-                form.save()
-                return redirect('cbt:cbt_ist')
-    organisations = None
-    cbts = None
-    try:
-        organisations = Institution.objects.all()
-        cbts = PersonalCBT.objects.all()
-    except (Institution.DoesNotExist, PersonalCBT.DoesNotExist):
-       pass
-    context = {'cbt_form':cbt_form, 'institution_form':institution_form,
-                'organisations':organisations, 'cbts':cbts}
-    return render(request, 'cbt/create_cbt.html', context)
+class IndividualAssessmentDetailView(LoginRequiredMixin, DetailView):
+    model = PersonalCBT
+    template_name = 'cbt/individual_assessment_detail.html'
+    context_object_name = 'assessment'
 
 class InstitutionListView(LoginRequiredMixin, ListView):
     model = Institution
@@ -110,15 +131,6 @@ def create_institution(request):
             messages.info(request, f'{name} added.')
     return redirect('cbt:create_cbt')
 """
-
-def create_institution_cbt(request):
-    form = PersonalCBTForm()
-    if request.method == 'POST':
-        form = PersonalCBTForm()
-        if form.is_valid:
-            form.save()
-            return redirect('cbt:cbt_ist')
-    return render(request, 'cbt/create_cbt.html', {'form':form})
 
 def user_login(request):
     form = UserLogin()

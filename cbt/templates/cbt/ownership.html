@@ -7,34 +7,30 @@
 {% block main %}
     <section class="">
         <section class="page-head">
+            <img src="{% static 'image/cbtmaker-create-gold-dark.png' %}" height="200">
             <p>
                 CBT can be created for institutions or personal use as a teacher or parents
                 who want to test their students and children respectively.
             </p>
-            <img src="{% static 'image/cbtmaker-create-gold-dark.png' %}">
         </section>
-       <section>
-            <!--img src="{% static 'image/cbtmaker-create-gold-dark.png' %}"-->
-       </section>
-       <article class="" style="margin: 5%;">
-            <div class="cbt-type">
-                <p>
-                    <h4>Organisation computer-based test</h4>
-                    Use this option to create quize, test and exams for students, children etc.
-                    <br>
-                    It is designed for teachers, parents, emplyers etc. who want to use this platform for their personal use.
-                </p>
-                <p>
-                    <h4>Personal computer-based test</h4>
-                     Use this option if you are creating test on behalf of an organisation, school or company.
-                    <br>
-                    This will require you to initially add the organisation you are creating the test during the creation process.
-                </p>
-                <p>
-                    <a href="{% url 'cbt:create_cbt' %}"><button>create assessment</button></a>
-                </p>
+        <section class="page-head" style="margin: 0% 5% 5%; font-family: 'Courier New', Courier, monospace;">
+            <div class="">
+                <div style="background-color: rosybrown; color: white;">
+                    <h4><u>Organisation computer-based test</u></h4>
+                    <p>Use this option to create quize, test and exams for students, children etc.</p>
+                    <p> It is designed for teachers, parents, emplyers etc. who want to use this platform for their personal use.</p>
+                    <a href="{% url 'cbt:create-individual-assessment' %}"><button> create Individual assessment</button></a>
+                </div>
+                <div style="background-color: skyblue;color:white">
+                    <h4><u>Personal computer-based test</u></h4>
+                    <p> Use this option if you are creating test on behalf of an organisation, school or company.</p>
+                    <p>
+                        This will require you to initially add the organisation you are creating the test during the creation process.
+                    </p>
+                    <a href="{% url 'cbt:create-organisation-assessment' %}"><button>create institutional assessment</button></a>
+                </div>
             </div>
-        </article>
+        </section>
     </section>
 {% endblock %}
 {% block script %} {{block.super}}{% endblock %}

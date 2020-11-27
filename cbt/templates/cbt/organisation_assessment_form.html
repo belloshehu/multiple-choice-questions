@@ -1,0 +1,65 @@
+{% extends 'cbt_base.html'%}
+{% block user_info %}
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    {{block.super}}
+{% endblock %}
+{% block main %}
+    <section class="cbt-form">
+        <section>
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}
+                    <p class="info">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        </section>
+        <section>
+            <h1>
+                Organisation Assessment form
+                <span><a href="{% url 'cbt:cbt_list' %}"><button class="small">Available Assessment</button></a></span>
+                <span class="badge">{{cbts|length}}</span>
+            </h1>
+        </section>
+        <section>
+            <div>
+                <a href="{% url 'cbt:create_institution' %}"><button class="small">create institution</button></a>
+                <a  href="{% url 'cbt:institution-list' %}"><button class="small">institution list</button></a>
+            </div>
+            <form action="{% url 'cbt:create-organisation-assessment' %}" method="POST">
+                {% csrf_token %}
+                <section id="cbt-info">
+                    <h4>Enter information related to your Assessment </h4>
+                    <section>
+                        <p> <label for="selection">Select organisation<span class="badge">{{organisations|length}}</span>:</label>
+                            {% if organisations %}
+                                <select id="selection">
+                                {% for organisation in organisations %}
+                                    <option value="{{organisation.id}}">{{organisation.name}}</option>
+                                {% endfor %}
+                                </select>
+                            {% else %}
+                                <span> No organisations</span>
+                            {% endif %}
+                        </p>
+                    </section>
+                    <section>
+                        {% for field in form %}
+                            {% if 3 > forloop.counter %}
+                            <p>{{field.error}}</p>
+                            <p>{{field}}</p>
+                            {% endif %}
+                        {% endfor %}
+
+                        {% for field in form %}
+                            {% if forloop.counter > 2%}
+                            {{field.error}}
+                            {{field.label}}{{field}}
+                            {% endif %}
+                        {% endfor %}
+                    </section>
+                    <button type="submit">Submit</button></a>
+                </section>
+            </form>
+        </section>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

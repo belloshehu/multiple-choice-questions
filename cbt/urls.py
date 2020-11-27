@@ -5,15 +5,13 @@ from django.contrib.auth import urls
 
 app_name = 'cbt'
 urlpatterns = [
-    path('create_cbt/', views.create_cbt, name='create_cbt' ),
     path('', views.home, name='home'),
-    path('cbt-list/', views.cbt_list, name='cbt_list'),
-    path('cbt-type', views.cbt_type, name='cbt_type'),
     path(
-        'create-institution-cbt/',
-        views.create_institution_cbt,
-        name='create_institution'
+        'cbt-list/',
+        views.IndividualAssessmentListView.as_view(),
+        name='cbt_list'
     ),
+    path('cbt-type', views.cbt_type, name='cbt_type'),
     path(
         'institution-detail/<int:pk>/',
         views.InstitutionDetailView.as_view(),
@@ -41,5 +39,25 @@ urlpatterns = [
         name='institution-delete'
     ),
     path('sample/', sample, name='sample'),
-
+    # Individual cbt url
+    path(
+        'create-individual-assessment/',
+        views.IndividualAssessmentCreateView.as_view(),
+        name='create-individual-assessment'
+    ),
+    path(
+        'individual-assessment-detail/<int:pk>/',
+        views.IndividualAssessmentDetailView.as_view(),
+        name='individual-assessment-detail'
+    ),
+    path(
+        'create-organisation-assessment/',
+        views.OrganisationAssessmentCreateView.as_view(),
+        name='create-organisation-assessment'
+    ),
+    path(
+        'help/',
+        views.AssessmentHelpView.as_view(),
+        name='assessment-help'
+    )
 ]

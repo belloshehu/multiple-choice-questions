@@ -1,0 +1,50 @@
+{% extends 'cbt_base.html'%}
+{% block user_info %}
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    {{block.super}}
+{% endblock %}
+{% block main %}
+    <section class="cbt-form">
+        <section>
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}
+                    <p class="info">{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        </section>
+        <section>
+            <h2><u>Assessment form</u></h2>
+            <p>
+                <a href="{% url 'cbt:cbt_list' %}"><button class="small">Available Assessments </button></a>
+                <span class="badge">{{cbts|length}}</span>
+            </p>
+        </section>
+        <section>
+            <form action="{% url 'cbt:create-individual-assessment' %}" method="POST">
+                {% csrf_token %}
+                <section id="cbt-info">
+                    <h4>Fill in the Assessment form <span class="badge" ><a href="{% url 'cbt:assessment-help' %}">?</a></span></h4>
+                    <section>
+                        {% for field in form %}
+                            {% if 3 > forloop.counter %}
+                                {{field.error}}
+                                <p>{{field.label}}</p>
+                                {{field}}
+                            {% endif %}
+                        {% endfor %}
+                        <div>
+                            {% for field in form %}
+                                {% if forloop.counter > 2 %}
+                                    {{field.error}}
+                                    {{field.label}}{{field}}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </section>
+                    <p><button type="submit">Submit</button></a></p>
+                </section>
+            </form>
+        </section>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

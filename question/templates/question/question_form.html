@@ -1,0 +1,21 @@
+{% extends 'cbt_base.html' %}
+{% block main %}
+    <section>
+        <h1>Question form</h1>
+        <h3>Add questions to your assessments(<span style="color: green;">{{assessment.title}}</span>).</h3>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <form action="{% url 'question:individual-create' assessment.id %}"  method="POST">
+            {% csrf_token %}
+            {% include 'cbt/partials/form_fields.html' %}
+           <section>
+                <button type="submit">Submit</button>
+           </section>
+            <br>
+        </form>
+    </section>
+
+{% endblock %}

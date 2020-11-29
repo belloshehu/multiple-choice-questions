@@ -1,0 +1,17 @@
+{% extends 'cbt_base.html' %}
+{% block main %}
+    <section>
+        <h1>Questions for {{assessment.list|title}}</h1>
+        <ol>
+            {% for question is questions %}
+                <li>
+                    <a href="{{question.get_absolute_url}}">{{question.statement}}</a>
+                    |<i class="fa fa-trash"></i>
+                    |<i class="fa fa-pencil"></i>
+                </li>
+            {% empty %}
+                <p>No questions for this assessment. </p>
+            {% endfor %}
+        </ol>
+    </section>
+{% endblock %}

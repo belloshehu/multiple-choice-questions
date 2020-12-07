@@ -19,7 +19,9 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cbt', include('multiple_choices.urls')),
+    path('assessment/', include('multiple_choices.urls')),
     path('accounts/', include('account.urls')),
     path('', include('cbt.urls')),
+    path('question/', include('question.urls')),
+    path('choice/', include('choice.urls'))
 ]

@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'multiple_choices',
     'cbt',
     'account',
+    'question',
+    'choice'
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,26 @@
+{% extends 'cbt_base.html'%}
+{% block main %}
+
+    <section class="cbt-form">
+       <h1 class="page-head">Update Account</h1>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <h2 class=" alert info">
+            Update the fields below:
+        </h2><br>
+       <form action="{% url 'account:account-update' request.user.id %}" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <p style="color: black;"><strong>{{field.label}}</strong><br>{{field}}</p>
+            {% endfor %}
+            <p>
+                <button type="submit">Save</button>
+                <a href="{% url 'account:dashboard' %}"><button class="cancel">Cancel</button></a>
+            </p>
+       </form>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

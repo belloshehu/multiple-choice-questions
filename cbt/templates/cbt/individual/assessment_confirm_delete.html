@@ -1,0 +1,25 @@
+{% extends 'cbt_base.html' %}
+{% block main %}
+    <section class="cbt-form">
+        <h1>Delete Assessment</h1>
+        <h3 class="alert danger"> Are you sure to delete this assessment?</h3>
+            <div class="" style="color: green; text-align: center;"><q>{{assessment.title}}</q></div>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <form action="{{assessment.get_delete_url}}"  method="POST">
+            {% csrf_token %}
+            {% include 'cbt/partials/form_fields.html' %}
+           <section>
+                <button type="submit">Yes delete</button>
+                <a  href="{{assessment.get_list_url}}" class="cancel">
+                    cancel
+                </a>
+           </section>
+            <br>
+        </form>
+    </section>
+
+{% endblock %}

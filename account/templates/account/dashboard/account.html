@@ -1,0 +1,28 @@
+<article id="account">
+        <table id="account">
+            <caption>
+                <strong class="h-titles">Account<span>({{request.user.username}})</span></strong><br><br>
+                <a href="{% url 'account:account-update' request.user.id %}">
+                    <i class="fa fa-pencil"> Edit account</i>
+                </a>
+            </caption>
+            <tbody>
+                <tr>
+                    <td class="account-items-title"><strong>First name</strong></td>
+                    <td class="account-items">{{request.user.first_name|default:"not entered"}}</td>
+                </tr>
+                <tr>
+                    <td class="account-items-title"><strong>Last name</strong></td>
+                    <td class="account-items">{{request.user.last_name|default_if_none:"not entered"}}</td>
+                </tr>
+                <tr>
+                    <td class="account-items-title"><strong>Middle name</strong></td>
+                    <td class="account-items">{{request.user.middle_name|default_if_none:"not entered"}}</td>
+                </tr>
+                 <tr>
+                    <td class="account-items-title"><strong>Email address</strong></td>
+                    <td class="account-items">{{request.user.email}}</td>
+                </tr>
+            </tbody>
+        </table>
+</article>

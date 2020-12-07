@@ -1,0 +1,29 @@
+{% load static %}
+{% block individual_assessment %}
+    <h3>Select a sample assessment</h3>
+    <section class="cbt-form">
+        {% for assessment in assessments %}
+            <article class="cbt-form left-align">
+                <div class="h-titles">{{assessment.title|title|truncatewords:5}}</div>
+                <div class="">
+                    <p>{{assessment.description}}</p>
+                </div>
+                <div><p><span  class="orange-font strong">Created at</span><br>
+                    {{assessment.time_created|time}}
+                </p>
+                <!--div><p><span  class="orange-font strong">Starting date and time</span><br>
+                    {{assessment.start_date}}/{{assessment.start_time|time}}
+                </p>
+                </div>
+                <div><p><span  class="orange-font strong">Ending date and time</span><br>
+                    {{assessment.end_date}}/{{assessment.end_time|time}}
+                </p>
+                </div-->
+                <div><a href="{% url 'multiple_choices:instruction' assessment.id %}"><button>Start</button></a> </div>
+            </article>
+        {% empty %}
+            <div class="alert white-font">There are no sample assessments.</div>
+        {% endfor %}
+
+    </section>
+{% endblock %}

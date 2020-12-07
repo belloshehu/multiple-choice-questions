@@ -1,11 +1,11 @@
 {% load static %}
-{% block Institution_assessments %}
+{% block individual_assessment %}
     <section class="">
         {% if assessments %}
             <table>
-                <caption>Individual Assessment list
+                <caption>Institutional Assessment list
                     <a href="{% url 'cbt:create-individual-assessment' %}" >
-                        <button><i class="fa fa-plus"></i> New Assessment</button>
+                        <button class="add"><i class="small fa fa-plus"></i> Add Assessment</button>
                     </a>
                 </caption>
                 <thead>
@@ -24,18 +24,20 @@
                             <td>{{assessment.time_created|time}}</td>
                             <td>{{assessment.start_date}}/{{assessment.start_time|time}}</td>
                             <td>{{assessment.end_date}}/{{assessment.end_time|time}}</td>
-                            <td><i class="fa fa-trash"></i></td>
-                            <td><i class="fa fa-pencil"></i></td>
+                            <td><a href="{{assessment.get_delete_url}}"><i class="fa fa-trash"></i></a> </td>
+                            <td><a href="{{assessment.get_update_url}}"><i class="fa fa-pencil"></i></a> </td>
                         </tr>
                     {% endfor %}
                 </tbody>
             </table>
         {% else %}
-         <p class="txt">You have not created any CBT.</p>
+         <p class="txt">You have not created any assessment.</p>
          <article id="logo">
                 <p><img src="{% static 'image/cbtmaker-logo-gold-dark.png' %}" height="50%" width="20%"></p>
                 <p class="cbt-type">
-                    create CBT <a href="{% url 'cbt:create-organisation-assessment' %}">here</a>
+                    <a href="{% url 'cbt:create-individual-assessment' %}">
+                            <button class="add"><i class="small fa fa-plus"></i> Add assessment</button>
+                    </a>
                 </p>
         </article>
         {% endif %}

@@ -29,7 +29,17 @@ urlpatterns = [
         'reset/done/',
         auth_views.PasswordResetCompleteView.as_view(
             template_name='account/password/password_reset_complete.html'
-        ),
+            ),
         name='password_reset_complete',
-        )
+        ),
+    path(
+        'dashboard/',
+        views.DashboardView.as_view(),
+        name='dashboard'
+    ),
+    path(
+        'update/<int:pk>/',
+        views.UserAccountUpdateView.as_view(),
+        name='account-update'
+    )
 ]

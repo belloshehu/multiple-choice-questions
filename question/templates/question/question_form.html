@@ -1,21 +1,33 @@
 {% extends 'cbt_base.html' %}
 {% block main %}
-    <section>
+    <section class="cbt-form">
         <h1>Question form</h1>
-        <h3>Add questions to your assessments(<span style="color: green;">{{assessment.title}}</span>).</h3>
         {% for message in messages %}
-            {% if forloop.counter == 1 %}
+        {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
             {% endif %}
         {% endfor %}
-        <form action="{% url 'question:individual-create' assessment.id %}"  method="POST">
-            {% csrf_token %}
-            {% include 'cbt/partials/form_fields.html' %}
-           <section>
-                <button type="submit">Submit</button>
-           </section>
-            <br>
-        </form>
+        {% comment %}
+            If Question has passage, show the passage. Otherwise, show Assessment.
+        {% endcomment %}
+        {% if not assessment %}
+            <div class="passage">
+                <h4>Passage</h4>
+                <p class="info alert">{{passage.body}}</p>
+            </div>
+            <h3>Add questions to Passage(<span style="color: green;">{{passage.title}}</span>).</h3>
+        {% else %}
+            <h3>Add questions to Assessment(<span style="color: green;">{{assessment.title}}</span>).</h3>
+        {% endif %}
+        <hr class="devider">
+            <form action="{{action_url}}"  method="POST">
+                {% csrf_token %}
+                {% include 'cbt/partials/form_fields.html' %}
+            <section>
+                    <button type="submit">Submit</button>
+            </section>
+                <br>
+            </form>
     </section>
 
 {% endblock %}

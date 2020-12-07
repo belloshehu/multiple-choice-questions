@@ -1,19 +1,9 @@
 {% extends 'cbt_base.html'%}
 {% load static %}
-{% block user_info %}
-    {% if user.username %}
-        <span>{{user.username}}</span>
-        <a class="" href="{% url 'account:logout' %}">logout</a>
-    {% else %}
-        <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
-        <a class="" href="{% url 'account:login' %}"><button>login</button></a>
-{% endif %}
-{% endblock %}
 {% block main %}
-    <section class="signup">
-        <p>
-            <!--img src="{% static 'image/cbtmaker-signup-gold-dark.png' %}" height="10%" width="50%"-->
-        </p>
+    <section class="cbt-form">
+        <h1>Sign up form</h1>
+        <h1 class="alert info">Fill the form below:</h1>
         {% for message in messages %}
             {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>

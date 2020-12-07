@@ -4,6 +4,8 @@ from django.contrib import messages
 from .forms import AssessmentForm, UserRegistration, UserLogin, MultipleChoiceQuestionForm
 from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice, GRADES
 from django.utils import timezone
+from django.views.generic import TemplateView
+from cbt.models import IndividualAssessment
 
 
 def duration_in_minute(duration):
@@ -24,16 +26,25 @@ def get_score(passed):
 
 # Create your views here.
 
+class AssessmentInstructionView(TemplateView):
+    '''View to show Instruction template'''
+    template_name = 'multiple_choices/instruction.html'
+
+    def get(self, request, **kwargs):
+        assessment = IndividualAssessment.objects.get(
+            id=kwargs.get('pk')
+        )
+        return render(request, self.template_name, {'assessment':assessment})
 
 def home(request):
-    ''' View for assessment taking. '''
+    ''' View for assessment taking. The template shows instructions.'''
     duration = 0
     multiple_choice_questions = MultipleChoiceQuestion.objects.all()
     try:
-        duration = duration_in_minute(multiple_choice_questions[0].duration) 
+        duration = duration_in_minute(multiple_choice_questions[0].duration)
     except IndexError:
         pass
-    return render(request, 'multiple_choices/home.html', {'duration':duration})
+    return render(request, 'multiple_choices/instruction.html', {'duration':duration})
 
 
 def register(request):
@@ -79,9 +90,9 @@ def assessment(request):
     questions = None
     choices = None
     multiple_choice_questions = None
-    if request.user.is_authenticated: 
+    if request.user.is_authenticated:
         try:
-            multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
+            multiple_choice_questions = MultipleChoiceQuestion.objects.all()
             questions = Question.objects.all()
             choices = Choice.objects.all()
             duration = multiple_choice_questions[0].duration
@@ -100,7 +111,7 @@ def assessment(request):
             'duration': duration_in_minute(duration),
             'test_time':duration
             }
-    
+
         return render(request, 'multiple_choices/assessment.html', context)
     return redirect('multiple_choices:login')
 
@@ -113,7 +124,7 @@ def sample(request):
     now = timezone.datetime.now()
     duration = now - timezone.timedelta(minutes=20)
     try:
-        multiple_choice_questions = MultipleChoiceQuestion.objects.all() 
+        multiple_choice_questions = MultipleChoiceQuestion.objects.all()
         questions = Question.objects.all()
         choices = Choice.objects.all()
         duration = multiple_choice_questions[0].duration
@@ -146,7 +157,7 @@ def process_result(request):
             print(choice_id)
             choice = Choice.objects.get(id=int(choice_id))
             if choice.is_correct:
-                # get the score assigned to the question 
+                # get the score assigned to the question
                 mark_per_question = Question.objects.get(id=choice.questions.id).grade
                 score+= mark_per_question
         # calculate grade score
@@ -161,8 +172,8 @@ def process_result(request):
         if request.user.is_authenticated:
             AssessmentTaker(user=request.user, score=percentage, status=get_score(passed)).save()
         return render(request, 'multiple_choices/result.html', {'score': score, 'grade': passed})
-    return redirect('multiple_choices:home')
-    
+    return redirect('cbt:cbt_type')
+
 
 def create_cbt(request):
     '''View for creating new cbt. '''

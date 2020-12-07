@@ -1,0 +1,19 @@
+{% extends 'cbt_base.html' %}
+{% load static %}
+{% block main %}
+    <section class="cbt-form">
+        <h1 id="dashboard-title">User dashboard</h1>
+        <article id="dashboard-nav">
+            <ul>
+                <a href="#account"><li class="dashboard-item" id="account">Account</li></a>
+                <a href="#assessments"><li class="dashboard-item" id="assessments">Assessments</li></a>
+                <a href="#notifications"><li class="dashboard-item" id="notifications">Notifications</li></a>
+            </ul>
+        </article>
+        {% include "account/dashboard/account.html" %}
+        {% include "account/dashboard/assessments.html" %}
+        {% include "account/dashboard/notifications.html" %}
+
+    </section>
+
+{% endblock %}

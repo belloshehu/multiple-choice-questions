@@ -1,0 +1,80 @@
+{% extends 'cbt_base.html'%}
+{% block user_info %}
+    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
+    {{block.super}}
+{% endblock %}
+{% block main %}
+    <section class="assessment-detail">
+        <h1>Assessment details</h1>
+        <article>
+            <h3 class="h-titles">Title and description</h3>
+            Title: {{assessment.title|title}} |
+            created on: {{assessment.time_created}}
+        </article>
+        <article>
+            <h3>About</h3>
+            {{assessment.description}}
+        </article>
+        <article>
+            <h3>Available from: </h3>
+                {{assessment.start_date}},
+                {{assessment.start_time}}
+        </article>
+        <article>
+             <h3>Instution: </h3>
+                {{assessment.institution.name}},
+                {{assessment.institution.address}}
+        </article>
+        <article>
+            <h3>Unavailable from: </h3>
+            {{assessment.end_date}},
+            {{assessment.end_time}}
+        </article>
+        <article>
+            <h3>Number of questions, student : </h3>
+            Students: {{assessment.candidates_no}},
+            Questions: {{assessment.no_of_questions}}
+        </article>
+        <article>
+            <h3> Duration </h3>
+            {{assessment.duration}} minutes
+        </article>
+        <article class="questions-list" id="questions">
+            <h3>Questions </h3>
+            <ol>
+                {% for question in questions %}
+                    <li class="question-item">{{question.question_asked|title}}
+                        <a href="{% url 'question:delete' question.id %}"><i class="fa fa-trash"></i></a>
+                        <a href="{% url 'question:update' question.id %}"> <i class="fa fa-pencil"></i></a>
+                    </li>
+                        <ol class="choices-list">
+                            {% for choice in choices %}
+                                {% if choice.question.id == question.id  %}
+                                    <li class="choice-item">
+                                        {{choice.choice_statement}}
+                                        <a href="{% url 'choice:individual-delete' choice.id %}"><i class="fa fa-trash"></i></a>
+                                        <a href="{% url 'choice:individual-update' choice.id %}"> <i class="fa fa-pencil"></i></a>
+                                    </li>
+                                {% endif %}
+                            {% empty %}
+                                <div>
+                                    <span class="alert info">Choices not addded yet.</span>
+                                </div>
+                            {% endfor %}
+                            <a href="{% url 'choice:individual-create' question.id %}">
+                                <button><i class="fa fa-plus"></i> Add choice</button>
+                            </a>
+                        </ol>
+                {% empty %}
+                    <p>No questions yet</p>
+                {% endfor %}
+            </ol>
+            <a href="{% url 'question:individual-create' assessment.id %}">Add Question</a>
+        </article>
+        <br>
+        <article>
+            <a href="{% url 'cbt:institution-assessment-list' %}">Go to assessment list</a>
+        </article>
+        <br>
+    </section>
+{% endblock %}

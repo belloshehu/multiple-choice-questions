@@ -1,13 +1,13 @@
 from django.contrib.auth.forms import UserModel
 from django import forms
 from django.utils import timezone
-from cbt.models import (PersonalCBT, OrganisationalCBT, CBTAssessment,
-                        PersonalChoice, OrganisationalChoice,
-                        PersonalQuestion, Question, Institution,
-                        OrganisationalQuestion
-                        )
+from cbt.models import (
+        IndividualAssessment,
+        InstitutionAssessment,
+        Institution,
+    )
 
-class PersonalCBTForm(forms.ModelForm):
+class IndividualAssessmentForm(forms.ModelForm):
     ''' Form for creating Personal CBT info. .'''
     title = forms.CharField(
         widget=forms.TextInput(
@@ -73,7 +73,7 @@ class PersonalCBTForm(forms.ModelForm):
 
 
     class Meta:
-        model = PersonalCBT
+        model = IndividualAssessment
         fields = (
             'title',
             'description',
@@ -83,42 +83,15 @@ class PersonalCBTForm(forms.ModelForm):
             'start_date',
             'start_time',
             'end_date',
-            'end_time'
+            'end_time',
+            'is_sample'
         )
 
-class OrganisationalCBTForm(PersonalCBTForm):
+class InstitutionAssessmentForm(IndividualAssessmentForm):
 
     class Meta:
-        model = OrganisationalCBT
+        model = InstitutionAssessment
         exclude = ('user',)
-
-class PersonalQuestionForm(forms.ModelForm):
-
-    class Meta:
-        model = PersonalQuestion
-        fields = '__all__'
-
-
-class OrganisationalQuestionForm(forms.ModelForm):
-
-    class Meta:
-        model = OrganisationalQuestion
-        fields = '__all__'
-
-
-class PersonalChoiceForm(forms.ModelForm):
-
-    class Meta:
-        model = PersonalChoice
-        fields = '__all__'
-
-
-class OrganisationalChoiceForm(forms.ModelForm):
-
-    class Meta:
-        model = OrganisationalChoice
-        fields = '__all__'
-
 
 class InstitutionForm(forms.ModelForm):
     name = forms.CharField(

@@ -1,10 +1,23 @@
 from django import forms
-from .models import IndividualQuestion, InstitutionQuestion
+from .models import (
+    IndividualQuestion,
+    InstitutionQuestion,
+    IndividualQuestionPassage
+)
+
+class IndividualQuestionPassageForm(forms.ModelForm):
+    body = forms.CharField(
+        widget=forms.Textarea(attrs={'cols':100, 'rows':20})
+    )
+    class Meta:
+        model = IndividualQuestionPassage
+        fields = ('title', 'body', 'no_of_questions')
 
 
 class IndividualQuestionForm(forms.ModelForm):
     question_asked = forms.CharField(
         label='Question statement',
+        widget=forms.Textarea(attrs={'cols':100, 'rows':10})
     )
     score = forms.IntegerField(
         label='Score to be earned',
@@ -17,11 +30,11 @@ class IndividualQuestionForm(forms.ModelForm):
 
     class Meta:
         model = IndividualQuestion
-        exclude = ('assessment',)
+        exclude = ('assessment', 'passage')
 
 
 class InstitutionQuestionForm(forms.ModelForm):
 
     class Meta:
         model = InstitutionQuestion
-        exclude = ('assessment',)
+        exclude = ('assessment','passage')

@@ -1,32 +1,25 @@
-{% extends 'cbt_base.html'%}
-{% block user_info %}
-    {% if user.username %}
-        <span>{{user.username}}</span>
-        <a class="" href="{% url 'account:logout' %}">logout</a>
-    {% else %}
-        <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
-        <a class="" href="{% url 'account:login' %}"><button>login</button></a>
-{% endif %}
-{% endblock %}
+{% extends 'cbt_base.html' %}
 {% block main %}
-
-    <section class="">
-       <h2 class="page-head">Delete Institution</h2>
+    <section class="cbt-form">
+        <h1>Delete institution</h1>
+        <h3 class="alert danger"> Are you sure to delete this institution?</h3>
+            <div class="" style="color: green; text-align: center;"><q>{{institution.name}}</q></div>
         {% for message in messages %}
             {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
             {% endif %}
         {% endfor %}
-        <p>
-            Want to delete <span style="color:red; font-weight:bold"><q>{{institution.name}}</q></span> institution
-        </p><br>
-       <form action="{% url 'cbt:institution-delete' institution.id %}" method="POST">
+        <form action="{% url 'cbt:institution-delete' institution.id %}"  method="POST">
             {% csrf_token %}
-            <p>
+            {% include 'cbt/partials/form_fields.html' %}
+           <section>
                 <button type="submit">Yes delete</button>
-                <a href="{% url 'cbt:institution-list' %}"> Cancel</a>
-            </p>
-       </form>
+                <a  href="{% url 'cbt:institution-list' %}">
+                    <button class="cancel">Cancel</button>
+                </a>
+           </section>
+            <br>
+        </form>
     </section>
+
 {% endblock %}
-{% block script %}{% endblock %}

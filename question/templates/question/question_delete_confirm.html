@@ -3,7 +3,8 @@
     <section>
         <h1>Delete Question</h1>
         <h3 class="alert danger"> Are you sure to delete this question?</h3>
-            <div class="" style="color: green; text-align: center;"><q>{{question.question_asked}}</q></div>
+        <p class="alert info">Note that all choices under this questions will be removed automatically!</p>
+        <div class="" >You are deleting:<q style="color: green; text-align: center;">{{question.question_asked}}</q></div>
         {% for message in messages %}
             {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>

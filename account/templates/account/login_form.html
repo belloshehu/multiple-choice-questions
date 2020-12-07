@@ -1,14 +1,9 @@
-{% extends 'base.html'%}
-{% block header %}
-    <section >
-        <h1 style="margin: 0%;">MCQs platform </h1>
-    </section>
-    <a class="anc-btn" href="{% url 'multiple_choices:home' %}"><button>Home</button></a>
-{% endblock %}
+{% extends 'cbt_base.html'%}
 {% block main %}
 
-    <section class="ass" id="login">
-       <h2>Login</h2>
+    <section class="cbt-form">
+       <h1>Login form</h1>
+       <h1 class="alert info">Fill the form below:</h1>
        {% for message in messages %}
             {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
@@ -19,10 +14,10 @@
             <p>{{form.as_p}}</p>
             <p><a class="acn-btn"><button>Send</button></a></p>
        </form><br>
-       <p class="txt">Have no account? <a href="{% url 'account:register' %}">sign up</a></p>
-       <p class="txt">Forgotten password? <a href="{% url 'account:reset_password' %}">reset password</a></p>
-
-
+       <p class="">Have no account?
+           <a href="{% url 'account:register' %}">sign up</a> OR
+           Forgotten password? <a href="{% url 'account:reset_password' %}">reset password</a>
+        </p>
     </section>
 {% endblock %}
 {% block script %}{% endblock %}

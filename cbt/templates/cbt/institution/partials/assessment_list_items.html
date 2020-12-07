@@ -1,11 +1,11 @@
 {% load static %}
-{% block individual_assessment %}
+{% block Institution_assessments %}
     <section class="">
         {% if assessments %}
             <table>
-                <caption>Institutional Assessment list
-                    <a href="{% url 'cbt:create-individual-assessment' %}" >
-                        <button><i class="fa fa-plus"></i> New Assessment</button>
+                <caption>Institution Assessment list
+                    <a href="{% url 'cbt:create-institution-assessment' %}" >
+                        <button class="add"><i class="small fa fa-plus"></i> New Assessment</button>
                     </a>
                 </caption>
                 <thead>
@@ -25,9 +25,9 @@
                             <td>{{assessment.time_created|time}}</td>
                             <td>{{assessment.start_date}}/{{assessment.start_time|time}}</td>
                             <td>{{assessment.end_date}}/{{assessment.end_time|time}}</td>
-                            <td>{{assessment.organisation.name|truncatewords:1}}</td>
-                            <td><i class="fa fa-trash"></i></td>
-                            <td><i class="fa fa-pencil"></i></td>
+                            <td>{{assessment.institution.name}}</td>
+                            <td><a href="{{assessment.get_delete_url}}"><i class="fa fa-trash"></i></a> </td>
+                            <td><a href="{{assessment.get_update_url}}"><i class="fa fa-pencil"></i></a> </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -36,8 +36,10 @@
          <p class="txt">You have not created any CBT.</p>
          <article id="logo">
                 <p><img src="{% static 'image/cbtmaker-logo-gold-dark.png' %}" height="50%" width="20%"></p>
-                <p class="cbt-type">
-                    create CBT <a href="{% url 'cbt:create-organisation-assessment' %}">here</a>
+                <p class="">
+                     <a href="{% url 'cbt:create-institution-assessment' %}">
+                         <button class="add"><i class="small fa fa-plus"></i> Add assessment</button
+                    ></a>
                 </p>
         </article>
         {% endif %}

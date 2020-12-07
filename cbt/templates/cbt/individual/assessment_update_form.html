@@ -1,0 +1,25 @@
+{% extends 'cbt_base.html'%}
+{% block main %}
+    <section class="cbt-form">
+       <h1 class="page-head">Update Institution assessment</h1>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <h3>update the assessment</h3><br>
+       <form action="{{assessment.get_update_url}}" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <p> <strong style="color: indianred;">{{field.label}}</strong><br> {{field}}</p>
+            {% endfor %}
+            <p>
+                <button type="submit">Save</button>
+                <a href="{% url 'cbt:individual-assessment-list' %}">
+                    <button class="cancel">Cancel</button>
+                </a>
+            </p>
+       </form>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

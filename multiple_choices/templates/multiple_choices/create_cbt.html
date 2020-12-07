@@ -1,15 +1,9 @@
-{% extends 'base.html'%}
-{% block header %}
-    <section >
-        <h1 style="margin: 0%;">MCQs platform </h1>
-    </section>
-    <a class="anc-btn" href="{% url 'multiple_choices:home' %}"><button>Home</button></a>
-{% endblock %}
+{% extends 'cbt_base.html'%}
 {% block main %}
 
     <section class="ass">
        <h2>Create CBT Question</h2><hr class="thick-line">
-       
+
        <form action="{% url 'multiple_choices:login' %}" method="POST">
             {% csrf_token %}
             <p>{{form.as_p}}</p>

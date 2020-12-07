@@ -1,18 +1,26 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import (
+                    render,
+                    redirect,
+                    reverse,
+                    get_object_or_404,
+                    get_list_or_404,
+                )
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from cbt.forms import (
-                    PersonalCBTForm, PersonalQuestionForm,
-                    OrganisationalChoiceForm,
-                    PersonalChoiceForm, OrganisationalChoiceForm,
-                    InstitutionForm, OrganisationalCBTForm
+                    IndividualAssessmentForm,
+                    InstitutionForm, InstitutionAssessmentForm
                     )
 from multiple_choices.forms import UserRegistration, UserLogin
 from .models import (
-                    CBTAssessment, InstitutionCBTAssessment,
-                    OrganisationalCBT, PersonalCBT, Institution
+                    InstitutionAssessment,
+                    IndividualAssessment,
+                    Institution
                     )
+from choice.models import IndividualChoice, InstitutionChoice
+from question.models import IndividualQuestion, InstitutionQuestion
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -37,58 +45,191 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def home(request):
     return render (request, 'cbt/home.html')
 
+
 def cbt_type(request):
-    '''
-    Handle CBT type selection.
-    '''
-    return render (request, 'cbt/ownership.html')
+    '''Renders Assessment types template'''
+    return render (request, 'cbt/assessment_types.html')
+
+
 class AssessmentHelpView(TemplateView):
     template_name = 'cbt/partials/assessment_help.html'
 
 ###############
-# Organisation Assessment CRUD
+# Institution Assessment type CRUD, list and details views:
 ##############
-class OrganisationAssessmentCreateView(LoginRequiredMixin ,CreateView):
+
+
+class InstitutionAssessmentCreateView(LoginRequiredMixin ,CreateView):
     ''' View to create Assessment by organisation. '''
-    model = OrganisationalCBT
-    form_class = OrganisationalCBTForm
-    template_name = 'cbt/organisation_assessment_form.html'
-    success_url = reverse_lazy('cbt:cbt_list')
+    model = InstitutionAssessment
+    form_class = InstitutionAssessmentForm
+    template_name = 'cbt/institution/assessment_form.html'
+    success_url = reverse_lazy('cbt:institution-assessment-list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class IndividualAssessmentListView(LoginRequiredMixin, ListView):
-    model = PersonalCBT
-    template_name = 'cbt/cbt_list.html'
+
+class InstitutionAssessmentListView(LoginRequiredMixin, ListView):
+    model = InstitutionAssessment
+    template_name = 'cbt/institution/assessment_list.html'
     context_object_name = 'assessments'
 
+class InstitutionAssessmentDetailView(LoginRequiredMixin, DetailView):
+    model = InstitutionAssessment
+    template_name = 'cbt/institution/assessment_detail.html'
+    context_object_name = 'assessment'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        try:
+            context['choices'] = InstitutionChoice.objects.all()
+            context['questions'] = InstitutionQuestion.objects.filter(
+                assessment_id=self.kwargs.get('pk')
+            )
+        except InstitutionChoice.DoesNotExist:
+            context['choices'] = None
+        except InstitutionQuestion.DoesNotExist:
+             context['questions'] = None
+        return context
+
+class InstitutionAssessmentUpdateView(LoginRequiredMixin, UpdateView):
+    model = InstitutionAssessment
+    form_class = InstitutionAssessmentForm
+    template_name = 'cbt/institution/assessment_update_form.html'
+    success_url = reverse_lazy('cbt:institution-assessment-list')
+    context_object_name = 'assessment'
+
+
+class InstitutionAssessmentDeleteView(LoginRequiredMixin, DeleteView):
+    model = InstitutionAssessment
+    form_class = InstitutionAssessmentForm
+    template_name = 'cbt/institution/assessment_delete_confirm.html'
+    success_url = reverse_lazy('cbt:institution-assessment-list')
+    context_object_name = 'assessment'
+
+
 # ####################
-# Individual assessment CRUD:
+# Individual assessment CRUD, details and list views:
 ######################
 
 class IndividualAssessmentCreateView(LoginRequiredMixin ,CreateView):
     ''' View to create Assessment by individuals. '''
-    model = PersonalCBT
-    form_class = PersonalCBTForm
-    template_name = 'cbt/individual_assessment.html'
-    success_url = reverse_lazy('cbt:cbt_list')
+    model = IndividualAssessment
+    form_class = IndividualAssessmentForm
+    template_name = 'cbt/individual/individual_assessment.html'
+    success_url = reverse_lazy('cbt:individual-assessment-list')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
+class IndividualAssessmentListView(LoginRequiredMixin, ListView):
+    model = IndividualAssessment
+    template_name = 'cbt/individual/individual_assessment_list.html'
+    context_object_name = 'assessments'
+
+    def get_queryset(self):
+        try:
+            queryset = IndividualAssessment.objects.filter(
+                user=self.request.user
+            )
+        except IndividualAssessment.DoesNotExist:
+            pass
+        return queryset
+
 class IndividualAssessmentDetailView(LoginRequiredMixin, DetailView):
-    model = PersonalCBT
-    template_name = 'cbt/individual_assessment_detail.html'
+    model = IndividualAssessment
+    template_name = 'cbt/individual/individual_assessment_detail.html'
     context_object_name = 'assessment'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        try:
+            context['choices'] = IndividualChoice.objects.filter(
+                question__assessment__user=self.request.user
+            )
+            context['questions'] = IndividualQuestion.objects.filter(
+                assessment_id=self.kwargs.get('pk'),
+                assessment__user=self.request.user
+            )
+        except IndividualChoice.DoesNotExist:
+            context['choices'] = None
+        except IndividualQuestion.DoesNotExist:
+            context['questions'] = None
+        return context
+
+
+    def get_question_with_passage(self):
+        Q1 = Q(passage__title=None)
+        Q2 = Q(passage__body=None)
+        Q3 = Q(passage__no_of_questions=None)
+        question_with_passage = None
+        try:
+            question_with_passage = IndividualQuestion.objects.filter(
+                Q1&Q2&Q3
+            )
+        except IndividualQuestion.DoesNotExist:
+            pass
+        return question_with_passage
+
+
+class IndividualAssessmentDeleteView(LoginRequiredMixin, DeleteView):
+    model = IndividualAssessment
+    form_class = IndividualAssessmentForm
+    template_name = 'cbt/individual/assessment_confirm_delete.html'
+    success_url = reverse_lazy('cbt:individual-assessment-list')
+    context_object_name = 'assessment'
+
+
+class IndividualAssessmentUpdateView(LoginRequiredMixin, UpdateView):
+    model = IndividualAssessment
+    form_class = IndividualAssessmentForm
+    template_name = 'cbt/individual/assessment_update_form.html'
+    success_url = reverse_lazy('cbt:individual-assessment-list')
+    context_object_name = 'assessment'
+
+
+#================================
+# Sample Assessments
+#===============================
+
+
+class SampleAssessmentListView(LoginRequiredMixin, ListView):
+    model = IndividualAssessment
+    template_name = 'cbt/sample/sample_list.html'
+    context_object_name = 'assessments'
+    def get_queryset(self):
+        try:
+            queryset = IndividualAssessment.objects.filter(
+                user__is_superuser=True,
+                is_sample=True
+            )
+        except IndividualAssessment.DoesNotExist:
+            pass
+        return queryset
+
+
+#=========================
+# Institution CRUD, list and details views
+#==========================
+
 
 class InstitutionListView(LoginRequiredMixin, ListView):
     model = Institution
     template_name = 'cbt/institution_list.html'
     context_object_name = 'institutions'
+
+    def get_queryset(self):
+        try:
+            queryset = Institution.objects.filter(
+                user=self.request.user
+            )
+        except Institution.DoesNotExist:
+            pass
+        return queryset
 
 
 class InstitutionDetailView(LoginRequiredMixin, DetailView):
@@ -118,19 +259,6 @@ class InstitutionCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-"""
-def create_institution(request):
-    '''
-        Returns empty form for creating institution.
-    '''
-    if request.method == 'POST':
-        form = InstitutionForm(request.POST)
-        if form.is_valid:
-            name = request.POST.get('name')
-            form.save()
-            messages.info(request, f'{name} added.')
-    return redirect('cbt:create_cbt')
-"""
 
 def user_login(request):
     form = UserLogin()
@@ -171,12 +299,6 @@ def user_signup(request):
 def user_logout(request):
     logout(request)
     return redirect('cbt:home')
-
-
-def cbt_list(request):
-    ''' View for displaying list of CBTs. '''
-    cbts = CBTAssessment.objects.filter(user=request.user.id)
-    return render(request, 'cbt/cbt_list.html', {'cbts':cbts})
 
 
 def password_reset(request):

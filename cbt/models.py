@@ -23,12 +23,8 @@ class Institution(models.Model):
     def get_absolute_url(self):
         return reverse('cbt:institution-details', kwargs={'pk':self.id})
 
-
-class PersonalCBT(models.Model):
-    '''
-        Represent CBT for individuals such as parents,
-        teachers etc.
-    '''
+class BaseAbstractAssessment(models.Model):
+    ''' Abstract model class for creating all sorts of assessment.'''
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50, null=True)
     description = models.TextField(max_length=1000, null=True)
@@ -40,77 +36,75 @@ class PersonalCBT(models.Model):
     candidates_no = models.IntegerField(default=10, null=True)
     no_of_questions = models.IntegerField(default=10, null=True)
     time_created = models.DateTimeField(auto_now_add=True)
+    is_sample = models.BooleanField(default=False, null=True)
+    # urls for detail, delete and update
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.delete_url = None
+        self.update_url = None
+        self.absolute_url = None
+        self.list_url = None
+
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('cbt:individual-assessment-detail', kwargs={'pk':self.id})
+        return reverse(self.absolute_url, kwargs={'pk':self.id})
+
+    def get_delete_url(self):
+        return reverse(self.delete_url, kwargs={'pk':self.id})
+
+    def get_update_url(self):
+        return reverse(self.update_url, kwargs={'pk':self.id})
+
+    def get_list_url(self):
+        return reverse(self.list_url)
 
 
-class OrganisationalCBT(PersonalCBT):
+    class Meta:
+        abstract = True
+
+
+class IndividualAssessment(BaseAbstractAssessment):
     '''
-        Represent CBT for organisation such as school,
+        Represent assessments for individuals such as parents,
+        teachers etc.
+    '''
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.delete_url = 'cbt:individual-assessment-delete'
+        self.update_url = 'cbt:individual-assessment-update'
+        self.absolute_url = 'cbt:individual-assessment-detail'
+        self.list_url = 'cbt:individual-assessment-list'
+
+
+class InstitutionAssessment(BaseAbstractAssessment):
+    '''
+        Represent assessments for organisation such as school,
         company etc.
     '''
-    organisation = models.ForeignKey(Institution, on_delete=models.CASCADE)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.delete_url = 'cbt:institution-assessment-delete'
+        self.update_url = 'cbt:institution-assessment-update'
+        self.absolute_url = 'cbt:institution-assessment-detail'
+        self.list_url = 'cbt:institution-assessment-list'
 
 
-    def __str__(self):
-        return self.title
-
-
-class Question(models.Model):
-    ''' Model for questions to be asked with multiple choices.'''
-    question_asked = models.TextField(unique=True)
-    grade = models.IntegerField(default=5)
-    no_of_choices = models.IntegerField(default=4)
-
-
-    def __str__(self):
-        return self.question_asked
-
-
-class PersonalQuestion(Question):
-    ''' Represents questions in personal CBT. '''
-    personal_cbt = models.ForeignKey(PersonalCBT, on_delete=models.CASCADE)
-
-
-class OrganisationalQuestion(Question):
-    ''' Represents questions in organisational CBT. '''
-    organisational_cbt = models.ForeignKey(OrganisationalCBT, on_delete=models.CASCADE)
-
-
-class Choice(models.Model):
-    ''' Choice for each question asked. '''
-    choice_statement = models.TextField(unique=True)
-    is_correct = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.choice_statement
-
-
-class PersonalChoice(Choice):
-    ''' Represents choice in personal CBT questions. '''
-    questions = models.ForeignKey(PersonalQuestion, on_delete=models.CASCADE)
-
-
-class OrganisationalChoice(Choice):
-    ''' Represents choice in organisational CBT questions. '''
-    questions = models.ForeignKey(PersonalQuestion, on_delete=models.CASCADE)
-
-
-class CBTAssessment(models.Model):
-    ''' Model for individuals taking the assessment. '''
+class IndividualAssessmentTaker(models.Model):
+    ''' Model for individuals taking theIndividual assessment type. '''
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
     status = models.CharField(choices=GRADES, max_length=20, default=GRADES[0])
-    cbt = models.ForeignKey(PersonalCBT, on_delete=models.CASCADE)
+    assessment = models.ForeignKey(IndividualAssessment, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.user.username}'
 
 
-class InstitutionCBTAssessment(CBTAssessment):
-    ''' Assessment for Instituions .'''
-    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
+class InstitutionAssessmentTaker(IndividualAssessment):
+    ''' Model for individual taking Insitution Assessment type .'''
+    assessment = models.ForeignKey(InstitutionAssessment, on_delete=models.CASCADE)

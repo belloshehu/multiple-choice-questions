@@ -3,5 +3,6 @@
 {% block header %}
 {% endblock %}
 {% block user_info %} {{block.super}} {% endblock %}
-{% include 'cbt/institutional_assessment_list_items.html' %}
-{% block script %} {{block.super}}{% endblock %}
+{% block main %}
+    {% include 'cbt/individual/partials/individual_assessment_list_items.html' %}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% block form_fields %}
+    <section class="form-fields">
+        <p>{{form.non_fields_errors}}</p>
+        {% for field in form %}
+           <p> {{field.error}} <br> {{field.label}}<br>{{field}}</p>
+        {% endfor %}
+    </section>
+{% endblock %}

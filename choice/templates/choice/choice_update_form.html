@@ -1,0 +1,45 @@
+{% extends 'cbt_base.html'%}
+{% block user_info %}
+    {% if user.username %}
+        <span>{{user.username}}</span>
+        <a class="" href="{% url 'account:logout' %}">logout</a>
+    {% else %}
+        <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
+        <a class="" href="{% url 'account:login' %}"><button>login</button></a>
+{% endif %}
+{% endblock %}
+{% block main %}
+    <section class="">
+       <h2 class="page-head">Update Choice</h2>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <p>
+            Update/edit this choice:
+        </p>
+        <div class='choices-in-form'>
+            <p class="alert info"><q>{{choice.question.question_asked}}</q></p>
+            <h6 style="text-align: left;">Available choices <span class="badge">{{choices|length}}</span></h6>
+            <ol>
+                {% for choice in choices %}
+                   <li><span class="alert info">{{choice.choice_statement|title}}</span></li>
+                {% empty %}
+                    <p class="alert info">No choices yet.</p>
+                {% endfor %}
+            </ol>
+        </div>
+        <br>
+       <form action="{% url 'choice:individual-update' choice.id %}" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                <p> {{field.label}}<br>{{field}}</p>
+            {% endfor %}
+            <p>
+                <button type="submit">Send</button>
+                <a href="{% url 'cbt:individual-assessment-detail' choice.question.assessment.id %}">Go back</a></p>
+       </form>
+    </section>
+{% endblock %}
+{% block script %}{% endblock %}

@@ -1,18 +1,17 @@
-{% extends 'base.html'%}
-{% block header %} <h1 id="score-head">MCQs result</h1> {% endblock %}
+{% extends 'cbt_base.html'%}
 {% block main %}
-    <section id="result">
+    <section class="cbt_form">
         <p>
             <h1 id="score-head">Total score</h1>
             <h1 id="score">{{score}}</h1>
             {% if grade %}
-                <h1>PASSED</h1>   
+                <h1>PASSED</h1>
             {% else %}
                 <h1>FAILED</h1>
             {% endif %}
         </p>
         <p>
-            <a href="{% url 'multiple_choices:home' %}"><button>Take assessment again</button></a>
+            <a href="{% url 'cbt:cbt_type' %}"><button>Take assessment again</button></a>
         </p>
     </section>
 {% endblock %}

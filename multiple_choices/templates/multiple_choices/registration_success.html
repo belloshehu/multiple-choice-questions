@@ -1,12 +1,12 @@
-{% extends 'base.html'%}
-{% block header %} <h1 id="score-head">MCQs platform</h1> {% endblock %}
+{% extends 'cbt_base.html'%}
+
 {% block main %}
     <section id="result">
         <p>
-            <h4 id="score-head">Successfully registered.</h4>
-            <p>You can now log in and take your assessment.</p>
+            <h4 class="alert info" id="score-head">Successfully registered.</h4>
+            <h2>You can now log in and take your assessment.</h2>
             <button><a href="{% url 'multiple_choices:login' %}" >login</a></button>
-        </p>  
+        </p>
     </section>
 {% endblock %}
 {% block script %}{% endblock %}

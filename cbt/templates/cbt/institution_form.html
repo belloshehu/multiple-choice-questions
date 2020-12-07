@@ -1,32 +1,23 @@
 {% extends 'cbt_base.html'%}
-{% block user_info %}
-    {% if user.username %}
-        <span>{{user.username}}</span>
-        <a class="" href="{% url 'account:logout' %}">logout</a>
-    {% else %}
-        <a class="" href="{% url 'cbt:home' %}"><button>home</button></a>
-        <a class="" href="{% url 'account:login' %}"><button>login</button></a>
-{% endif %}
-{% endblock %}
 {% block main %}
 
-    <section class="">
-       <h2 class="page-head">Create Institution</h2>
+    <section class="cbt-form">
+       <h1 class="page-head">Create Institution</h1>
         {% for message in messages %}
             {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
             {% endif %}
         {% endfor %}
-        <p>
+        <h2 class="alert info title">
             Provide the name and address of your Institution
-        </p><br>
+        </h2><br>
        <form action="{% url 'cbt:create_institution' %}" method="POST">
             {% csrf_token %}
-            {% for field in form %}
-                <strong>{{field.label}}</strong>
-                <p>{{field}}</p>
-            {% endfor %}
-            <p><button type="submit">Send</button></p>
+            {% include 'cbt/partials/form_fields.html' %}
+            <p>
+                <button type="submit">Send</button>
+                <!--a href="{% url 'cbt:institution-list' %}"><button class="cancel">Cancel</button></a-->
+            </p>
        </form>
     </section>
 {% endblock %}

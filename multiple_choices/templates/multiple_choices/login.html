@@ -1,13 +1,7 @@
-{% extends 'base.html'%}
-{% block header %}
-    <section >
-        <h1 style="margin: 0%;">MCQs platform </h1>
-    </section>
-    <a class="anc-btn" href="{% url 'multiple_choices:home' %}"><button>Home</button></a>
-{% endblock %}
+{% extends 'cbt_base.html'%}
 {% block main %}
 
-    <section class="ass" id="login">
+    <section class="cbt-form" id="login">
        <h2>Login</h2>
        {% for message in messages %}
             {% if forloop.counter == 1 %}

@@ -1,0 +1,107 @@
+{% extends 'cbt_base.html'%}
+{% block main %}
+    <section class="assessment-detail">
+        <h1>Assessment details</h1>
+        <article class="cbt-form">
+            <h3 class="h-titles">Title and misc.|
+                <span class="small-font orange-font">
+                   Gives identity to the Assessment and time it was created
+                </span>
+            </h3>
+            Title: {{assessment.title|title}} |
+            created on: {{assessment.time_created}}
+
+        </article>
+        <article class="cbt-form">
+            <h3 class="h-titles">About|
+                <span class="small-font orange-font">
+                    Describes why assessment is created and who may take it.
+                </span>
+            </h3>
+            {% if assessment.is_sample %}
+            <p class="ornage-font alert">This is a sample Assessment</p>
+            {% else %}
+            <p class="orange-font alert">Non sample Assessment</p>
+            {% endif %}
+            <p>{{assessment.description}}</p>
+        </article>
+        <article class="cbt-form">
+            <h3 class="h-titles">Available from|
+                <span class="small-font orange-font">
+                    Date and time at which The Assessment becomes available to be taken
+                </span>
+            </h3>
+                {{assessment.start_date}},
+                {{assessment.start_time}}
+        </article>
+        <article class="cbt-form">
+            <h3 class="h-titles">Unavailable from|
+                <span class="small-font orange-font">
+                    Date and time at which The Assessment ceases to be available.
+                </span>
+            </h3>
+            <i class=" fa fa-calender"></i>{{assessment.end_date}},
+            <i class="white-font fa fa-alarm-clock"></i>{{assessment.end_time}}
+        </article>
+        <article class="cbt-form">
+            <h3 class="h-titles">Number of questions, student|
+                    <span class="small-font orange-font">Number of student taking the assessment</span>
+            </h3>
+            Students: {{assessment.candidates_no}},
+            Questions: {{assessment.no_of_questions}}
+        </article>
+        <article class="cbt-form">
+            <h3 class="h-titles"> Duration|
+                <span class="small-font orange-font">Duration for the Assessment in minutes</span>
+            </h3>
+            {{assessment.duration}} minutes
+        </article>
+        <article style="background-color: black;color: blanchedalmond;" class="questions-list cbt-form" id="questions">
+            <h3 class="h-titles">Questions added:
+                <span class="small-font orange-font">All questions with their answer choices added under this Assessment</span>
+            </h3>
+            <ol>
+                {% for question in questions %}
+                    <p class="orange-font"><u>Questions:</u></p>
+                    <li class="question-item">{{question.question_asked|title}}
+                        <a href="{% url 'question:delete' question.id %}"><i class="fa fa-trash"></i></a>
+                        <a href="{% url 'question:update' question.id %}"> <i class="fa fa-pencil"></i></a>
+                    </li>
+                        <ol class="choices-list">
+                            <p class="orange-font"><u>Answer choices:</u></p>
+                            {% for choice in choices %}
+                                {% if choice.question.id == question.id  %}
+                                    <li class="choice-item">
+                                        {{choice.choice_statement}}
+                                        <a href="{% url 'choice:individual-delete' choice.id %}"><i class="fa fa-trash"></i></a>
+                                        <a href="{% url 'choice:individual-update' choice.id %}"> <i class="fa fa-pencil"></i></a>
+                                    </li>
+                                {% endif %}
+                            {% empty %}
+                                <div>
+                                    <span class="alert info">Choices not addded yet.</span>
+                                </div>
+                            {% endfor %}
+                            <a href="{% url 'choice:individual-create' question.id %}">
+                                <button class="add small"><i class="small fa fa-plus"></i> Add choice</button>
+                            </a>
+                            <hr>
+                        </ol>
+                {% empty %}
+                    <p>No questions yet</p>
+                {% endfor %}
+            </ol>
+           <div style="text-align:start">
+                <a class="" href="{% url 'question:individual-question-choices' assessment.id %}">
+                    <button class="add small">Add Question</button>
+                </a>
+           </div>
+            <!--a  href="{% url 'question:individual-create' assessment.id %}">Add Question</a-->
+        </article>
+        <br>
+        <article>
+            <a href="{% url 'cbt:individual-assessment-list' %}">Go to assessment list</a>
+        </article>
+        <br>
+    </section>
+{% endblock %}

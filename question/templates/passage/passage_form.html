@@ -1,0 +1,23 @@
+{% extends 'cbt_base.html' %}
+{% block main %}
+    <section class="cbt-form">
+        <h1>Passage form</h1>
+        {% for message in messages %}
+        {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <hr class="devider">
+        <h3>Add Passage to be used in assessments(<span style="color: green;">{{assessment.title}}</span>).</h3>
+            <form action="{% url 'question:individual-passage-create' assessment.id %}"  method="POST">
+                {% csrf_token %}
+                {% include 'cbt/partials/form_fields.html' %}
+            <section>
+                    <button type="submit">Submit</button>
+                    <a href="{{assessment.get_absolute_url}}" class="small">Cancel</a>
+            </section>
+                <br>
+            </form>
+    </section>
+
+{% endblock %}

@@ -4,7 +4,11 @@ from django.urls import path
 
 app_name = 'multiple_choices'
 urlpatterns = [
-    path('', views.home, name='home'),
+    path(
+        'instruction/<int:pk>/',
+        views.AssessmentInstructionView.as_view(),
+        name='instruction'
+    ),
     path('login/', views.user_login, name='login'),
     path('register/', views.register, name='register'),
     path('assessment/', views.assessment, name='assessment'),

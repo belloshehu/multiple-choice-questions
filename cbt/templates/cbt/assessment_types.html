@@ -1,0 +1,38 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+
+{% block main %}
+    <section class="container">
+        <article class="page-head">
+            <h1>
+                CBT can be created for institutions or personal use as a teacher or parents
+                who want to test their students and children respectively.
+            </h1>
+        </article>
+        <article class="cbt-step">
+            <article class="step">
+                <div class="step-item">
+                    <h3 >Institution assessments</h3>
+                </div>
+                <p>Use this option to create quize, test and exams for students, children etc.</p>
+                <p>
+                        It is designed for teachers, parents, employers etc. who want to use this platform for their personal use.
+                </p>
+                <a href="{% url 'cbt:create-individual-assessment' %}"><button class="add">Individual assessment</button></a>
+            </article>
+            <article class="step">
+                <div class="step-item">
+                    <h3 >Personal assessment</h3>
+                </div>
+                <p> Use this option if you are creating test on behalf of an organisation, school or company.</p>
+                <p>
+                    This will require you to initially add the organisation you are creating the test during the creation process.
+                </p>
+                <a href="{% url 'cbt:create-institution-assessment' %}">
+                    <button class="add">Institutional assessment</button>
+                </a>
+            </article>
+        </article>
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

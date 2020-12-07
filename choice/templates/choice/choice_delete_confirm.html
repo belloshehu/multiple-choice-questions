@@ -1,0 +1,23 @@
+{% extends 'cbt_base.html' %}
+{% block main %}
+    <section>
+        <h1>Delete Choice</h1>
+        <h3 class="alert danger"> Are you sure to delete this choice?</h3>
+            <div class="" style="color: green; text-align: center;"><q>{{choice.choice_statement}}</q></div>
+        {% for message in messages %}
+            {% if forloop.counter == 1 %}
+                <span style="color: orange;">{{message}}</span>
+            {% endif %}
+        {% endfor %}
+        <form action="{% url 'choice:individual-delete' choice.id %}"  method="POST">
+            {% csrf_token %}
+            {% include 'cbt/partials/form_fields.html' %}
+           <section>
+                <button type="submit">Yes delete</button>
+                <a class="btn-info" href="{% url  'cbt:individual-assessment-detail' choice.question.assessment.id  %}">Cancel</a>
+           </section>
+            <br>
+        </form>
+    </section>
+
+{% endblock %}

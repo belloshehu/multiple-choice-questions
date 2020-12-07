@@ -1,0 +1,28 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block main %}
+
+    <section class="cbt-form" style="background-color: black;">
+
+        <article>
+            <h3 class="alert info">Instructions</h3>
+            <p class="white-font"> You are about to assessment titled <q>{{assessment.title}}</q></p>
+            <p style="color: orange; font-weight: bold;">
+                <i style="color: orange;" class="fa fa-clock-o" aria-hidden="true"></i>
+                Duration for the assessment is <span id="time">{{assessment.duration}}</span> minutes
+            </p>
+            <br>
+            <h4>
+                Make sure you are ready before you commence.
+                Note that once an assessment is started, it can not be stopped
+            </h4>
+            <br>
+            <h4>
+                You are expected to remain within the window while taking the assessment as
+                going out of it will be considered an effort to cheat
+            </h4>
+            <p><a class="anc-btn" href="{% url 'multiple_choices:assessment' %}"><button>Get started </button></a></p>
+        </article>
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

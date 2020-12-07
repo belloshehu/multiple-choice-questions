@@ -1,9 +1,5 @@
 {% extends 'cbt_base.html'%}
-{% load static %}
-{% block user_info %}
-    <a class="" href="{% url 'cbt:home' %}"><button>Home</button></a>
-    {{block.super}}
-{% endblock %}
+
 {% block main %}
     <h2><u>Institutions</u></h2>
     {% if institutions %}
@@ -11,7 +7,7 @@
             <caption>Institutions list
                 <span style="margin: auto auto 2%;">
                     <a href="{% url 'cbt:create_institution' %}">
-                        <button><i class="fa fa-plus"></i> Add institution</button>
+                        <button class="add"><i class="fa fa-plus"></i> Add institution</button>
                     </a>
                 </span>
             </caption>
@@ -35,17 +31,17 @@
         </table>
         <section>
             Add assessment for
-            <a href="{% url 'cbt:create-organisation-assessment' %}">organisation</a> Or
+            <a href="{% url 'cbt:create-institution-assessment' %}">organisation</a> Or
             <a href="{% url 'cbt:create-individual-assessment' %}">individual</a>
             <br>
         </section>
         <br>
     {% else %}
         <div>
-            <p>You have no added Institutions</p>
+            <h3>You have not added Institutions</h3>
             <span style="margin: auto auto 2%;">
                 <a href="{% url 'cbt:create_institution' %}">
-                    <button><i class="fa fa-plus"></i> Add institution</button>
+                    <button class="add"><i class="fa fa-plus"></i> Add institution</button>
                 </a>
             </span>
         </div>

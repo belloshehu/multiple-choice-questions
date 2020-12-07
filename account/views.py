@@ -1,18 +1,21 @@
 from django.shortcuts import render, redirect, reverse
+from django.urls import reverse_lazy
 from django.views.generic import (
     ListView,
     CreateView,
     DeleteView,
     UpdateView,
-    View
+    View,
+    TemplateView
 )
 from django.contrib.auth import(
     authenticate,
     login,
     logout,
 )
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.contrib.auth.models import User
+from account.models import User
 from django.conf import settings
 from django.conf import settings
 from django.core.mail import send_mail
@@ -24,7 +27,7 @@ from django.utils.encoding import force_bytes
 from .forms import UserLoginForm, UserRegistrationForm
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.views import PasswordResetView as CorePasswordResetView
-
+from cbt.models import IndividualAssessment, InstitutionAssessment
 
 class UserRegistrationView(View):
 
@@ -35,7 +38,7 @@ class UserRegistrationView(View):
 
     def post(self, request):
         form = UserRegistrationForm(request.POST)
-        if form.is_valid:
+        if form.is_valid():
             if User.objects.filter(email=request.POST['email']).exists():
                 messages.error(request, 'Username is already taken')
                 return render(request, self.template_name, {'form':form})
@@ -48,7 +51,6 @@ class UserRegistrationView(View):
             email_sender = settings.EMAIL_HOST_USER
             recipient_list = [user_detail.get('email')]
             send_mail(email_subject, message, email_sender, recipient_list)
-            print('Email sent')
             return redirect('cbt:home')
         else:
             return render(request, self.template_name, {'form':form})
@@ -127,3 +129,43 @@ class PasswordResetView(CorePasswordResetView):
                     return redirect('password_reset_done')
         context = {'password_reset_form':form}
         return render(request, self.template_name, context)
+
+
+#========================
+#    Dashboard views
+#========================
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    ''' View to render dashboard page.'''
+    template_name = 'account/dashboard/dashboard.html'
+    context = {}
+
+    def get(self, request):
+        context = self.get_assessment_objects(request)
+        return render(request, self.template_name, context )
+
+    def get_assessment_objects(self, request):
+        try:
+            self.context['institution_assessments'] = InstitutionAssessment.objects.filter(
+                user_id=request.user.id
+            )
+            self.context['individual_assessments'] = IndividualAssessment.objects.filter(
+                user_id=request.user.id
+            )
+        except InstitutionAssessment.DoesNotExist:
+            self.context['institution_assessments'] = None
+        except IndividualAssessment.DoesNotExist:
+            self.context['individual_assessments'] = None
+        return self.context
+
+
+class UserAccountUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = (
+        'first_name',
+        'last_name',
+        'middle_name',
+        'username',
+    )
+    template_name = 'account/account_update_form.html'
+    success_url = reverse_lazy('account:dashboard')

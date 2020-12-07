@@ -1,18 +1,17 @@
-{% extends 'base.html'%}
-{% block header %} 
+{% extends 'cbt_base.html'%}
+{% block header %}
     <h2>MCQs platform</h2>
     <section><h4>You can't submit assessment once time is out.</h4>
-        <p id="time">Duration: <span id="duration">{{duration}}</span> 
+        <p id="time">Duration: <span id="duration">{{duration}}</span>
             <p>Remaining time: <span id="timer"></span> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
         </p>
     </section>
 {% endblock %}
-{% block user_info %}  {% endblock %}
 {% block main %}
     <section id="auth">
         <!--h4>Assessment will automatically close after {{duration}} minutes</h4-->
     </section>
-    <section id="assessment">
+    <section id="assessment" class="cbt-form">
         <form method="POST" action="{% url 'multiple_choices:result' %}">
         {% csrf_token %}
         {% if multiple_choice_questions %}
@@ -40,11 +39,15 @@
                 <button id="submit-btn" type="submit">Submit</button>
             {% endfor %}
         {% else %}
-                <section>
-                    <h1>No assessment provided!</h1>
-                </section>
         {% endif %}
-        </form>
+    </form>
+    <section>
+        <h1><span class="alert info title-1">Oops! No assessment provided!</span></h1>
+        <p>Try again letter. Thanks</p>
+        <a href="{% url 'cbt:cbt_type' %}">
+            <button class="add"><i class="fa fa-puls"></i>Create Assessment</button>
+        </a>
+    </section>
     </section>
 {% endblock %}
 {% block script %} {{block.super}}{% endblock %}

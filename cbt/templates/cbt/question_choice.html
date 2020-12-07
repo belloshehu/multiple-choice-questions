@@ -1,0 +1,44 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+
+{% block main %}
+    <section class="container">
+        <article class="page-head">
+            <h1>Assessment question type </h1>
+            <p>
+                Choose the type of question you want to add to your assessment.
+            </p>
+        </article>
+        <article class="cbt-step">
+            <article class="step">
+                <div class="step-item">
+                    <h3>Questions from Passage</h3>
+                </div>
+                <p>
+                    Use this option if your student need to read a passage before answering some questions. Passage may a story, description just to name a few. Below is a sample:
+                </p>
+                <h3 class=''>Question from passage exmple:</h3>
+                <p>
+                    <scan class="alert info">Questions and passage here.</scan>
+                </p>
+                <a href="{{with_passage_url}}"><button class="add">Questions from passage</button></a>
+            </article>
+            <article class="step">
+                <div class="step-item">
+                    <h3>Questions without passage</h3>
+                </div>
+                <p>
+                    Use this option if your students do not need to read a passage before answering some questions. <br>
+                    Below is a sample:
+                </p>
+                <h3 class="">Question without passage example:</h3>
+                <p>
+                    <scan class="alert info">Questions without passage here.</scan>
+                </p>
+                <a href="{{without_passage_url}}"><button class="add">Questions without passage</button></a>
+
+            </article>
+        </article>
+    </section>
+{% endblock %}
+{% block script %} {{block.super}}{% endblock %}

@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 {% block individual_assessment %}
     <h3>Select a sample assessment</h3>
     <section class="cbt-form">
@@ -6,7 +7,7 @@
             <article class="cbt-form left-align">
                 <div class="h-titles">{{assessment.title|title|truncatewords:5}}</div>
                 <div class="">
-                    <p>{{assessment.description}}</p>
+                    <p>{{assessment.description|uppercase}}</p>
                 </div>
                 <div><p><span  class="orange-font strong">Created at</span><br>
                     {{assessment.time_created|time}}

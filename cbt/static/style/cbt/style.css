@@ -14,7 +14,7 @@ i {
 
 header, footer {
     margin: 0%;
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.9);
     color: black;
     font-family: 'Courier New', Courier, monospace;
     font-size: x-large;

@@ -1,0 +1,33 @@
+{% extends 'cbt_base.html'%}
+{% load static %}
+{% block header %}
+{% endblock %}
+{% block main %}
+<article  id="assessment-dashboard" style=" color: white;"></article>
+<section class="cbt-form">
+    <section id="window" class="" style="background-color: black; position: fixed; bottom:0px;right:0px; padding:10px; border-radius: 20%;">
+        <span class="alert orange-font">You can't submit assessment once time is out.</span>
+        <p class="white-font"  id="{{assessment.id}}">Assessment:<span class="orange-font"> {{assessment.title}}</span></p>
+        <div id="time" class="white-font">
+            Duration: <span id="duration" class="orange-font">{{assessment.duration}} minutes</span>
+            <p >Remaining time:
+                <span id="timer" class="orange-font"></span>
+                <i class="fa fa-clock-o" aria-hidden="true"></i>
+             </p>
+        </div>
+    </section>
+    <section id="assessment" class="cbt-form">
+        <article class="" id="assessment-window">
+            <!--Assessment question and choices are shown here-->
+            <form>
+
+            </form>
+        </article>
+
+    </section>
+</section>
+{% endblock %}
+{% block script %}
+    {{block.super}}
+    <script src="{% static 'script/assessment_window.js'%}" ></script>
+{% endblock %}

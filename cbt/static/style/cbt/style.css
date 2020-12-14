@@ -19,7 +19,7 @@ header, footer {
     font-family: 'Courier New', Courier, monospace;
     font-size: x-large;
     padding: 1% 2%;
-    box-shadow: 3px 3px  5px 5px rgb(172, 49, 49);
+    box-shadow: 3px 3px  5px 3px rgb(160, 128, 64);
 }
 footer {
     font-size: small;
@@ -65,7 +65,7 @@ footer em {
         color: rgb(223, 10, 30);
         font-size: 42px;
     }
-    input, select, textarea{
+     input:not([type=radio]), select, textarea{
         border-radius: 0px;
         border-color: white white black white;
         border-width:0px ;
@@ -80,9 +80,6 @@ footer em {
 
     input[type=radio] {
         text-align: left;
-        font-size: large;
-        display: flex;
-        vertical-align: top;
     }
     button {
         background-color:  rgb(11, 23, 67);
@@ -132,7 +129,6 @@ section.container  div img {
         text-align: center;
         color: white;
         box-shadow: 0px 0px 5px 5px gray;
-
     }
     h1 {
         font-family: 'arial black';
@@ -161,8 +157,6 @@ section.container  div img {
     }
     input[type=radio] {
         text-align: left;
-        font-weight: normal;
-        display: inline-flex;
     }
     button {
         background-color:  rgb(11, 23, 67);
@@ -204,9 +198,7 @@ section.container  div img {
     p.label {
         text-align: left;
     }
-    p.label label {
-        margin-block-start: 0%;
-    }
+
 }
 
 header > section > h4 {
@@ -729,6 +721,9 @@ p strong label {
 .orange-font {
     color: orange;
 }
+.bg-skye-blue {
+    background-color: skyblue ;
+}
 .strong{
     font-weight: bold;
 }
@@ -737,4 +732,23 @@ p strong label {
     display: flex;
     flex-direction: column;
     justify-content: start;
+}
+/*Passage style*/
+p.passage-body {
+    font-size: smaller;
+    padding: 5%;
+    background-color: rgb(127, 140, 187);
+}
+/* ASSESSMENT TAKING WINDOW DASHBOARD*/
+article#assessment-dashboard{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 2px goldenrod solid;
+    box-shadow: 2px 3px 2px 2px  gray;
+    margin: 20px auto ;
+    background-color: rgb(11, 23, 67);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

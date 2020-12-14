@@ -1,11 +1,27 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import AssessmentForm, UserRegistration, UserLogin, MultipleChoiceQuestionForm
-from .models import AssessmentTaker, MultipleChoiceQuestion, Question, Choice, GRADES
+from .forms import (
+    AssessmentForm,
+    UserRegistration,
+    UserLogin,
+    MultipleChoiceQuestionForm
+)
+from .models import (
+    AssessmentTaker,
+    MultipleChoiceQuestion,
+    Question,
+    Choice,
+    GRADES
+)
 from django.utils import timezone
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from cbt.models import IndividualAssessment
+from choice.models import IndividualChoice
+from question.models import IndividualQuestion, IndividualQuestionPassage
+from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+import json
 
 
 def duration_in_minute(duration):
@@ -36,6 +52,62 @@ class AssessmentInstructionView(TemplateView):
         )
         return render(request, self.template_name, {'assessment':assessment})
 
+class AssessmentTakingView(View):
+    template_name = 'multiple_choices/assessment_window.html'
+
+    def get(self, request, **kwargs):
+        assessment = IndividualAssessment.objects.get(
+            id=self.kwargs.get('pk')
+        )
+        return render(request, self.template_name, {'assessment':assessment})
+
+
+class AssessmentWindowView(View):
+    '''' View to get questions to assessment window.'''
+
+    def get(self, request, **kwargs):
+        assessment_id = request.GET.get('assessment_id')
+        assessment = IndividualAssessment.objects.get(
+            id=assessment_id
+        )
+        questions = IndividualQuestion.objects.filter(
+            assessment=assessment
+        ).values()
+        passages = self.get_assessment_passages(assessment)
+        print(assessment_id)
+        print(list(questions.values())[1])
+        print(f'passages:{passages}')
+        data = {
+            'questions': list(questions),
+            'passages': list(passages)
+        }
+        return JsonResponse(data)
+
+
+    def get_assessment_passages(self, assessment):
+        ''' Returns all passages in a given Assessment.'''
+        passages = ()
+        try:
+            passages = IndividualQuestionPassage.objects.filter(
+                assessment=assessment
+            ).values()
+        except IndividualQuestionPassage.DoesNotExist:
+            pass
+        return passages
+
+
+class QuestionAssociatedChoicesView(View):
+
+    def get(self, request, **kwargs):
+        question_id = self.request.GET.get('question_id')
+        choices = IndividualChoice.objects.filter(
+            question=question_id
+        ).values()
+        print(choices)
+        data = {'choices': list(choices)}
+        return JsonResponse(data)
+
+
 def home(request):
     ''' View for assessment taking. The template shows instructions.'''
     duration = 0
@@ -45,44 +117,6 @@ def home(request):
     except IndexError:
         pass
     return render(request, 'multiple_choices/instruction.html', {'duration':duration})
-
-
-def register(request):
-    ''' View to handle user registration.'''
-    form = UserRegistration()
-    if request.method == 'POST':
-        form = UserRegistration(request.POST)
-        if form.is_valid:
-            try:
-                form.save(commit=True)
-                return render(request, 'multiple_choices/registration_success.html')
-            except ValueError:
-                pass
-        messages.info(request, 'Wrong information entered!')
-        return redirect(reverse('multiple_choices:register'))
-    return render(request, 'multiple_choices/register.html', {'form':form})
-
-
-def user_login(request):
-    ''' View to handle user login.'''
-    form = UserLogin()
-    if request.method == 'POST':
-        username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('multiple_choices:home')
-        else:
-            messages.info(request, 'username or password or both are incorrect.')
-            return redirect(reverse('multiple_choices:login'))
-    return render(request, 'multiple_choices/login.html', {'form':form})
-
-
-def user_logout(request):
-    ''' view function to logout user. '''
-    logout(request)
-    return redirect('multiple_choices:home')
 
 
 def assessment(request):

@@ -32,6 +32,7 @@ $(document).ready(function(){
             $('#timer').css({'color':'red'});
         }
     }, secs);
+
 });
 
 // function to allow toggling of account navigation items in mobile mode.

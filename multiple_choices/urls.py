@@ -9,11 +9,23 @@ urlpatterns = [
         views.AssessmentInstructionView.as_view(),
         name='instruction'
     ),
-    path('login/', views.user_login, name='login'),
-    path('register/', views.register, name='register'),
     path('assessment/', views.assessment, name='assessment'),
     path('result/', views.process_result, name='result'),
-    path('logout/', views.user_logout, name='logout'),
     path('create-test/', views.create_cbt, name='create_test'),
-    path('sample/', views.sample, name='sample')
+    path('sample/', views.sample, name='sample'),
+    path(
+        'assessment-taking/<int:pk>/',
+        views.AssessmentTakingView.as_view(),
+        name='assessment-taking'
+    ),
+    path(
+        'assessment-window/',
+        views.AssessmentWindowView.as_view(),
+        name='assessment-window'
+    ),
+    path(
+        'get-associated-choices/',
+        views.QuestionAssociatedChoicesView.as_view(),
+        name='get-associated-choices'
+    )
 ]

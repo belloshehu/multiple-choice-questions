@@ -20,6 +20,19 @@ def get_questions_under_passage(value, questions):
     return questions_with_passage
 
 
+@register.filter(name='answers')
+def get_choices(question, choices):
+    ''' Returns choices for a question'''
+    return [ choice for choice in choices if choice.question==question]
+
+@register.filter(name='is_none')
+def is_none(value):
+    return value == None
+
+@register.filter(name='is_not_none')
+def is_not_none(value):
+    return value != None
+
 @register.filter(name='description')
 def get_description(value):
     return value.description

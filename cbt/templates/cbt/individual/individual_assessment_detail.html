@@ -1,6 +1,7 @@
 {% extends 'cbt_base.html'%}
+{% load custom_tags %}
 {% block main %}
-    <section class="assessment-detail">
+    <section class="assessment-detail cbt-form">
         <h1>Assessment details</h1>
         <article class="cbt-form">
             <h3 class="h-titles">Title and misc.|
@@ -61,22 +62,50 @@
                 <span class="small-font orange-font">All questions with their answer choices added under this Assessment</span>
             </h3>
             <ol>
+                <p class="orange-font"><u>Questions:</u></p>
                 {% for question in questions %}
-                    <p class="orange-font"><u>Questions:</u></p>
-                    <li class="question-item">{{question.question_asked|title}}
-                        <a href="{% url 'question:delete' question.id %}"><i class="fa fa-trash"></i></a>
-                        <a href="{% url 'question:update' question.id %}"> <i class="fa fa-pencil"></i></a>
-                    </li>
-                        <ol class="choices-list">
-                            <p class="orange-font"><u>Answer choices:</u></p>
-                            {% for choice in choices %}
-                                {% if choice.question.id == question.id  %}
-                                    <li class="choice-item">
+                    {% if question.passage.body|is_not_none %}
+                    <p class="alert white-font">Use the passage below to answer the questions that follow:</p>
+                    <p class="big-font white-font">Passage({{question.passage.title}})</p>
+                        <p class="white-font passage-body"> {{question.passage.body}}</p>
+                        <p class="orange-font"><u>Questions from the passage:</u></p>
+                        {% for p_question in question|passage_questions:questions %}
+                            <li class="question-item white-font">{{p_question.question_asked|title}}
+                                <a href="{% url 'question:delete' question.id %}"><i class="fa fa-trash"></i></a>
+                                <a href="{% url 'question:update' question.id %}"> <i class="fa fa-pencil"></i></a>
+                            </li>
+                            <ol class="choices-list white-font">
+                                    <p class="orange-font"><u>Answer choices:</u></p>
+                                {% for choice in p_question|answers:choices %}
+                                    <li class="choice-item white-font">
                                         {{choice.choice_statement}}
                                         <a href="{% url 'choice:individual-delete' choice.id %}"><i class="fa fa-trash"></i></a>
                                         <a href="{% url 'choice:individual-update' choice.id %}"> <i class="fa fa-pencil"></i></a>
                                     </li>
-                                {% endif %}
+                                {% empty %}
+                                    <div>
+                                        <span class="alert info">Choices not addded yet.</span>
+                                    </div>
+                                {% endfor %}
+                                <a href="{% url 'choice:individual-create' question.id %}">
+                                    <button class="add small"><i class="small fa fa-plus"></i> Add choice</button>
+                                </a>
+                                <hr>
+                            </ol>
+                        {% endfor %}
+                    {% else %} {% comment%} show questions that have no passage {% endcomment %}
+                        <li class="question-item white-font">{{question.question_asked|title}}
+                            <a href="{% url 'question:delete' question.id %}"><i class="fa fa-trash"></i></a>
+                            <a href="{% url 'question:update' question.id %}"> <i class="fa fa-pencil"></i></a>
+                        </li>
+                        <ol class="choices-list">
+                            <p class="orange-font"><u>Answer choices:</u></p>
+                            {% for choice in question|answers:choices %}
+                                <li class="choice-item white-font">
+                                    {{choice.choice_statement}}
+                                    <a href="{% url 'choice:individual-delete' choice.id %}"><i class="fa fa-trash"></i></a>
+                                    <a href="{% url 'choice:individual-update' choice.id %}"> <i class="fa fa-pencil"></i></a>
+                                </li>
                             {% empty %}
                                 <div>
                                     <span class="alert info">Choices not addded yet.</span>
@@ -87,6 +116,7 @@
                             </a>
                             <hr>
                         </ol>
+                    {% endif %}
                 {% empty %}
                     <p>No questions yet</p>
                 {% endfor %}

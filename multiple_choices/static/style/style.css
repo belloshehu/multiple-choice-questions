@@ -90,7 +90,7 @@ header {
     }
       #time {
           font-size: small;
-      }  
+      }
     input[type=text], input[type=password], input[type=email] {
         border-radius: 2em 2em;
         height: 2em;
@@ -140,11 +140,6 @@ header > section > h4 {
 strong{
     text-align: justify;
     font-size: large;
-}
-label {
-    font-size: medium;
-    text-align: justify;
-    white-space: nowrap;
 }
 
 hr {

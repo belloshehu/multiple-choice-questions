@@ -10,18 +10,20 @@
             {% endfor %}
         </section>
         <section>
-            <h2><u>Individual Assessment form</u></h2>
-            <p>
-                <a href="{% url 'cbt:individual-assessment-list' %}"><button class="small">Available Assessments </button></a>
-                <span class="badge">{{cbts|length}}</span>
-                <a class="small" href="{% url 'cbt:create-institution-assessment' %}"><button class="add fa fa-plus"> Add institution Assessment</button></a>
-            </p>
+           <h2>Individual Assessment form</h2>
+           <p>
+               If the assessment to be created is for Individuals( such  as parents, teachers etc.) and is not meant to be assoicated with any institution or organisation, use this form. Otherwise, make use of the form in this link <a class="small" href="{% url 'cbt:create-institution-assessment' %}">institution Assessment</a>
+           </p>
         </section>
-        <section>
+        <section class="cbt-form" style="border-radius: 40px;">
+            <a href="{% url 'cbt:individual-assessment-list' %}"><button class="small">Available Assessments </button></a>
+            <span class="badge">{{cbts|length}}</span>
+        </section>
+        <section class="cbt-form">
             <form action="{% url 'cbt:create-individual-assessment' %}" method="POST">
                 {% csrf_token %}
                 <section id="cbt-info">
-                    <h4>Fill in the Assessment form
+                    <h4>Fill in the individual Assessment form
                         <p>
                             <span class="alert info"> Not sure what to fill? get guide</span>
                             <a href="{% url 'cbt:assessment-help' %}">

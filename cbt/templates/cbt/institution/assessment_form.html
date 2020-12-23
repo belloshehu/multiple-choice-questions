@@ -10,27 +10,33 @@
             {% endfor %}
         </section>
         <section>
-            <h1>
-                Institution Assessment form
-                <span><a href="{% url 'cbt:institution-assessment-list' %}"><button class="small">Available Assessment</button></a></span>
-                <span class="badge">{{cbts|length}}</span>
-            </h1>
-            <a class="small" href="{% url 'cbt:create-individual-assessment' %}">
-                <button class="add fa fa-plus"> Add individual Assessment</button>
+            <h2>Institution Assessment form</h2>
+            <p>
+                If the assessment to be created is by institutions/organisations( such  as schools, companies etc.) use this form. Otherwise, make use of the form in this link
+                 <a class="small" href="{% url 'cbt:create-individual-assessment' %}">individual Assessment</a>.
+            </p>
+            <p>
+                Note that you will have to creat the institution/organisation the assessment will be associated with if you have not done so.
+            </p>
+        </section>
+        <section class="cbt-form" style="border-radius: 40px;">
+            <span>
+                <a href="{% url 'cbt:institution-assessment-list' %}">
+                    <button class="small">Available Assessments</button>
+                </a>
+            </span>
+            <span class="badge info">{{cbts|length}}</span>
+            <a  href="{% url 'cbt:institution-list' %}"><button class="small">institution list</button></a>
+            <a href="{% url 'cbt:create_institution' %}">
+                <button class="add"><i class="small fa fa-plus"></i> create institution</button>
             </a>
         </section>
-        <section>
-            <div>
-                <a  href="{% url 'cbt:institution-list' %}"><button class="small">institution list</button></a>
-                <a href="{% url 'cbt:create_institution' %}">
-                    <button class="add"><i class="small fa fa-plus"></i> create institution</button>
-                </a>
-            </div>
+        <section class="cbt-form">
             <form action="{% url 'cbt:create-institution-assessment' %}" method="POST">
                 {% csrf_token %}
                 <section id="cbt-info">
                     <h4>
-                        Enter information related to your Assessment
+                        Fill in the institution Assessment form
                         <p>
                             <span class="alert info"> Not sure what to fill? get guide</span>
                             <a href="{% url 'cbt:assessment-help' %}">

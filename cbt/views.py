@@ -19,6 +19,7 @@ from .models import (
                     IndividualAssessment,
                     Institution
                     )
+from account.forms import UserLoginForm, UserCreationForm
 from choice.models import IndividualChoice, InstitutionChoice
 from question.models import IndividualQuestion, InstitutionQuestion
 from django.core.mail import send_mail
@@ -36,19 +37,21 @@ from django.views.generic import(
     DetailView,
     ListView,
     UpdateView,
-    TemplateView
+    TemplateView,
+     View
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
-
 def home(request):
-    return render (request, 'cbt/home.html')
-
+    return render (request, 'cbt/home.html', {'form':UserLoginForm})
 
 def cbt_type(request):
     '''Renders Assessment types template'''
     return render (request, 'cbt/assessment_types.html')
+
+
+
 
 
 class AssessmentHelpView(TemplateView):

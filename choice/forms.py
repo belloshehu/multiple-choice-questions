@@ -7,6 +7,13 @@ from django.utils.translation import gettext_lazy as _
 class IndividualChoiceForm(forms.ModelForm):
     choice_statement = forms.CharField(
         widget=forms.Textarea(attrs={'cols':50, 'rows':10}),
+        help_text="enter the choice here",
+
+    )
+    is_correct = forms.BooleanField(
+        help_text="indicate if this is the correct answer.",
+        label="Is this the correct answer?"
+
     )
     class Meta:
         model = IndividualChoice

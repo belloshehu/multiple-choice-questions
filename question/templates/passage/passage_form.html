@@ -2,6 +2,14 @@
 {% block main %}
     <section class="cbt-form">
         <h1>Passage form</h1>
+        <article class="cbt-form" style="border-radius: 40px; padding: auto;">
+            <p>
+                You this form to add passage to your selected assessment and create questions from it afterwards.
+            </p>
+            <p>
+                You are required to enter the maximum number of questions you want to ask from the passage.
+            </p>
+        </article>
         {% for message in messages %}
         {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
@@ -9,15 +17,14 @@
         {% endfor %}
         <hr class="devider">
         <h3>Add Passage to be used in assessments(<span style="color: green;">{{assessment.title}}</span>).</h3>
-            <form action="{% url 'question:individual-passage-create' assessment.id %}"  method="POST">
+            <form action="{% url 'question:individual-passage-create' assessment.id %}"  method="POST" class="cbt-form">
                 {% csrf_token %}
                 {% include 'cbt/partials/form_fields.html' %}
-            <section>
-                    <button type="submit">Submit</button>
-                    <a href="{{assessment.get_absolute_url}}" class="small">Cancel</a>
-            </section>
-                <br>
+                <section>
+                        <button type="submit">Submit</button>
+                        <a href="{{assessment.get_absolute_url}}" class="small">Cancel</a>
+                </section>
+                    <br>
             </form>
     </section>
-
 {% endblock %}

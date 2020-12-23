@@ -13,7 +13,8 @@
             <article class="account-nav">
                 <div class="nav-button account"><i class="fa fa-bars"></i></div>
                 <ul class="nav">
-                    <li id="logo"><img src="{% static 'image/cbtmaker-logo-gold-dark.png' %}" height="100" width="150"></li>
+                    <li id="logo"><img src="{% static 'image/monbes-center.png' %}" height="100" width="200"></li>
+                    <li id="company-name">AssessmentMAker</li>
                     {% block user_info %}
                         {% if request.user.username %}
                             <a class=""  href="#"><li class="nav-item"> welcome {{request.user.username}}</li></a>

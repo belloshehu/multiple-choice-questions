@@ -2,6 +2,12 @@
 {% block main %}
     <section class="cbt-form">
         <h1>Question form</h1>
+        <article class="cbt-form" style="border-radius: 40px; padding: auto;">
+            <p>
+                You use this form to add question to your selected assessment.
+            </p>
+        </article>
+        <article  class="cbt-form">
         {% for message in messages %}
         {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
@@ -26,8 +32,8 @@
             <section>
                     <button type="submit">Submit</button>
             </section>
-                <br>
             </form>
+        </article>
     </section>
 
 {% endblock %}

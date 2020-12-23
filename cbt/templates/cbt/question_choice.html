@@ -6,8 +6,11 @@
         <article class="page-head">
             <h1>Assessment question type </h1>
             <p>
-                Choose the type of question you want to add to your assessment.
+                Question to be asked in assessment can be stand-alone or come from passage. On this note, there are two options for you to add questions to your assessment.
             </p>
+            <h2>
+                Choose the type of question you want to add to your assessment.
+            </h2>
         </article>
         <article class="cbt-step">
             <article class="step">
@@ -17,10 +20,40 @@
                 <p>
                     Use this option if your student need to read a passage before answering some questions. Passage may a story, description just to name a few. Below is a sample:
                 </p>
-                <h3 class=''>Question from passage exmple:</h3>
-                <p>
-                    <scan class="alert info">Questions and passage here.</scan>
-                </p>
+                <h2 class="">Question from passage example:</h2>
+                <p>Below are examples of questions from passage</p>
+                <div class="cbt-form assessment-type-sample">
+                    <strong>Read the passage carefully and use it to answer the questions that follow</strong>
+                    <article>
+                        <p class="passage-sample">
+                            Web development is one of the widest areas of software development. It is mainly categorised into front-end and backend. People taking care of the backend are called backend developers or engineers. while on the other, People taking care of the front-end are called front-end developers or engineers.
+                        </p>
+                        <p class="passage-sample">
+                            Each of these areas can be further categorised but in most cases, a dedicated developer handle each. People with knowledge of both the front-end and backend are refered to as fullstack developers.
+                        </p>
+                        <strong>Questions</strong>
+                    </article>
+                    <ol>
+                        <li>What are the major areas of the web development?</li>
+                        <strong>Answers</strong>
+                           <ol>
+                                <li>Frontend</li>
+                                <li>Backend</li>
+                                <li>Middle-End</li>
+                                <li>Non of the above</li>
+                           </ol>
+                           <br>
+
+                        <li>Which of the available areas of web development is harder?</li>
+                        <strong>Answers</strong>
+                        <ol>
+                             <li>Frontend</li>
+                             <li>Backend</li>
+                             <li>Middle-End</li>
+                             <li>All of the above</li>
+                        </ol>
+                    </ol>
+                </div>
                 <a href="{{with_passage_url}}"><button class="add">Questions from passage</button></a>
             </article>
             <article class="step">
@@ -31,14 +64,41 @@
                     Use this option if your students do not need to read a passage before answering some questions. <br>
                     Below is a sample:
                 </p>
-                <h3 class="">Question without passage example:</h3>
-                <p>
-                    <scan class="alert info">Questions without passage here.</scan>
-                </p>
-                <a href="{{without_passage_url}}"><button class="add">Questions without passage</button></a>
+                <h2 class="">Question without passage(stand-alone) example:</h2>
+                <p>Below are examples of questions without passage(i.e. stand-alone)</p>
+                <div class="cbt-form" id="passage-question-type">
+                    <p>
+                        <scan class="alert info">Questions without passage here.</scan>
+                    </p>
 
+                    <Strong>Answer the following question:</Strong>
+                    <ol>
+                        <li>What are the major areas of the web development?</li>
+                        <strong>Answers</strong>
+                            <ol>
+                                <li>Frontend</li>
+                                <li>Backend</li>
+                                <li>Middle-End</li>
+                                <li>Non of the above</li>
+                            </ol>
+                            <br>
+
+                            <li>Which of the available areas of web development is harder?</li>
+                            <strong>Answers</strong>
+                            <ol>
+                                 <li>Frontend</li>
+                                 <li>Backend</li>
+                                 <li>Middle-End</li>
+                                 <li>All of the above</li>
+                            </ol>
+                        </ol>
+                    </div>
+                <a href="{{without_passage_url}}"><button class="add">Questions without passage</button></a>
             </article>
         </article>
     </section>
 {% endblock %}
-{% block script %} {{block.super}}{% endblock %}
+{% block script %}
+    {{block.super}}
+    <script type="text/javascript" src="{% static 'script/scrolling_question_type.js' %}"></script>
+{% endblock %}

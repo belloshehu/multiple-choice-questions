@@ -9,29 +9,28 @@
 {% endif %}
 {% endblock %}
 {% block main %}
-    <section class="">
+    <section class="cbt-form">
        <h2 class="page-head">Add Choice</h2>
         {% for message in messages %}
             {% if forloop.counter == 1 %}
                 <span style="color: orange;">{{message}}</span>
             {% endif %}
         {% endfor %}
-        <p>
-            Add choice {{choices|length}} to this question:
-        </p>
-        <div class='choices-in-form'>
-            <p class="alert info"><q>{{question.question_asked}}</q></p>
-            <h6 style="text-align: left;">Added choices <span class="badge">{{choices|length}}</span></h6>
-            <ol>
-                {% for choice in choices %}
-                   <li><span class="alert info">{{choice.choice_statement|title}}</span></li>
-                {% empty %}
-                    <p class="alert info">No choices yet.</p>
-                {% endfor %}
-            </ol>
-        </div>
-        <br>
-       <form action="{% url 'choice:individual-create' question.id %}" method="POST">
+        <article class="cbt-form"  style="border-radius: 40px; padding: auto;">
+            <p>
+                Add choice {{choices|length}} to this question:
+            </p>
+                <p class="alert info"><q>{{question.question_asked}}</q></p>
+                <h6 style="text-align: left;">Added choices <span class="badge">{{choices|length}}</span></h6>
+                <ol>
+                    {% for choice in choices %}
+                    <li><span class="alert info">{{choice.choice_statement|title}}</span></li>
+                    {% empty %}
+                        <p class="alert info">No choices yet.</p>
+                    {% endfor %}
+                </ol>
+        </article>
+       <form action="{% url 'choice:individual-create' question.id %}" method="POST" class="cbt-form">
             {% csrf_token %}
             {% for field in form %}
                 <p> {{field.label}}<br>{{field}}</p>

@@ -9,7 +9,7 @@
 {% endif %}
 {% endblock %}
 {% block main %}
-    <section class="">
+    <section class="cbt-form">
        <h2 class="page-head">Update Choice</h2>
         {% for message in messages %}
             {% if forloop.counter == 1 %}
@@ -19,7 +19,7 @@
         <p>
             Update/edit this choice:
         </p>
-        <div class='choices-in-form'>
+        <article class='cbt-form' style="border-radius: 40px; padding: auto;">
             <p class="alert info"><q>{{choice.question.question_asked}}</q></p>
             <h6 style="text-align: left;">Available choices <span class="badge">{{choices|length}}</span></h6>
             <ol>
@@ -29,8 +29,7 @@
                     <p class="alert info">No choices yet.</p>
                 {% endfor %}
             </ol>
-        </div>
-        <br>
+        </article>
        <form action="{% url 'choice:individual-update' choice.id %}" method="POST">
             {% csrf_token %}
             {% for field in form %}

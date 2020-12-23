@@ -1,24 +1,32 @@
 {% extends 'cbt_base.html'%}
+{% load static %}
 {% block main %}
-
     <section class="cbt-form">
-       <h1 class="page-head">Create Institution</h1>
-        {% for message in messages %}
-            {% if forloop.counter == 1 %}
-                <span style="color: orange;">{{message}}</span>
-            {% endif %}
-        {% endfor %}
-        <h2 class="alert info title">
-            Provide the name and address of your Institution
-        </h2><br>
-       <form action="{% url 'cbt:create_institution' %}" method="POST">
-            {% csrf_token %}
-            {% include 'cbt/partials/form_fields.html' %}
+        <article>
+            <h2 class="page-head"> Institution form</h2>
             <p>
-                <button type="submit">Send</button>
-                <!--a href="{% url 'cbt:institution-list' %}"><button class="cancel">Cancel</button></a-->
+                You use this form to create the institution/organisation you are creating assessment for incase you have not done so.
             </p>
-       </form>
+                {% for message in messages %}
+                    {% if forloop.counter == 1 %}
+                        <span style="color: orange;">{{message}}</span>
+                    {% endif %}
+                {% endfor %}
+                <h2 class="alert info title">
+                    Provide the name and address of your Institution
+                </h2><br>
+            <form action="{% url 'cbt:create_institution' %}" method="POST">
+                    {% csrf_token %}
+                    {% include 'cbt/partials/form_fields.html' %}
+                    <p>
+                        <button type="submit">Submit</button>
+                        <!--a href="{% url 'cbt:institution-list' %}"><button class="cancel">Cancel</button></a-->
+                    </p>
+            </form>
+        </article>
+        <article>
+            <img src="{% static 'image/institution.png' %}" height="400">
+        </article>>
     </section>
 {% endblock %}
 {% block script %}{% endblock %}

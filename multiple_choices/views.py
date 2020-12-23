@@ -74,9 +74,6 @@ class AssessmentWindowView(View):
             assessment=assessment
         ).values()
         passages = self.get_assessment_passages(assessment)
-        print(assessment_id)
-        print(list(questions.values())[1])
-        print(f'passages:{passages}')
         data = {
             'questions': list(questions),
             'passages': list(passages)

@@ -2,57 +2,73 @@
 {% load static %}
 {% block user_info %} {{block.super}} {% endblock %}
 {% block main %}
-
     <section class="container">
-        <article class="statement">
-            <h1>Create computer based assessments for yourself and your institution using CBTMaker.</h1>
-                <img src="{% static 'image/cbtmaker20.png' %}" width="200" height="200">
-                <h2>
-                CBTMaker makes it easier for individuals and organnisations to create online computer tests(CBT), quizes and exams.
-                Its practice session allows individuals to practice in order to improve their confidence before taking their actual tests.
-                </h2>
+        <div id="cat-scroll">
+            <article id="categories">
+                <strong>Assessment Categories</strong><hr>
+                <ol>
+                    <a href="{% url 'cbt:create-institution-assessment' %}"><li><i class="fa fa-arrow-right"></i> Individual Assessment</li></a>
+                    <a href="{% url 'cbt:create-individual-assessment' %}"><li><i class="fa fa-arrow-right"></i> Organnisational Assessment</li></a>
+
+                </ol>
+            </article>
+            <article class="statement" id="scrolling-panel">
+                <div id="landing-text">
+                    <h1 class="white-font">Create computer based assessments for yourself and your institution using CBTMaker.</h1>
+                    <!--h2 class="orange-font">
+                        CBTMaker makes it easier for individuals and organnisations to create online computer tests(CBT), quizes and exams.
+                        Its practice session allows individuals to practice in order to improve their confidence before taking their actual tests.
+                    </h2-->
+                </div>
+            </article>
+        </div>
+        <hr class="divider">
+        <article  class="sample cbt-form">
+                <div>
+                    <img src="{% static 'image/personal.png' %}" height="400">
+                </div>
+            <div>
+                <h2> Create assessments</h2>
+                <p class="">
+                   You can create assessments for yourself or institution/organisaton following the simple steps.
+                </p>
+                <br>
+                <article>
+                    <p>Create assessments for your personal use using this option.</p>
+                    <p>
+                        <a href="{% url 'cbt:create-individual-assessment' %}">
+                            <button >Assessment for individual</button>
+                        </a>
+                    </p>
+                </article>
+                <article>
+                    <p>Create assessments for the institution/organisation you are working for</p>
+                    <p>
+                        <a href="{% url 'cbt:create-institution-assessment' %}">
+                            <button>Assessment for institution</button>
+                        </a>
+                    </p>
+                </article>
+            </div>
+
+        </article>
+        <article  class="sample cbt-form">
+            <div>
+                <h2> Practice with assessments samples</h2>
+                <p class="">
+                    To better familiarize yourself with the platform as a student, we encourage you to take Samples assessments.
+                </p>
+                <p><a class="anc-btn" href="{% url 'cbt:sample-assessment-list' %}">
+                    <button>Learn with samples</button></a>
+                </p><br>
+            </div>
+            <div>
+                <img src="{% static 'image/cbtmaker20.png' %}" height="400">
             </div>
         </article>
-        <article class="cbt-steps">
-            <h2>Steps to create a computer-base test(CBT)</h2>
-            <p class="alert small-font  white-font">Note: Creating a CBT requires sign up and log in. Ensure you do so.</p>
-
-            <section class="step">
-                <div class="step-item">
-                    Step <span>1</span>
-                    <h3>Create a CBT </h3>
-                </div>
-                <p>
-                    You start by creating a CBT which serves as the main container for your questions. Give your CBT a title,
-                    description, number of candidates and duration of test.
-                </p>
-            </section>
-            <section class="step">
-                <div  class="step-item">
-                    Step <span>2</span>
-                    <h3>Add questions </h3>
-                </div>
-
-                <p>After creating your CBT  in step 1, go ahead to add questions to it depending on the number of choice.</p>
-            </section>
-            <section class="step">
-                <div  class="step-item">
-                    Step <span>3</span>
-                    <h3>Add choice</h3>
-                </div>
-                <p>Add choices to your questions.</p>
-            </section>
-            <p><a class="anc-btn" href="{% url 'cbt:cbt_type' %}"><button class="add">Create CBT Test</button></a></p><br>
-        </article>
-        <article id="sample">
-            <h1> Practice with assessments sample</h1>
-            <p class="">
-                To better familiarize yourself with the platform as a student, we encourage you to take Samples assessments.
-            </p>
-            <p><a class="anc-btn" href="{% url 'cbt:sample-assessment-list' %}">
-                <button>Learn with samples</button></a>
-            </p><br><br>
-        </article>
     </section>
+    {% endblock %}
+{% block script %}
+    {{block.super}}
+    <script type="text/javascript" src="{% static 'script/scrolling_image.js' %}" ></script>
 {% endblock %}
-{% block script %} {{block.super}}{% endblock %}

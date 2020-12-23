@@ -1,21 +1,23 @@
 {% extends 'cbt_base.html' %}
 {% block main %}
-    <section>
+    <section class="cbt-form">
         <h1>Edit Question</h1>
-        <h3>Edit question to your assessments(<span style="color: green;">{{question.assessment.title}}</span>).</h3>
-        {% for message in messages %}
-            {% if forloop.counter == 1 %}
-                <span style="color: orange;">{{message}}</span>
-            {% endif %}
-        {% endfor %}
-        <form action="{% url 'question:update' question.id %}"  method="POST">
-            {% csrf_token %}
-            {% include 'cbt/partials/form_fields.html' %}
-           <section>
-                <button type="submit">Submit</button>
-           </section>
-            <br>
-        </form>
+        <article>
+            <h3>Edit question to your assessments(<span style="color: green;">{{question.assessment.title}}</span>).</h3>
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}
+                    <span style="color: orange;">{{message}}</span>
+                {% endif %}
+            {% endfor %}
+            <form action="{% url 'question:update' question.id %}"  method="POST" class="cbt-form">
+                {% csrf_token %}
+                {% include 'cbt/partials/form_fields.html' %}
+            <section>
+                    <button type="submit">Submit</button>
+            </section>
+                <br>
+            </form>
+        </article>
     </section>
 
 {% endblock %}

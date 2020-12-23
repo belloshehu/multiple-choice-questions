@@ -7,13 +7,11 @@ body {
     grid-template-rows: 1fr minmax(auto 8fr) 1fr;
     grid-template-areas: "header header" "main main" "footer footer";
     margin: 0% 0%;
-    padding: 0%;
+    padding: 2%;
     background-color: rgb(255, 255, 255);
     color: black;
 }
-header {
-    grid-area: header;
-}
+
 main{
     grid-area: main;
     margin:0%;
@@ -23,41 +21,159 @@ main{
     font-size: larger;
     padding: 2%;
 }
+
+/* ACCOUNT AND PRIMARY NAVIGATION*/
+
+header {
+    grid-area: header;
+    margin: 0%;
+    background-color: white;
+    color: black;
+    font-family: 'Open Sans Condensed',courier;
+    box-shadow: 3px 3px  5px 3px rgb(160, 128, 64);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    ul.nav {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+    }
+    article.account-nav {
+        ul.nav {
+            align-items: center;
+            justify-content: flex-start;
+            list-style-type: none;
+        }
+
+        ul.nav > a.nav-link {
+            color: black;
+            font-family: 'Open Sans Condensed',courier;
+            text-decoration: none;
+            font-size: medium;
+           font-style: italic;
+            &:hover{
+                background-color: yellowgreen;
+            }
+            li {
+                margin-right: 20px;
+            }
+        }
+    }
+    article.primary-nav {
+        ul.nav {
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        ul.nav > a.nav-link  {
+            font-family: 'Open Sans Condensed', courier;
+            color: black;
+            font-size: medium;
+            font-weight: bold;
+            margin-right: 20px;
+            &:hover{
+                background-color: yellowgreen;
+            }
+        }
+
+    }
+
+    @media (min-width:500px){
+        article div.nav-button {
+            display: none;
+        }
+    }
+    @media(max-width: 499px){
+        article div.nav-button {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        article ul.nav {
+            display: none;
+        }
+        ul.nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: small;
+        }
+        ul.nav > a  {
+           width: 50%;
+           margin: 5px 0px;
+        }
+
+    }
+    li#company-name {
+        color: orange;
+        font-family: forte;
+        margin: 0px 10px;
+    }
+}
+
+footer {
+    grid-area: footer;
+    font-size: small;
+    padding: 3% 5%;
+    text-align: center;
+    box-shadow: 3px 3px  5px 5px rgb(172, 49, 49);
+    margin: 0%;
+    background-color: white;
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+    box-shadow: 3px 3px  5px 3px rgb(160, 128, 64);
+
+    em {
+        text-align: center;
+    }
+}
+
 div#cat-scroll {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 3fr;
     grid-template-rows: 1fr;
-    grid-template-areas: "categories scroll";
-}
-article#categories hr{
-    border: 2px solid orange;
-}
-article#categories a{
-   text-decoration: none;
-   color: white;
+    grid-template-areas: "categories scrolls";
+    @media (max-width:499px){
+        grid-template-areas: "scrolls scrolls";
+    }
 }
 article#categories{
     grid-area: categories;
     background-color: rgb(11, 23, 67);
     color: white;
     margin-top: 6%;
-}
-article#categories ol{
-    text-align: left;
-    font-family: monospace;
-    list-style-type: none;
+    hr{
+        border: 2px solid orange;
+    }
+    a{
+       text-decoration: none;
+       color: white;
+    }
+    ol{
+        text-align: left;
+        font-family: monospace;
+        list-style-type: none;
+    }
+    @media(max-width:499px) {
+        display: none;
+        hr{
+            border: 2px solid orange;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+        }
+    }
 }
 
 article#scrolling-panel {
     margin-top: 2%;
-    grid-area: scroll;
+    grid-area: scrolls;
 }
 article.statement {
-    /*background: url('/static/image/cbtmaker20.png') no-repeat;
-    background-clip: content-box;
-    background-position: center;
-    */
     margin-top: 5%;
     width: auto;
     height: auto;
@@ -74,32 +190,9 @@ div#landing-text {
 }
 div#landing-text h1{
     font-family: 'Abril Fatface', cursive;
-font-family: 'Noto Serif', serif;
-
-
+    font-family: 'Noto Serif', serif;
 }
 
-i {
-    color: white;
-    font-size: large;
-}
-
-header, footer {
-    margin: 0%;
-    background-color: white;
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: x-large;
-    padding: 1% 2%;
-    box-shadow: 3px 3px  5px 3px rgb(160, 128, 64);
-}
-footer {
-    grid-area: footer;
-    font-size: small;
-    padding: 3% 5%;
-    text-align: center;
-    box-shadow: 3px 3px  5px 5px rgb(172, 49, 49);
-}
 article.sample {
     display: flex;
     flex-direction: row;
@@ -110,27 +203,11 @@ article.sample {
     font-family: 'Open Sans Condensed', sans-serif;
 }
 
-footer em {
-    text-align: center;
-}
-
-.bg-light-pink {
-    background-color: rgb(107, 93, 93);
-}
-
 @media(min-width: 500px){
-    header article div.nav-button {
-        display: none;
-    }
-    main {
-        padding: 0% 0%;
-    }
     article.cbt-steps {
         padding: 0% 5%;
     }
-    main h1{
-        text-align: center;
-    }
+
     .cbt-form {
         text-align: left;
         margin: 5% 0% 5% 0%;
@@ -194,14 +271,6 @@ section.container  div img {
     }
 }
 @media(max-width: 499px){
-    header article div.nav-button {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-    header article ul.nav {
-        display: none;
-    }
     article.cbt-steps {
         padding: 0% 1%;
     }
@@ -268,10 +337,6 @@ section.container  div img {
         color: rgb(255, 255, 255);
     }
 
-    header img {
-        width: 20%;
-        height: 20%;
-    }
 
     .cbt-form {
         width: 100%;
@@ -284,34 +349,7 @@ section.container  div img {
         text-align: left;
     }
 
-div#cat-scroll {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 3fr;
-    grid-template-rows: 1fr;
-    grid-template-areas: "scroll scroll";
-}
-    article#categories hr{
-        border: 2px solid orange;
-    }
-    article#categories a{
-        text-decoration: none;
-        color: white;
-    }
-    article#categories{
-        display: none;
-    }
-    article#scrolling-panel {
-        margin-top: 2%;
-        grid-area: scroll;
-    }
 
-}
-
-header > section > h4 {
-    padding: 0%;
-    font-size: large;
-    font-family: 'Courier New', Courier, monospace;
 }
 
 strong{
@@ -319,13 +357,8 @@ strong{
     font-size: large;
 }
 
-hr {
-    border: 1px solid  rgb(11, 23, 67);
-    border-radius: 10px 10px;
-}
-
 a {
-    color: orangered;
+    color: rgb(84, 84, 199);
 }
 
 .anc-btn  {
@@ -361,9 +394,7 @@ ol > section {
     margin: 2%;
 }
 
-ul {
-    margin-bottom: 2%;
-}
+
 span {
     color: rgb(107, 93, 93);
 }
@@ -374,9 +405,7 @@ span {
 hr.thick-line {
     border: 1px solid rgb(223, 10, 30);
 }
- img {
-    border-radius: 50%;
-}
+
 h1, h2, h4 {
     font-family: 'Abril Fatface', cursive;
     color: rgb(132, 105, 12);
@@ -384,10 +413,6 @@ h1, h2, h4 {
     font-family: 'Abril Fatface', cursive;
     font-family: 'Noto Serif', serif;
 
-}
-
-header > section > h1 {
-    color: white;
 }
 
 ol > p , ol > li{
@@ -548,9 +573,7 @@ section article.statement h3 {
     line-height: 3em;
     font-family: courier 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;
 }
-main {
-    text-align: center;
-}
+
 .cbt-form {
     padding: 0% 5%  5%;
     color: black;
@@ -649,84 +672,95 @@ a button.add {
 /*
 USER DASHBOARD
 */
-h1#dashboard-title {
-    font-family: 'Noto Serif', serif;
-    font-family: 'Open Sans Condensed', sans-serif;
-    text-shadow: rgb(41, 66, 32) 1px 2px 2px;
-}
-@media (min-width:500px){
-    article#dashboard-nav > ul {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        list-style-type: none;
-        font-size: small;
+section#dashboard {
+    margin: 0% 2% 2%;
+    width: max-content;
+    padding: 2%;
+    h1#dashboard-title {
+        font-family: 'Noto Serif', serif;
+        font-family: 'Open Sans Condensed', sans-serif;
+        text-shadow: rgb(41, 66, 32) 1px 2px 2px;
     }
-    article#dashboard-nav > ul > a  {
-        width: 30%;
-     }
-}
-@media (max-width:499px){
-    article#dashboard-nav > ul {
+    @media (min-width:500px){
+        article#dashboard-nav > ul {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            list-style-type: none;
+            font-size: small;
+        }
+        article#dashboard-nav > ul > a  {
+            width: 30%;
+         }
+    }
+    @media (max-width:499px){
+        article#dashboard-nav > ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            list-style-type: none;
+        }
+        article#dashboard-nav > ul > a  {
+           width: 80%;
+           margin: 5px 0px;
+        }
+
+    }
+    article#dashboard-nav {
+        background-color: rgb(200, 200, 200);
+        margin: 0% 2%;
+        padding: 2% 1%;
+        ul > a  {
+            border-radius: 10px 10px 0px 0px;
+            background-color: rgb(132, 105, 12);
+            color: rgb(218, 212, 212);
+            font-family: courier;
+            padding: 5px;
+            text-decoration: none;
+        }
+        /* Styling background and color of nav items*/
+        ul > a[href="#account"]  {
+            background-color: rgb(132, 105, 12);
+            color: white;
+        }
+        ul > a[href="#assessments"]  {
+            background-color: rgb(41, 66, 32);
+            color: white;
+        }
+        ul > a[href="#notifications"]  {
+            background-color: rgb(11, 23, 67);
+            color: white;
+        }
+    }
+    /* dashboard navigation body style*/
+    article#account {
+        border: 1px solid rgb(132, 105, 12);
+        margin: 0% 2%;
+        padding: 2% 2% 2%;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-        list-style-type: none;
+        align-items: flex-start;
+        justify-content: flex-start;
+        article#account table{
+            background-color: white;
+        }
+        article#account table td{
+            border: 0px white solid;
+        }
     }
-    article#dashboard-nav > ul > a  {
-       width: 80%;
-       margin: 5px 0px;
+    article#assessments {
+        margin: 0% 2%;
+        border: 1px solid rgb(132, 105, 12);
+        padding: 0% 0% 2% 0%;
     }
+    article#notifications {
+        margin: 0% 2%;
+        padding: 0% 0% 2% 0%;
+    }
+}
 
-}
-article#dashboard-nav > ul > a  {
-    border-radius: 10px 10px 0px 0px;
-    background-color: rgb(132, 105, 12);
-    color: rgb(218, 212, 212);
-    font-family: courier;
-    padding: 5px;
-    text-decoration: none;
-}
-/* Styling background and color of nav items*/
-article#dashboard-nav > ul > a[href="#account"]  {
-    background-color: rgb(132, 105, 12);
-    color: white;
-}
-article#dashboard-nav > ul > a[href="#assessments"]  {
-    background-color: rgb(41, 66, 32);
-    color: white;
-}
-article#dashboard-nav > ul > a[href="#notifications"]  {
-    background-color: rgb(11, 23, 67);
-    color: white;
-}
-article#dashboard-nav {
-    background-color: rgb(200, 200, 200);
-    margin: 0% 2%;
-    padding: 2% 1%;
-}
-/* dashboard navigation body style*/
-section#dashboard article#account {
-    border: 1px solid rgb(132, 105, 12);
-    margin: 0% 2%;
-    padding: 2% 2% 2%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-section#dashboard article#assessments {
-    margin: 0% 2%;
-    border: 1px solid rgb(132, 105, 12);
-    padding: 0% 0% 2% 0%;
-}
-section#dashboard article#notifications {
-    margin: 0% 2%;
-    padding: 0% 0% 2% 0%;
-
-}
 hr.devider {
     border: 2px solid rgb(160, 128, 64);
     margin: 0px 10px ;
@@ -740,95 +774,7 @@ hr.devider {
     padding: 10px;
     width: max-content;
 }
-section#dashboard article#accounts table{
-    background-color: white;
-}
-section#dashboard article#accounts table td{
-    border: 0px white solid;
-}
-section#dashboard {
-    margin: 0% 2% 2%;
-    width: max-content;
-    padding: 2%;
-}
 
-/* ACCOUNT AND PRIMARY NAVIGATION*/
-
-@media (min-width:500px){
-    header ul.nav {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: flex-start;
-        list-style-type: none;
-        font-size: medium;
-    }
-    header ul.nav > a  {
-        width: 10%;;
-     }
-
-    header article.primary-nav {
-        padding: 10px;
-        margin: 0%;
-        background-color: rgb(11, 23, 67);
-}
-}
-@media (max-width:499px){
-    header ul.nav {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        list-style-type: none;
-        font-size: small;
-    }
-    header ul.nav > a  {
-       width: 50%;
-       margin: 5px 0px;
-    }
-
-    header article.primary-nav {
-    padding: 10px;
-    margin: 0%;
-    background-color: rgb(11, 23, 67);
-}
-}
-header article.primary-nav, header article.account-nav {
-    padding: 0%;
-}
-
-header article.primary-nav ul.nav > a.nav-link  {
-    color: rgb(218, 212, 212);
-    font-family: courier;
-    padding: 5px;
-    margin: 1px;
-    text-decoration: none;
-    text-align: center;
-}
-header article.account-nav ul.nav > a.nav-link  {
-    border-radius: 10px 10px 10px 10px;
-    background-color: rgb(11, 23, 67);
-    color: rgb(218, 212, 212);
-    font-family: courier;
-    text-decoration: none;
-    text-align: center;
-    font-weight: bold;
-}
-header ul.nav > a {
-    text-decoration: none;
-}
-header article.account-nav ul.nav {
-    justify-content: flex-end;
-}
-header article.account-nav ul.nav li#logo img{
-    align-self: flex-start;
-    border-radius: 0%;
-}
-li#company-name {
-    color: orange;
-    font-family: forte;
-    margin: 0px 10px;
-}
 /* NAVIGATION BUTTON */
 p strong label {
     color: black;

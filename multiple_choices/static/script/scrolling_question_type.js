@@ -13,7 +13,6 @@ $(document).ready(function(){
                 questions = data.questions;
                 choices = data.choices;
                 $questionTypeDiv.html(data.passages[0].body);
-               // alert(data.passages[0].body)
             },
             error: function(){
                 alert('error')

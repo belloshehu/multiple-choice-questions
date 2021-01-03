@@ -1,13 +1,36 @@
 {% load static %}
 {% block individual_assessment %}
-    <section class="" id="">
+    <section class="cbt-form" id="">
         {% if individual_assessments %}
-            <table>
+            <table class="desktop">
                 <caption>
                     <h3 class="h-titles">Individual Assessment list</h3>
-
                 </caption>
-                <thead>
+                <thead class="mobile">
+                    <tr>
+                        <td>Title</td>
+                        <td colspan="2">Action</td>
+                    </tr>
+                </thead>
+                <tbody class="mobile">
+                    {% for assessment in individual_assessments|slice:":10" %}
+                        <tr>
+                            <td><a href="{{assessment.get_absolute_url}}">{{assessment.title|title|truncatewords:2}}</a></td>
+                            <td><a href="{{assessment.get_delete_url}}"><i class="fa fa-trash"></i></a> </td>
+                            <td><a href="{{assessment.get_update_url}}"><i class="fa fa-pencil"></i></a> </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="6">
+                            <a><button class="small">See more assessments...</button></a>
+                            <a href="{% url 'cbt:create-individual-assessment' %}" >
+                                <button class="small add"><i class="small fa fa-plus"></i> Add Assessment</button>
+                            </a>
+                        </td>
+
+                    </tr>
+                </tbody>
+                <thead class="desktop">
                     <tr>
                         <td>Title</td>
                         <td>Time created</td>
@@ -16,7 +39,7 @@
                         <td colspan="2">Action</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="desktop">
                     {% for assessment in individual_assessments|slice:":10" %}
                         <tr>
                             <td><a href="{{assessment.get_absolute_url}}">{{assessment.title|title|truncatewords:2}}</a></td>
@@ -41,11 +64,11 @@
         {% else %}
          <p class="alert info">No assessment.</p>
          <article>
-                <p class="">
-                    <a href="{% url 'cbt:create-individual-assessment' %}">
-                            <button class="add"><i class="small fa fa-plus"></i> Add assessment</button>
-                    </a>
-                </p>
+            <p class="">
+                <a href="{% url 'cbt:create-individual-assessment' %}">
+                        <button class="add"><i class="small fa fa-plus"></i> Add assessment</button>
+                </a>
+            </p>
         </article>
         {% endif %}
     </section>

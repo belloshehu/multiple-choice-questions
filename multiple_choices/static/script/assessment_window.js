@@ -41,7 +41,7 @@ $(document).ready(function(){
 function addQuestionAndChoices(questionChoices, randomQuestion){
     let assessmentWindowForm = $('#assessment-window form');
     let questionElement = $(`
-        <p class='orange-font'><strong>${randomQuestion.question_asked}</strong></p>
+        <p class=''><strong>${randomQuestion.question_asked}</strong></p>
         <p><strong><i class='orange-font'>Select an answer below:</i></strong></p>
     `);
     assessmentWindowForm.html(questionElement);
@@ -59,13 +59,14 @@ function addQuestionAndChoices(questionChoices, randomQuestion){
                      ${choice.choice_statement}
                 </label>
                 <br>
-                <br>
             `);
         });
         let nextButton = $(`
             <button id='next' type='submit'>
                 Next Question <i class='orange-font fa fa-arrow-right'></i>
             </button>
+            <br>
+            <br>
         `)
         .css({'marginBottom':'0px'});
         assessmentWindowForm.append(questionListContainer).append(nextButton);
@@ -125,9 +126,10 @@ function getRandomQuestion(questions, attemptedQuestions){
 
 function showAssessmentDetails(questions, counter){
     $('article#assessment-dashboard').html(`
-        <span class='white-font'>
-            Question ${counter} of ${questions.length}
-        </span>
+        <progress max="${questions.length}" min="0" value="${counter-1}" style="width: 100%;">${counter}</progress>
+    `);
+    $('div#question-number').html(`
+        <span class='orange-font'>Question ${counter} of ${questions.length}</span>
     `);
 }
 
@@ -173,8 +175,8 @@ function showAssessmentResult(scores, questions){
             'position': 'relative',
             'top':'0px',
             'left':'0px',
-            'z':'3',
-            'backgroundColor':'rgba(0, 0, 0,1)',
+            'zIndex':'3',
+            'backgroundColor':'rgba(0, 0, 0,0.6)',
             'display':'flex',
             'flexDirection':'column',
             'justifyContent':'space-between',

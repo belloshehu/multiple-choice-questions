@@ -3,9 +3,9 @@
 {% block header %}
 {% endblock %}
 {% block main %}
-<article  id="assessment-dashboard" style=" color: white;"></article>
-<section class="cbt-form">
-    <section id="window" class="" style="background-color: black; position: fixed; bottom:0px;right:0px; padding:10px; border-radius: 20%;">
+<section class="cbt-form" style="margin-top: 0%;">
+    <article  id="assessment-dashboard" style=" color: black;"></article>
+    <section id="window" class="">
         <span class="alert orange-font">You can't submit assessment once time is out.</span>
         <p class="white-font"  id="{{assessment.id}}">Assessment:<span class="orange-font"> {{assessment.title}}</span></p>
         <div id="time" class="white-font">
@@ -16,7 +16,8 @@
              </p>
         </div>
     </section>
-    <section id="assessment" class="cbt-form">
+    <section> <div id="question-number"></div></section>
+    <section id="assessment" class="">
         <article class="" id="assessment-window">
             <!--Assessment question and choices are shown here-->
             <form>

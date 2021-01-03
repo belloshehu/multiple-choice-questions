@@ -1,22 +1,15 @@
 {% extends 'cbt_base.html'%}
 {% load static %}
 {% block main %}
-    <section class="cbt-form">
-        <section>
-            {% for message in messages %}
-                {% if forloop.counter == 1 %}
-                    <p class="info">{{message}}</p>
-                {% endif %}
-            {% endfor %}
-        </section>
-        <section>
-            <h2>Institution Assessment form</h2>
+    <section class="">
+        <section style="background-color: rgba(0, 0, 0, 0.5); color: white; padding: 5%; margin-bottom: 2%;">
+            <h2 class="white-font">Institution Assessment form</h2>
             <p>
                 If the assessment to be created is by institutions/organisations( such  as schools, companies etc.) use this form. Otherwise, make use of the form in this link
-                 <a class="small" href="{% url 'cbt:create-individual-assessment' %}">individual Assessment</a>.
+                <a class="small orange-font" href="{% url 'cbt:create-individual-assessment' %}">individual Assessment</a>.
             </p>
             <p>
-                Note that you will have to creat the institution/organisation the assessment will be associated with if you have not done so.
+                Note that you will have to create the institution/organisation the assessment will be associated with if you have not done so.
             </p>
         </section>
         <section class="cbt-form" style="border-radius: 40px;">
@@ -30,6 +23,13 @@
             <a href="{% url 'cbt:create_institution' %}">
                 <button class="add"><i class="small fa fa-plus"></i> create institution</button>
             </a>
+        </section>
+        <section>
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}
+                    <p class="info">{{message}}</p>
+                {% endif %}
+            {% endfor %}
         </section>
         <section class="cbt-form">
             <form action="{% url 'cbt:create-institution-assessment' %}" method="POST">
@@ -49,13 +49,13 @@
                         {% for field in form %}
                             {% if 3 > forloop.counter %}
                             <p>{{field.error}}</p>
-                            <p><strong>{{field.label}}</strong><br>{{field}}</p>
+                            <p class="label-field">{{field.label}}<br>{{field}}</p>
                             {% endif %}
                         {% endfor %}
                         {% for field in form %}
                             {% if forloop.counter > 2%}
                             {{field.error}}
-                            <p><strong>{{field.label}}</strong><br>{{field}}</p>
+                            <p>{{field.label}}<br>{{field}}</p>
                             {% endif %}
                         {% endfor %}
                     </section>

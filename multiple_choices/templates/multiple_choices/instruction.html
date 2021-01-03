@@ -2,28 +2,29 @@
 {% load static %}
 {% block main %}
 
-    <section class="cbt-form">
+    <section>
         <h1>Assessment Instructions</h1>
-        <article class="cbt-form"  style="background-color: black;">
+        <article class="cbt-form"  style="background-color: rgba(0, 0, 0, 0.7);">
             <h3 class="alert info">Instructions</h3>
-            <p class="white-font assessment_id" id="{{assessment.id}}" >
-                 You are about to assessment titled <q>{{assessment.title}}</q>
-            </p>
+            <h2 class="white-font assessment_id" id="{{assessment.id}}" >
+                 You are about to take assessment titled <q>{{assessment.title}}</q>
+            </h2>
             <p style="color: orange; font-weight: bold;">
                 <i style="color: orange;" class="fa fa-clock-o" aria-hidden="true"></i>
-                Duration for the assessment is <span id="time">{{assessment.duration}}</span> minutes
+                Duration for the assessment is <span style="color: white;" id="time">{{assessment.duration}}</span> minutes
             </p>
-            <br>
-            <h4>
+            <hr>
+            <p class="white-font">
                 Make sure you are ready before you commence.
-                Note that once an assessment is started, it can not be stopped
-            </h4>
-            <h4>
+                Note that once an assessment is started, it can not be stopped.
+            </p>
+            <p class="white-font">
                 You are expected to remain within the window while taking the assessment as
-                going out of it will be considered an effort to cheat
-            </h4>
+                going out of it will be considered an effort to cheat.
+            </p>
+            <h2>Good luck <i class="fa fa-smile"></i>  </h2>
             <p>
-                <a class="anc-btn" href="{% url 'multiple_choices:assessment-taking' assessment.id %}">
+                <a  href="{% url 'multiple_choices:assessment-taking' assessment.id %}">
                     <button>Get started </button>
                 </a>
             </p>

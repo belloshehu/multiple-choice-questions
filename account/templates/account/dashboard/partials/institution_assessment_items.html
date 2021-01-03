@@ -6,6 +6,29 @@
                 <caption>
                     <h3 class="h-titles">Institution Assessment list</h3>
                 </caption>
+                <thead class="mobile">
+                    <tr>
+                        <td>Title</td>
+                        <td colspan="2">Action</td>
+                    </tr>
+                </thead>
+                <tbody class="mobile">
+                    {% for assessment in institution_assessments|slice:":10" %}
+                        <tr>
+                            <td><a href="{{assessment.get_absolute_url}}">{{assessment.title|title|truncatewords:2}}</a></td>
+                            <td><a href="{{assessment.get_delete_url}}"><i class="fa fa-trash"></i></a> </td>
+                            <td><a href="{{assessment.get_update_url}}"><i class="fa fa-pencil"></i></a> </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="7">
+                            <a><button class="small">See more assessments...</button></a>
+                            <a href="{% url 'cbt:create-institution-assessment' %}" >
+                                <button class="small add"><i class="small fa fa-plus"></i> Add Assessment</button>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
                 <thead>
                     <tr>
                         <td>Title</td>
@@ -38,6 +61,7 @@
                     </tr>
                 </tbody>
             </table>
+
         {% else %}
          <p class="alert info">No Assessment.</p>
          <article >

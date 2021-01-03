@@ -46,7 +46,23 @@
         </header>
         <main>{% block main %} {% endblock %}</main>
         <footer>
-            <em>@cbtmaker 2020</em>
+            <div id="footer-body">
+               <div class="footer-item">
+                    <h3><i class="fa fa-map-marker"></i> Address</h3>
+                    <p class="">shop no. 0000 PTI shopping complex, <br> Effurun, Delta state</p>
+               </div>
+               <div class="footer-item">
+                   <h3><i class="fa fa-address-card"></i> Our contact</h3>
+                   <p class=""><i class="fa fa-phone"></i> +23409061983150</p>
+                   <p class=""><i class="fa fa-envelope"></i> monbes-cbt@gmail.com</p>
+               </div>
+               <div  class="footer-item">
+                   <h3><i class="fa fa-road"></i> Serices</h3>
+                   <p class="">Assessments center</p>
+                   <p class="">Fashion</p>
+               </div>
+            </div>
+            <div id="copy-right"><em>@cbtmaker 2020</em></div>
         </footer>
        {% block script %}  <script src="{% static 'script/jquery-3.5.0.js'%}"></script> {% endblock %}
         <script src="{% static 'script/script.js'%}" ></script>

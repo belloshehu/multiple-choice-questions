@@ -1,23 +1,23 @@
 {% extends 'cbt_base.html'%}
 {% load static %}
 {% block main %}
-    <section class="cbt-form">
+    <section>
+        <section style="background-color: rgba(0, 0, 0, 0.5); color: white; padding: 5%; margin-bottom: 2%;">
+                <h2 class="white-font">Individual Assessment form</h2>
+           <p>
+               If the assessment to be created is for Individuals( such  as parents, teachers etc.) and is not meant to be assoicated with any institution or organisation, use this form. Otherwise, make use of the form in this link <a class="small orange-font" href="{% url 'cbt:create-institution-assessment' %}">institution Assessment</a>
+           </p>
+        </section>
+        <section class="cbt-form" style="border-radius: 40px;">
+                <a href="{% url 'cbt:individual-assessment-list' %}"><button class="small">Available Assessments </button></a>
+                <span class="badge">{{cbts|length}}</span>
+        </section>
         <section>
             {% for message in messages %}
                 {% if forloop.counter == 1 %}
                     <p class="info">{{message}}</p>
                 {% endif %}
             {% endfor %}
-        </section>
-        <section>
-           <h2>Individual Assessment form</h2>
-           <p>
-               If the assessment to be created is for Individuals( such  as parents, teachers etc.) and is not meant to be assoicated with any institution or organisation, use this form. Otherwise, make use of the form in this link <a class="small" href="{% url 'cbt:create-institution-assessment' %}">institution Assessment</a>
-           </p>
-        </section>
-        <section class="cbt-form" style="border-radius: 40px;">
-            <a href="{% url 'cbt:individual-assessment-list' %}"><button class="small">Available Assessments </button></a>
-            <span class="badge">{{cbts|length}}</span>
         </section>
         <section class="cbt-form">
             <form action="{% url 'cbt:create-individual-assessment' %}" method="POST">

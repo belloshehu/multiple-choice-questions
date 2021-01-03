@@ -1,14 +1,29 @@
 {% load static %}
 {% block individual_assessment %}
-    <section class="">
+    <section class="cbt-form">
         {% if assessments %}
             <table>
-                <caption>Institutional Assessment list
+                <caption>Individual Assessment list
                     <a href="{% url 'cbt:create-individual-assessment' %}" >
                         <button class="add"><i class="small fa fa-plus"></i> Add Assessment</button>
                     </a>
                 </caption>
-                <thead>
+                <thead class="mobile">
+                    <tr>
+                        <td>Title</td>
+                        <td colspan="2">Action</td>
+                    </tr>
+                </thead>
+                <tbody class="mobile">
+                    {% for assessment in assessments %}
+                        <tr>
+                            <td><a href="{{assessment.get_absolute_url}}">{{assessment.title|title|truncatewords:2}}</a></td>
+                            <td><a href="{{assessment.get_delete_url}}"><i class="fa fa-trash"></i></a> </td>
+                            <td><a href="{{assessment.get_update_url}}"><i class="fa fa-pencil"></i></a> </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <thead class="desktop">
                     <tr>
                         <td>Title</td>
                         <td>Time created</td>
@@ -17,7 +32,7 @@
                         <td colspan="2">Action</td>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="desktop">
                     {% for assessment in assessments %}
                         <tr>
                             <td><a href="{{assessment.get_absolute_url}}">{{assessment.title|title|truncatewords:2}}</a></td>

@@ -1,0 +1,91 @@
+/* ACCOUNT AND PRIMARY NAVIGATION*/
+
+header {
+    grid-area: header;
+    margin: 0%;
+    background-color: white;
+    color: black;
+    font-family: 'Open Sans Condensed',courier;
+    box-shadow: 3px 3px  5px 3px rgb(160, 128, 64);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    ul.nav {
+        display: flex;
+        flex-direction: row;
+        list-style-type: none;
+    }
+    article.account-nav {
+        div.mobile-logo {
+            display: none;
+        }
+        ul.nav {
+            align-items: center;
+            justify-content: flex-start;
+            list-style-type: none;
+        }
+        ul.nav > a.nav-link {
+            color: black;
+            font-family: 'Open Sans Condensed',courier;
+            text-decoration: none;
+            font-size: medium;
+           font-style: italic;
+            &:hover{
+                background-color: yellowgreen;
+            }
+            li {
+                margin-right: 20px;
+            }
+        }
+    }
+    article.primary-nav {
+        width: 90%;
+        box-shadow: 3px 2px 3px 3px rgb(116, 116, 65);
+        ul.nav {
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        ul.nav > a.nav-link  {
+            font-family: 'Open Sans Condensed', courier;
+            color: black;
+            font-size: medium;
+            font-weight: bold;
+            margin-right: 20px;
+            &:hover{
+                background-color: yellowgreen;
+            }
+        }
+    }
+    @media (min-width:500px){
+         div.nav-button {
+            display: none;
+        }
+    }
+    @media(max-width: 499px){
+        article div.nav-button {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+        }
+        article ul.nav {
+            display: none;
+        }
+        ul.nav {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: small;
+        }
+        ul.nav > a  {
+           width: 50%;
+           margin: 5px 0px;
+        }
+    }
+    li#company-name {
+        color: orange;
+        font-family: forte;
+        margin: 0px 10px;
+    }
+}

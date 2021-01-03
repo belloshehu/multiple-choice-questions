@@ -44,7 +44,7 @@ class IndividualAssessmentForm(forms.ModelForm):
         error_messages={'invalid':'invalid'}
         )
     end_time = forms.TimeField(
-        label='Closing date(Date assessment will be unavailable.)',
+        label='Closing time(Time assessment will be unavailable.)',
         widget=forms.TimeInput(
             attrs={'placeholder':'Time to expire', 'type':'time'}
             ),

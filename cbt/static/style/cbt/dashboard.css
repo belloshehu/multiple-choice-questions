@@ -1,0 +1,132 @@
+/*
+USER DASHBOARD
+*/
+section#dashboard {
+  margin: 0% 2% 2%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 2%;
+  /* dashboard navigation body style*/
+}
+
+section#dashboard h1#dashboard-title {
+  font-family: 'Noto Serif', serif;
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-shadow: #294220 1px 2px 2px;
+}
+
+@media (min-width: 500px) {
+  section#dashboard article#dashboard-nav > ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    list-style-type: none;
+    font-size: small;
+  }
+  section#dashboard article#dashboard-nav > ul > a {
+    width: 30%;
+  }
+}
+
+@media (max-width: 499px) {
+  section#dashboard article#dashboard-nav > ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    list-style-type: none;
+  }
+  section#dashboard article#dashboard-nav > ul > a {
+    width: 80%;
+    margin: 5px 0px;
+  }
+}
+
+section#dashboard article#dashboard-nav {
+  background-color: #c8c8c8;
+  margin: 0% 2%;
+  padding: 2% 1%;
+  /* Styling background and color of nav items*/
+}
+
+section#dashboard article#dashboard-nav ul > a {
+  border-radius: 10px 10px 0px 0px;
+  background-color: #84690c;
+  color: #dad4d4;
+  font-family: courier;
+  padding: 5px;
+  text-decoration: none;
+}
+
+section#dashboard article#dashboard-nav ul > a[href="#account"] {
+  background-color: #84690c;
+  color: white;
+}
+
+section#dashboard article#dashboard-nav ul > a[href="#assessments"] {
+  background-color: #294220;
+  color: white;
+}
+
+section#dashboard article#dashboard-nav ul > a[href="#notifications"] {
+  background-color: #0b1743;
+  color: white;
+}
+
+section#dashboard article#account {
+  border: 1px solid #84690c;
+  margin: 0% 2%;
+  padding: 2% 2% 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+section#dashboard article#account article#account table {
+  background-color: white;
+}
+
+section#dashboard article#account article#account table td {
+  border: 0px white solid;
+}
+
+section#dashboard article#assessments {
+  margin: 0% 2%;
+  border: 1px solid #84690c;
+  padding: 0% 0% 2% 0%;
+}
+
+section#dashboard article#notifications {
+  margin: 0% 2%;
+  padding: 0% 0% 2% 0%;
+}
+/*# sourceMappingURL=dashboard.css.map */

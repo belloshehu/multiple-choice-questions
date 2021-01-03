@@ -3,87 +3,81 @@
 
 {% block main %}
     <section class="container">
-        <article class="page-head cbt-form" style="background-color: rgba(0, 0, 0, 1); padding: 5%;">
-            <h1 class="" style="color: wheat;">
-                Assessment can be created for Institutions or Individual.
-            </h1>
-            <div>
-                <img src="{% static 'image/cbtmaker20.png' %}" height="200" width="300">
-                <p style="color: wheat;">
-                    Teachers, lecturers, instructors can use Institution assessment option to create assessment for their students.
+        <section class="sample">
+            <p>
+                <strong>There are two types of Assessment you can create:</strong>
+                <ol>
+                    <li>Individual assessment</li>
+                    <li>Institution or organisation assessment</li>
+                </ol>
+            </p>
+        </section>
+        <hr>
+        <section class="sample">
+            <h2 class="orange-font">Assessments for Individual</h2>
+            <div class="floating">
+                <p>
+                    Use this option to create quize, test and exams for students,children etc.
                 </p>
-                <h2 style="color: wheat;">
-                        With Individual assessment, teachers, lecturers, instructors and parents can create assessment for their personal use.
-                </h2>
-            </div>
-        </article>
-        <article class="cbt-step">
-            <article class="sample cbt-form">
-                <div>
-                    <div class="step-item">
-                        <h3 >Assessments for Individual</h3>
-                    </div>
-                    <p>Use this option to create quize, test and exams for students, children etc.</p>
-                    <p>
-                        It is designed for teachers, parents, employers etc. who want to use this platform for their personal use.
-                    </p>
+                <p>
+                    It is designed for teachers, parents, employers etc. who want to use this platform for their personal use.
+                </p>
+                <p>
                     <a href="{% url 'cbt:create-individual-assessment' %}">
-                        <button class="add">Individual assessment</button>
+                        <button>Individual assessment</button>
                     </a>
-                </div>
-                <div>
-                    <img src="{% static 'image/Institution.png' %}" height="400">
-                </div>
-            </article>
-            <article  class="sample cbt-form"  style="background-color: black; color: blanchedalmond;">
-                <div>
-                    <div class="step-item">
-                        <h3 >Assessment for Institution</h3>
-                    </div>
-                    <p> Use this option if you are creating test on behalf of an organisation, school or company.</p>
-                    <p>
-                        This will require you to initially add the organisation you are creating the test during the creation process.
-                    </p>
+                </p>
+            </div>
+            <img src="{% static 'image/personal.png' %}" height="400">
+        </section>
+        <section class="sample">
+            <h2>Assessment for Institution</h2>
+            <div class="floating">
+                <p>Use this option if you are creating test on behalf of an organisation, school or company.</p>
+                <p>
+                    This will require you to initially add the organisation you are creating the test during the creation process.
+                </p>
+                <p>
                     <a href="{% url 'cbt:create-institution-assessment' %}">
-                        <button class="add">Institutional assessment</button>
+                        <button>Institutional assessment</button>
                     </a>
-                </div>
-                <div>
-                    <img src="{% static 'image/personal.png' %}" height="400">
-                </div>
+                </p>
+            </div>
+            <img src="{% static 'image/Institution.png' %}" height="400">
 
-            </article>
-            <article class="cbt-steps cbt-form" style="background-color: black; color: blanchedalmond;">
-                    <h2>Steps to create a Assessment</h2>
-                    <!--p class="alert small-font  white-font">Note: Creating a CBT requires sign up and log in. Ensure you do so.</p-->
-
-                    <section class="step">
-                        <div class="step-item">
-                            Step <span>1</span>
-                            <h3>Create a CBT </h3>
-                        </div>
-                        <p>
-                            You start by creating a CBT which serves as the main container for your questions. Give your CBT a title,
-                            description, number of candidates and duration of test.
-                        </p>
-                    </section>
-                    <section class="step">
-                        <div  class="step-item">
-                            Step <span>2</span>
-                            <h3>Add questions </h3>
-                        </div>
-                        <p>After creating your CBT  in step 1, go ahead to add questions to it depending on the number of choice.</p>
-                    </section>
-                    <section class="step">
-                        <div  class="step-item">
-                            Step <span>3</span>
-                            <h3>Add choice</h3>
-                        </div>
-                        <p>Add choices to your questions.</p>
-                    </section>
-                    <p><a class="anc-btn" href="{% url 'cbt:cbt_type' %}"><button class="add">Create CBT Test</button></a></p><br>
-                </article>
-        </article>
+        </section>
+        <h2>Steps to create a Assessment</h2>
+        <section class="cbt-steps">
+            <div class="step">
+                <div class="step-item">
+                    Step <span>1</span>
+                    <h3>Create a CBT </h3>
+                </div>
+                <p>
+                    You start by creating a CBT which serves as the main container for your questions. Give your CBT a title,
+                    description, number of candidates and duration of test.
+                </p>
+            </div>
+            <div class="step">
+                <div  class="step-item">
+                    Step <span>2</span>
+                    <h3>Add questions </h3>
+                </div>
+                <p>After creating your CBT  in step 1, go ahead to add questions to it depending on the number of choice.</p>
+            </div>
+            <div class="step">
+                <div  class="step-item">
+                    Step <span>3</span>
+                    <h3>Add choice</h3>
+                </div>
+                <p>Add choices to your questions.</p>
+            </div>
+        </section>
+        <section>
+            <a class="anc-btn" href="{% url 'cbt:cbt_type' %}">
+                <button>Start creating Assessment</button>
+            </a>
+        </section>
     </section>
 {% endblock %}
 {% block script %} {{block.super}}{% endblock %}

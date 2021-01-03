@@ -3,41 +3,39 @@
 {% block main %}
     <section id="assessment-help">
         <h1 >Assessment creation guideline</h1>
-        <h3>
-            Creating assessment requires the following information to be filled in the form:
-        </h3>
-        <article class="step">
+        <h2 class="orange-font">
+            Creating assessment requires the following information to be filled in the form
+        </h2>
+        <div class="step">
             <div class="step-item">
-                <h3 >Title</h3>
-                <img src="{% static 'image/help2.png' %}" height="100" width="100">
+                <h3>Title</h3>
+                <P>
+                    This gives a name or title(as it simply implies) with which it is to be identified. It will allow you distinguish one assessment from the other
+                </P>
             </div>
-            <P>
-                This gives a name or title(as it simply implies) with which it is to be identified. It will allow you distinguish one assessment from the other
-            </P>
-        </article>
-        <article class="step">
+        </div>
+        <div class="step">
             <div class="step-item">
-                <h3 >Description</h3>
-                <img src="{% static 'image/help2.png' %}" height="100" width="100">
+                <h3 class="fainted-font">Description</h3>
             </div>
             <p> Description of assessment explains the reason it is created and might also state the candidates that are to take it.</p>
-        </article>
-        <article class="step">
+        </div>
+        <div class="step">
             <div class="step-item">
-                <h3 >Institution</h3>
-                <img src="{% static 'image/help2.png' %}" height="100" width="100">
+                <h3>Institution</h3>
+                <!--img src="{% static 'image/help2.png' %}" height="100" width="100"-->
             </div>
             <P>
                 If the assessment you are creating is going to be used by the Institution or organisation you are working with, create the organisation and then select from the list of organisations/institutions you have created. Note that you have to opt for institutional assessment type before you get this feature.
             </P>
-        </article>
-        <article>
-                <a class="small" href="{% url 'cbt:create-individual-assessment' %}">
-                    <button class="fa fa-plus add"> Add individual Assessment</button>
-                </a>
-                <a class="small" href="{% url 'cbt:create-institution-assessment' %}">
-                    <button class="fa fa-plus add"> Add institution Assessment</button>
-                </a>
-        </article>
+        </div>
+        <div>
+            <a class="small" href="{% url 'cbt:create-individual-assessment' %}">
+                <button class="fa fa-plus add"> Add individual Assessment</button>
+            </a>
+            <a class="small" href="{% url 'cbt:create-institution-assessment' %}">
+                <button class="fa fa-plus add"> Add institution Assessment</button>
+            </a>
+        </div>
     </section>
 {% endblock %}

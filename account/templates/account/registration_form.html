@@ -2,8 +2,8 @@
 {% load static %}
 {% block main %}
     <section class="cbt-form" id="login-form">
-        <article class="cbt-form" style="background-color: black; color: blanchedalmond;">
-            <h1>Signup form</h1><hr>
+        <article class="cbt-form" style="background-color: rgba(0, 0, 0, 0.5); color: white;">
+            <h1 class="white-font">Signup form</h1><hr>
             <h1 class="alert info">Fill the form below:</h1>
             {% for message in messages %}
                 {% if forloop.counter == 1 %}
@@ -15,7 +15,7 @@
                 <p>{{form.as_p}}</p>
                 <p><button type="submit">Send</button></p>
             </form>
-        <p class="">If you are registered, login <a href="{% url 'account:login' %}">here</a></p>
+        <p class="">If you are registered, login <a  class="orange-font" href="{% url 'account:login' %}">here</a></p>
         </article>
     </section>
 {% endblock %}

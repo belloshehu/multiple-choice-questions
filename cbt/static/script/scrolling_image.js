@@ -12,9 +12,9 @@ $(document).ready(function(){
         error: function(){
            // alert('error');
             scrollingObjects.images = [
-                '/static/images/cbtmaker20.png',
-                '/static/images/personal.png',
-                '/static/images/institution.png'
+                '/static/image/cbtmaker20.png',
+                '/static/image/personal.png',
+                '/static/image/institution.png'
             ];
             scrollingObjects.text = [
                 {name: 'Creating and taking assessment here is always a fun '},

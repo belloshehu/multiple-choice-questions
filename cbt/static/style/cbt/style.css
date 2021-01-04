@@ -286,7 +286,7 @@ body {
   -ms-grid-rows: 1fr minmax(auto 8fr) 1fr;
       grid-template-rows: 1fr minmax(auto 8fr) 1fr;
       grid-template-areas: "header header" "main main" "footer footer";
-  margin: 0% 0%;
+  margin: 0%;
   background-color: white;
   color: black;
 }
@@ -446,15 +446,17 @@ section article.statement h1, section article.statement h2, section article.stat
 }
 
 div#landing-text {
-  background-color: rgba(235, 198, 198, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
   padding: 0% 5% 5%;
   line-height: 3em;
   margin-top: 5%;
 }
 
-div#landing-text h1 {
+div#landing-text h1, div#landing-text h3 {
   font-family: 'Noto Serif', serif;
+  font-weight: bolder;
+  font-size: large;
 }
 
 section.sample {

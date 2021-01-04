@@ -10,7 +10,7 @@ $(document).ready(function(){
             scrollingObjects.text = data.scrolling_images
         },
         error: function(){
-            alert('error');
+           // alert('error');
         }
     });
     var $scrollingPanel = $('article#scrolling-panel');
